@@ -156,9 +156,27 @@ export function RouteDetailDrawer({ row, onClose, onEdit }: Props) {
               <p className="text-[10px] text-[#999999] font-medium mb-1.5">
                 שעות מתוכננות
               </p>
-              <p className="text-sm font-semibold text-[#1a1a1a] tabular-nums">
-                {schedule.scheduledStartTime}–{schedule.scheduledEndTime}
-              </p>
+              {schedule.recurrenceType === "daily" && schedule.dailyTimeWindows?.length ? (
+                <div className="space-y-1">
+                  {schedule.dailyTimeWindows.map((win, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <span
+                        className="w-4 h-4 rounded-full shrink-0 flex items-center justify-center text-[8px] font-bold"
+                        style={{ background: "#eef4fb", color: "#1f5fa6" }}
+                      >
+                        {idx + 1}
+                      </span>
+                      <span className="text-xs font-semibold text-[#1a1a1a] tabular-nums">
+                        {win.startTime}–{win.endTime}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm font-semibold text-[#1a1a1a] tabular-nums">
+                  {schedule.scheduledStartTime}–{schedule.scheduledEndTime}
+                </p>
+              )}
             </div>
 
             <div className="bg-[#fafafa] rounded-lg p-3">

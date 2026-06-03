@@ -290,6 +290,11 @@ export interface RouteTemplate {
 
 export type RecurrenceType = "daily" | "weekly" | "monthly";
 
+export interface TimeWindow {
+  startTime: string;
+  endTime: string;
+}
+
 export interface RouteSchedule {
   id: string;
   templateId: string;
@@ -304,6 +309,7 @@ export interface RouteSchedule {
   recurrenceType?: RecurrenceType;
   timesPerDay?: number;
   timesPerMonth?: number;
+  dailyTimeWindows?: TimeWindow[];
 }
 
 export interface RouteExecution {

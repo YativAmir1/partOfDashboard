@@ -10,7 +10,7 @@ import {
   Cell,
   ReferenceLine,
 } from "recharts";
-import type { RouteRow, CalculatedRouteStatus } from "@/lib/types";
+import type { RouteRow, CalculatedRouteStatus, TimeWindow } from "@/lib/types";
 import { ROUTE_STATUS_COLORS, ROUTE_STATUS_LABELS } from "@/lib/routeUtils";
 
 const ORIGIN = 360; // 06:00 in minutes from midnight
@@ -41,18 +41,54 @@ interface TimelineEntry {
   pct: number;
 }
 
+function windowStatus(win: TimeWindow, now: Date): CalculatedRouteStatus {
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const endMin = toMin(win.endTime);
+  const startMin = toMin(win.startTime);
+  if (nowMin >= endMin) return "completed";
+  if (nowMin >= startMin) return "in_progress";
+  return "scheduled";
+}
+
 function buildData(rows: RouteRow[], now: Date): TimelineEntry[] {
   const nowMin = now.getHours() * 60 + now.getMinutes();
+  const entries: TimelineEntry[] = [];
 
-  return rows.map((row) => {
+  for (const row of rows) {
     const exec = row.execution;
-    const name = row.template.name.replace(/^מסלול /, "");
+    const baseName = row.template.name.replace(/^מסלול /, "");
+    const isDaily = row.schedule.recurrenceType === "daily";
+    const windows =
+      isDaily && (row.schedule.dailyTimeWindows?.length ?? 0) > 1
+        ? row.schedule.dailyTimeWindows!
+        : null;
+
+    if (windows) {
+      windows.forEach((win, idx) => {
+        const schedStart = Math.max(toMin(win.startTime) - ORIGIN, 0);
+        const schedEnd = toMin(win.endTime) - ORIGIN;
+        const status = windowStatus(win, now);
+        entries.push({
+          name: `${baseName} (${idx + 1})`,
+          fullName: `${row.template.name} — הפעלה ${idx + 1}`,
+          gap: schedStart,
+          bar: Math.max(schedEnd - schedStart, 10),
+          status,
+          schedStart: win.startTime,
+          schedEnd: win.endTime,
+          actualStart: null,
+          actualEnd: null,
+          pct: status === "completed" && exec ? exec.completionPct : 0,
+        });
+      });
+      continue;
+    }
 
     if (!exec?.actualStartTime) {
       const schedStart = toMin(row.schedule.scheduledStartTime) - ORIGIN;
       const schedEnd = toMin(row.schedule.scheduledEndTime) - ORIGIN;
-      return {
-        name,
+      entries.push({
+        name: baseName,
         fullName: row.template.name,
         gap: schedStart,
         bar: Math.max(schedEnd - schedStart, 10),
@@ -62,27 +98,28 @@ function buildData(rows: RouteRow[], now: Date): TimelineEntry[] {
         actualStart: null,
         actualEnd: null,
         pct: 0,
-      };
+      });
+    } else {
+      const actualStart = toMin(exec.actualStartTime) - ORIGIN;
+      const actualEnd = exec.actualEndTime
+        ? toMin(exec.actualEndTime) - ORIGIN
+        : nowMin - ORIGIN;
+      entries.push({
+        name: baseName,
+        fullName: row.template.name,
+        gap: actualStart,
+        bar: Math.max(actualEnd - actualStart, 10),
+        status: row.status,
+        schedStart: row.schedule.scheduledStartTime,
+        schedEnd: row.schedule.scheduledEndTime,
+        actualStart: exec.actualStartTime,
+        actualEnd: exec.actualEndTime ?? null,
+        pct: exec.completionPct,
+      });
     }
+  }
 
-    const actualStart = toMin(exec.actualStartTime) - ORIGIN;
-    const actualEnd = exec.actualEndTime
-      ? toMin(exec.actualEndTime) - ORIGIN
-      : nowMin - ORIGIN;
-
-    return {
-      name,
-      fullName: row.template.name,
-      gap: actualStart,
-      bar: Math.max(actualEnd - actualStart, 10),
-      status: row.status,
-      schedStart: row.schedule.scheduledStartTime,
-      schedEnd: row.schedule.scheduledEndTime,
-      actualStart: exec.actualStartTime,
-      actualEnd: exec.actualEndTime ?? null,
-      pct: exec.completionPct,
-    };
-  });
+  return entries;
 }
 
 function CustomTooltip({ active, payload }: { active?: boolean; payload?: any[] }) {
@@ -145,6 +182,7 @@ const LEGEND = [
 export function TimelineChart({ rows, now }: { rows: RouteRow[]; now: Date }) {
   const data = buildData(rows, now);
   const nowOffset = now.getHours() * 60 + now.getMinutes() - ORIGIN;
+  const chartHeight = Math.max(160, data.length * 34 + 20);
 
   return (
     <div className="bg-white border border-[#d0d0d0] rounded-xl p-4">
@@ -155,7 +193,7 @@ export function TimelineChart({ rows, now }: { rows: RouteRow[]; now: Date }) {
         <p className="text-[10px] text-[#999999] mt-0.5">מסלולים פעילים היום · 06:00–17:00</p>
       </div>
       <div dir="ltr">
-        <ResponsiveContainer width="100%" height={200}>
+        <ResponsiveContainer width="100%" height={chartHeight}>
           <BarChart
             layout="vertical"
             data={data}

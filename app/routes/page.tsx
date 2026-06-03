@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import {
   Route,
   CheckCircle2,
@@ -37,6 +37,7 @@ import type {
   RouteSchedule,
   CalculatedRouteStatus,
   DayKey,
+  TimeWindow,
 } from "@/lib/types";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -100,6 +101,36 @@ function CompletionBar({ pct }: { pct: number }) {
         {pct}%
       </span>
     </div>
+  );
+}
+
+type WindowPhase = "past" | "current" | "future";
+
+function getWindowPhase(win: TimeWindow, now: Date, isToday: boolean): WindowPhase {
+  if (!isToday) return "future";
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const [sh, sm] = win.startTime.split(":").map(Number);
+  const [eh, em] = win.endTime.split(":").map(Number);
+  if (nowMin >= eh * 60 + em) return "past";
+  if (nowMin >= sh * 60 + sm) return "current";
+  return "future";
+}
+
+function WindowPhaseBadge({ phase }: { phase: WindowPhase }) {
+  const cfg: Record<WindowPhase, { label: string; color: string }> = {
+    past:    { label: "בוצע",    color: "#459524" },
+    current: { label: "בביצוע", color: "#f37d00" },
+    future:  { label: "מתוכנן", color: "#1f5fa6" },
+  };
+  const { label, color } = cfg[phase];
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold"
+      style={{ background: color + "20", color }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: color }} />
+      {label}
+    </span>
   );
 }
 
@@ -388,97 +419,158 @@ export default function RoutesPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {dailyRows.map((row, i) => (
-                      <tr
-                        key={`${row.schedule.id}-${selectedDay}`}
-                        className={cn(
-                          "border-b border-[#f0f0f0] hover:bg-[#fafbff] transition-colors",
-                          i === dailyRows.length - 1 && "border-b-0"
-                        )}
-                      >
-                        <td className="px-4 py-3 font-medium text-[#1a1a1a] whitespace-nowrap">
-                          {row.template.name}
-                        </td>
-                        <td className="px-4 py-3 text-[#585858]">
-                          <span className="flex flex-wrap gap-1">
-                            {row.template.streets.map((street, idx) => (
-                              <span
-                                key={street}
-                                className="inline-flex items-center gap-1"
-                              >
-                                <span className="text-xs">{street}</span>
-                                {idx < row.template.streets.length - 1 && (
-                                  <span className="text-[#cccccc] text-[10px]">
-                                    ←
+                    {dailyRows.map((row, i) => {
+                      const isDaily = row.schedule.recurrenceType === "daily";
+                      const windows = isDaily && (row.schedule.dailyTimeWindows?.length ?? 0) > 1
+                        ? row.schedule.dailyTimeWindows!
+                        : null;
+                      const isLast = i === dailyRows.length - 1 && !windows;
+
+                      return (
+                        <React.Fragment key={`${row.schedule.id}-${selectedDay}`}>
+                          {/* Main row */}
+                          <tr
+                            className={cn(
+                              "border-b border-[#f0f0f0] hover:bg-[#fafbff] transition-colors",
+                              isLast && "border-b-0"
+                            )}
+                          >
+                            <td className="px-4 py-3 font-medium text-[#1a1a1a] whitespace-nowrap">
+                              <span className="flex items-center gap-2">
+                                {row.template.name}
+                                {windows && (
+                                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-[#fff7ed] text-[#c2410c]">
+                                    {windows.length}× ביום
                                   </span>
                                 )}
                               </span>
-                            ))}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-[#585858] whitespace-nowrap tabular-nums">
-                          {row.schedule.scheduledStartTime}–
-                          {row.schedule.scheduledEndTime}
-                        </td>
-                        <td className="px-4 py-3 text-[#585858] whitespace-nowrap">
-                          {row.schedule.vehicle ? (
-                            <span>
-                              <span className="font-medium text-[#1a1a1a]">
-                                {row.schedule.vehicle}
-                              </span>
-                              <span className="text-[#999999] text-[11px] mr-1">
-                                · {row.schedule.assignedTeam}
-                              </span>
-                            </span>
-                          ) : (
-                            row.schedule.assignedTeam
-                          )}
-                        </td>
-                        <td className="px-4 py-3">
-                          <StatusBadge status={row.status} />
-                        </td>
-                        {isToday && (
-                          <>
-                            <td className="px-4 py-3">
-                              {row.execution ? (
-                                <CompletionBar pct={row.execution.completionPct} />
-                              ) : (
-                                <span className="text-[#cccccc] text-xs">—</span>
-                              )}
                             </td>
-                            <td className="px-4 py-3 text-center">
-                              {row.complaintCount > 0 ? (
-                                <span
-                                  className="inline-flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold"
-                                  style={{
-                                    background:
-                                      row.complaintCount > 3
-                                        ? "#d9635020"
-                                        : "#f3f4f6",
-                                    color:
-                                      row.complaintCount > 3
-                                        ? "#d96350"
-                                        : "#585858",
-                                  }}
-                                >
-                                  {row.complaintCount}
+                            <td className="px-4 py-3 text-[#585858]">
+                              <span className="flex flex-wrap gap-1">
+                                {row.template.streets.map((street, idx) => (
+                                  <span key={street} className="inline-flex items-center gap-1">
+                                    <span className="text-xs">{street}</span>
+                                    {idx < row.template.streets.length - 1 && (
+                                      <span className="text-[#cccccc] text-[10px]">←</span>
+                                    )}
+                                  </span>
+                                ))}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3 text-[#585858] whitespace-nowrap tabular-nums">
+                              {windows ? (
+                                <span className="text-[11px] text-[#999999]">
+                                  {windows.length} הפעלות
                                 </span>
                               ) : (
-                                <span className="text-[#cccccc] text-xs">—</span>
+                                <>
+                                  {row.schedule.scheduledStartTime}–
+                                  {row.schedule.scheduledEndTime}
+                                </>
                               )}
                             </td>
-                          </>
-                        )}
-                        <td className="px-4 py-3 text-center">
-                          <button
-                            onClick={() => setDetailScheduleId(row.schedule.id)}
-                            className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap"
-                          >
-                            פרטים
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                            <td className="px-4 py-3 text-[#585858] whitespace-nowrap">
+                              {row.schedule.vehicle ? (
+                                <span>
+                                  <span className="font-medium text-[#1a1a1a]">
+                                    {row.schedule.vehicle}
+                                  </span>
+                                  <span className="text-[#999999] text-[11px] mr-1">
+                                    · {row.schedule.assignedTeam}
+                                  </span>
+                                </span>
+                              ) : (
+                                row.schedule.assignedTeam
+                              )}
+                            </td>
+                            <td className="px-4 py-3">
+                              <StatusBadge status={row.status} />
+                            </td>
+                            {isToday && (
+                              <>
+                                <td className="px-4 py-3">
+                                  {row.execution ? (
+                                    <CompletionBar pct={row.execution.completionPct} />
+                                  ) : (
+                                    <span className="text-[#cccccc] text-xs">—</span>
+                                  )}
+                                </td>
+                                <td className="px-4 py-3 text-center">
+                                  {row.complaintCount > 0 ? (
+                                    <span
+                                      className="inline-flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold"
+                                      style={{
+                                        background: row.complaintCount > 3 ? "#d9635020" : "#f3f4f6",
+                                        color: row.complaintCount > 3 ? "#d96350" : "#585858",
+                                      }}
+                                    >
+                                      {row.complaintCount}
+                                    </span>
+                                  ) : (
+                                    <span className="text-[#cccccc] text-xs">—</span>
+                                  )}
+                                </td>
+                              </>
+                            )}
+                            <td className="px-4 py-3 text-center">
+                              <button
+                                onClick={() => setDetailScheduleId(row.schedule.id)}
+                                className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap cursor-pointer"
+                              >
+                                פרטים
+                              </button>
+                            </td>
+                          </tr>
+
+                          {/* Sub-rows: one per time window (only for daily multi-window) */}
+                          {windows?.map((win, winIdx) => {
+                            const phase = getWindowPhase(win, now, isToday);
+                            const isLastSub =
+                              i === dailyRows.length - 1 && winIdx === windows.length - 1;
+                            return (
+                              <tr
+                                key={`${row.schedule.id}-win-${winIdx}`}
+                                className={cn(
+                                  "border-b border-[#f5f5f5] bg-[#fafafa]",
+                                  isLastSub && "border-b-0"
+                                )}
+                              >
+                                <td className="px-4 py-2">
+                                  <span className="flex items-center gap-2 pr-4">
+                                    <span
+                                      className="w-5 h-5 rounded-full shrink-0 flex items-center justify-center text-[9px] font-bold"
+                                      style={{ background: "#eef4fb", color: "#1f5fa6" }}
+                                    >
+                                      {winIdx + 1}
+                                    </span>
+                                    <span className="text-[11px] text-[#999999]">
+                                      הפעלה {winIdx + 1}
+                                    </span>
+                                  </span>
+                                </td>
+                                <td />
+                                <td className="px-4 py-2 text-xs tabular-nums text-[#585858] whitespace-nowrap">
+                                  {win.startTime}–{win.endTime}
+                                </td>
+                                <td />
+                                <td className="px-4 py-2">
+                                  <WindowPhaseBadge phase={phase} />
+                                </td>
+                                {isToday && <><td /><td /></>}
+                                <td className="px-4 py-2 text-center">
+                                  <button
+                                    onClick={() => setDetailScheduleId(row.schedule.id)}
+                                    className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap cursor-pointer"
+                                  >
+                                    פרטים
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </React.Fragment>
+                      );
+                    })}
                   </tbody>
                 </table>
               </div>
