@@ -1,0 +1,2810 @@
+[
+  {
+    "id": "C001",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פחים לא פונו כבר 3 ימים; יש ריח קשה באזור"
+  },
+  {
+    "id": "C002",
+    "category": "מפגע דרך",
+    "district": "City Center",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "בור גדול בכביש ראשי גרם נזק לצמיג הרכב שלי"
+  },
+  {
+    "id": "C003",
+    "category": "תאורת רחוב",
+    "district": "Bursa District",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "תאורת הרחוב תוקנה; תודה על תגובה מהירה"
+  },
+  {
+    "id": "C004",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "עבודות כביש בשעה 02:00; רעש בלתי נסבל"
+  },
+  {
+    "id": "C005",
+    "category": "פינוי אשפה",
+    "district": "Industrial Zone",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "השלכת פסולת לא חוקית ליד המפעל שלנו; מפגע בריאותי"
+  },
+  {
+    "id": "C006",
+    "category": "חניה",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אוטובוסי תיירים חוסמים דיירים בכל בוקר"
+  },
+  {
+    "id": "C007",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "עוד איסוף שפוספס; פעם שלישית השבוע"
+  },
+  {
+    "id": "C008",
+    "category": "גנים ונוף",
+    "district": "National Park",
+    "date": "2026-04-25",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הפארק ליד הנהר נראה מצוין אחרי הניקוי; כל הכבוד"
+  },
+  {
+    "id": "C009",
+    "category": "מפגע דרך",
+    "district": "Bursa District",
+    "date": "2026-04-25",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "הבור ברחוב השוק תוקן; מעריכים את הטיפול"
+  },
+  {
+    "id": "C010",
+    "category": "תאורת רחוב",
+    "district": "Tel Hashomer",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "3 פנסים כבויים בדרך הגישה; מסוכן בלילה"
+  },
+  {
+    "id": "C011",
+    "category": "פינוי אשפה",
+    "district": "Bursa District",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אזור השוק מלוכלך אחרי השוק השבועי; נדרש ניקוי מיידי"
+  },
+  {
+    "id": "C012",
+    "category": "רעש",
+    "district": "Marom Nave",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רעש בנייה מתחיל כל יום ב-06:00"
+  },
+  {
+    "id": "C013",
+    "category": "חניה",
+    "district": "City Center",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רכבי משלוחים חוסמים נתיבי אוטובוס בשעת עומס"
+  },
+  {
+    "id": "C014",
+    "category": "פינוי אשפה",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת מסעדה נשארה ברחוב בלילה; ריח חריף"
+  },
+  {
+    "id": "C015",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-24",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המתקן בגן המשחקים תוקן ונראה בטוח; הילדים נהנים"
+  },
+  {
+    "id": "C016",
+    "category": "מפגע דרך",
+    "district": "Ramat Chen",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "משאיות בנייה שברו את פני הכביש"
+  },
+  {
+    "id": "C017",
+    "category": "תאורת רחוב",
+    "district": "Marom Nave",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רחוב שלם חשוך; סכנת בטיחות לדיירים מבוגרים"
+  },
+  {
+    "id": "C018",
+    "category": "פינוי אשפה",
+    "district": "Ramat Chen",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת בנייה נשארה בשטח ציבורי במשך שבועות"
+  },
+  {
+    "id": "C019",
+    "category": "רעש",
+    "district": "National Park",
+    "date": "2026-04-24",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "עבודות הצרת נתיב היו רועשות, אבל ברור שהיו זמניות"
+  },
+  {
+    "id": "C020",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "מכוניות חונות על שביל אופניים בכל בוקר"
+  },
+  {
+    "id": "C021",
+    "category": "פינוי אשפה",
+    "district": "City Center",
+    "date": "2026-04-23",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פחי מחזור גולשים במרכז העיר; מביך"
+  },
+  {
+    "id": "C022",
+    "category": "מפגע דרך",
+    "district": "Marom Nave",
+    "date": "2026-04-23",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "בור ליד בית הספר סומן אבל לא תוקן; מתי יטופל?"
+  },
+  {
+    "id": "C023",
+    "category": "גנים ונוף",
+    "district": "Ramat Chen",
+    "date": "2026-04-23",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "מגרש הספורט שופץ; עבודה מצוינת ומשטח חלק"
+  },
+  {
+    "id": "C024",
+    "category": "תאורת רחוב",
+    "district": "Ramat Chen",
+    "date": "2026-04-23",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "ארון חשמל נשאר פתוח; ילדים משחקים לידו"
+  },
+  {
+    "id": "C025",
+    "category": "פינוי אשפה",
+    "district": "National Park",
+    "date": "2026-04-23",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "תחנת קומפוסט מפיצה ריח קשה לכל הרחוב"
+  },
+  {
+    "id": "C026",
+    "category": "רעש",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-23",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רעש מהבר עד 03:00; הדיירים לא מצליחים לישון"
+  },
+  {
+    "id": "C027",
+    "category": "חניה",
+    "district": "Ramat Chen",
+    "date": "2026-04-23",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "פסי ההאטה החדשים עובדים; השכונה הרבה יותר שקטה"
+  },
+  {
+    "id": "C028",
+    "category": "פינוי אשפה",
+    "district": "Industrial Zone",
+    "date": "2026-04-22",
+    "status": "in_progress",
+    "sentiment": "negative",
+    "description": "ריח ביוב מאזור התעשייה; האם יש סיכון סביבתי?"
+  },
+  {
+    "id": "C029",
+    "category": "מפגע דרך",
+    "district": "National Park",
+    "date": "2026-04-22",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "עבודות הכביש הסתיימו נקי; עבודה טובה"
+  },
+  {
+    "id": "C030",
+    "category": "גנים ונוף",
+    "district": "Bursa District",
+    "date": "2026-04-22",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "גרפיטי על ספסלי הפארק; לא נעים למשפחות"
+  },
+  {
+    "id": "C031",
+    "category": "תאורת רחוב",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-22",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "פנסי הרחוב ההיסטוריים חזרו לעבוד; יפה בלילה"
+  },
+  {
+    "id": "C032",
+    "category": "פינוי אשפה",
+    "district": "Tel Hashomer",
+    "date": "2026-04-22",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פחי אזור תל השומר גולשים לפני ביקורי ספינות"
+  },
+  {
+    "id": "C033",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-22",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "כלב נובח כל הלילה מהשכנים; נדרש פיקוח וטרינרי"
+  },
+  {
+    "id": "C034",
+    "category": "חניה",
+    "district": "Marom Nave",
+    "date": "2026-04-22",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "מתעלמים מתמרורי אין חניה בכל בוקר ליד בית הספר"
+  },
+  {
+    "id": "C035",
+    "category": "פינוי אשפה",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת רפואית; האם מטפלים בזה כמו שצריך?"
+  },
+  {
+    "id": "C036",
+    "category": "מפגע דרך",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "בור במרכז העיר תוקן אבל האזור לא נוקה"
+  },
+  {
+    "id": "C037",
+    "category": "גנים ונוף",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "ממטרה בפארק המרכזי מציפה שביל; מחכים כבר 3 ימים"
+  },
+  {
+    "id": "C038",
+    "category": "תאורת רחוב",
+    "district": "Industrial Zone",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "תאורת אבטחה בכניסה לאזור התעשייה כבויה; לא בטוח"
+  },
+  {
+    "id": "C039",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פיר אשפה בבניין חסום; הדיירים מתוסכלים"
+  },
+  {
+    "id": "C040",
+    "category": "רעש",
+    "district": "Industrial Zone",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רעש מפעל חורג בסופי שבוע"
+  },
+  {
+    "id": "C041",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ניהול חניית הפסטיבל היה מצוין השנה"
+  },
+  {
+    "id": "C042",
+    "category": "פינוי אשפה",
+    "district": "Bursa District",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "השלכת פסולת ליד בית ספר; ילדים רואים את זה כל יום"
+  },
+  {
+    "id": "C043",
+    "category": "מפגע דרך",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "כביש עתיק במצב רע; אזור מורשת צריך טיפול טוב יותר"
+  },
+  {
+    "id": "C044",
+    "category": "מפגע דרך",
+    "district": "National Park",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "ונדליזם בפארק ליד הנהר; ספסלים ניזוקו"
+  },
+  {
+    "id": "C045",
+    "category": "תאורת רחוב",
+    "district": "National Park",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "שביל הנהר חשוך אחרי 20:00; לא בטוח לרצים"
+  },
+  {
+    "id": "C046",
+    "category": "פינוי אשפה",
+    "district": "National Park",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת צפה בנהר; מי אחראי?"
+  },
+  {
+    "id": "C047",
+    "category": "רעש",
+    "district": "Tel Hashomer",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רעש טעינה בתל השומר בלילה מפריע לאורחי מלון"
+  },
+  {
+    "id": "C048",
+    "category": "חניה",
+    "district": "Tel Hashomer",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "חניה כפולה מחוץ לתל השומר יוצרת עומס מסוכן"
+  },
+  {
+    "id": "C049",
+    "category": "פינוי אשפה",
+    "district": "Ramat Chen",
+    "date": "2026-04-19",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "גזם נאסף במהירות; שירות מצוין"
+  },
+  {
+    "id": "C050",
+    "category": "מפגע דרך",
+    "district": "Ramat Chen",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פס האטה ניזוק מרכבים כבדים והפך לבור"
+  },
+  {
+    "id": "C051",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "שער גינת הכלבים שבור; כלבים בורחים"
+  },
+  {
+    "id": "C052",
+    "category": "תאורת רחוב",
+    "district": "Bursa District",
+    "date": "2026-04-19",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "הותקנו פנסי LED; הרבה יותר מואר, שדרוג טוב"
+  },
+  {
+    "id": "C053",
+    "category": "פינוי אשפה",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "ערימת קרטונים בנקודת האיסוף כבר 5 ימים"
+  },
+  {
+    "id": "C054",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רעש מפנייה גולשת לאזור מגורים; צריך מחסום"
+  },
+  {
+    "id": "C055",
+    "category": "מפגע דרך",
+    "district": "National Park",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נתיב אופניים חסום מדי יום על ידי רכבים ליד קו המים"
+  },
+  {
+    "id": "C056",
+    "category": "פינוי אשפה",
+    "district": "City Center",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "משאית דחסן התקלקלה; האיסוף הידני איטי מאוד"
+  },
+  {
+    "id": "C057",
+    "category": "מפגע דרך",
+    "district": "Tel Hashomer",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "כביש תל השומר תוקן מהר; הלוגיסטיקה לא נפגעה"
+  },
+  {
+    "id": "C058",
+    "category": "רעש",
+    "district": "Industrial Zone",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "מתקני הכושר חזרו לעבוד; תודה לצוות התחזוקה"
+  },
+  {
+    "id": "C059",
+    "category": "תאורת רחוב",
+    "district": "Ramat Chen",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "תאורת חדר מדרגות לא עובדת; דייר מבוגר נפל"
+  },
+  {
+    "id": "C060",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פחים לא מסומנים נכון; ממחזרים פריטים לא מתאימים"
+  },
+  {
+    "id": "C061",
+    "category": "רעש",
+    "district": "Bursa District",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אזעקת כספומט פועלת שוב ושוב כל הלילה"
+  },
+  {
+    "id": "C062",
+    "category": "חניה",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אוטובוסי תיירים עוצרים כל הזמן באזורי אין חניה"
+  },
+  {
+    "id": "C063",
+    "category": "פינוי אשפה",
+    "district": "National Park",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "מחזור מזוהם; כנראה אי אפשר לעבד אותו"
+  },
+  {
+    "id": "C064",
+    "category": "מפגע דרך",
+    "district": "Bursa District",
+    "date": "2026-04-17",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "הבור תוקן אבל הכביש עדיין קופצני; צריך ריבוד מלא"
+  },
+  {
+    "id": "C065",
+    "category": "גנים ונוף",
+    "district": "Ramat Chen",
+    "date": "2026-04-17",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ענף עץ פונה במהירות אחרי הסופה; תגובה מצוינת"
+  },
+  {
+    "id": "C066",
+    "category": "תאורת רחוב",
+    "district": "Marom Nave",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אזור השלכת פסולת בלי תאורה; ההשלכות נמשכות בלילה"
+  },
+  {
+    "id": "C067",
+    "category": "פינוי אשפה",
+    "district": "Tel Hashomer",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת ימית נראית בתל השומר; חשש סביבתי"
+  },
+  {
+    "id": "C068",
+    "category": "רעש",
+    "district": "Marom Nave",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "בנייה בסופי שבוע מתחילה ב-07:00; זה חוקי?"
+  },
+  {
+    "id": "C069",
+    "category": "חניה",
+    "district": "Ramat Chen",
+    "date": "2026-04-17",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "פסי האטה חדשים הותקנו; הכביש בטוח יותר עכשיו"
+  },
+  {
+    "id": "C070",
+    "category": "פינוי אשפה",
+    "district": "Industrial Zone",
+    "date": "2026-04-16",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "ריח פסולת כימית ליד בית ספר; דורש טיפול דחוף"
+  },
+  {
+    "id": "C071",
+    "category": "מפגע דרך",
+    "district": "Industrial Zone",
+    "date": "2026-04-16",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "משאיות כבדות הורסות את כביש התעשייה; מתוכנן תיקון?"
+  },
+  {
+    "id": "C072",
+    "category": "חניה",
+    "district": "City Center",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "אזור הפיקניק נוקה אחרי הפנייה ונראה מצוין"
+  },
+  {
+    "id": "C073",
+    "category": "תאורת רחוב",
+    "district": "National Park",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "פנסי השביל תוקנו; בטוח ללכת בערב"
+  },
+  {
+    "id": "C074",
+    "category": "פינוי אשפה",
+    "district": "Ramat Chen",
+    "date": "2026-04-16",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הפח מלא מדי והמכסה לא נסגר; מושך מזיקים"
+  },
+  {
+    "id": "C075",
+    "category": "רעש",
+    "district": "National Park",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "עבודות הצרת הכביש היו רועשות אך הסתיימו מהר"
+  },
+  {
+    "id": "C076",
+    "category": "חניה",
+    "district": "City Center",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רכבי משלוחים חוסמים מדרכה מדי יום; בלתי אפשרי לעגלות"
+  },
+  {
+    "id": "C077",
+    "category": "פינוי אשפה",
+    "district": "City Center",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "בקבוקי זכוכית שבורים בעמדת המחזור; מסוכן"
+  },
+  {
+    "id": "C078",
+    "category": "מפגע דרך",
+    "district": "Marom Nave",
+    "date": "2026-04-15",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "בור ברחוב בית הספר דווח לפני שבועות ועדיין לא תוקן"
+  },
+  {
+    "id": "C079",
+    "category": "רעש",
+    "district": "Bursa District",
+    "date": "2026-04-15",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "שירותים ציבוריים מקולקלים; חוויית הפארק נפגעה"
+  },
+  {
+    "id": "C080",
+    "category": "תאורת רחוב",
+    "district": "City Center",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אזור השוק החיצוני לא מואר בערבים; סוחרים עוזבים מוקדם"
+  },
+  {
+    "id": "C081",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-14",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "שקיות אשפה נשארות בחוץ; לוח האיסוף מבלבל"
+  },
+  {
+    "id": "C082",
+    "category": "רעש",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-14",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "חיי הלילה בשיכון ותיקים נעשים רועשים יותר מדי שבוע"
+  },
+  {
+    "id": "C083",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "מדחני החניה החדשים עובדים; תמחור ברור והוגן"
+  },
+  {
+    "id": "C084",
+    "category": "פינוי אשפה",
+    "district": "National Park",
+    "date": "2026-04-14",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "עלים שנשרו חוסמים ניקוז ליד הנהר; סכנת הצפה"
+  },
+  {
+    "id": "C085",
+    "category": "מפגע דרך",
+    "district": "National Park",
+    "date": "2026-04-14",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "עבודות הכביש הסתיימו; סוף סוף משטח חלק"
+  },
+  {
+    "id": "C086",
+    "category": "מפגע דרך",
+    "district": "National Park",
+    "date": "2026-04-13",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "מעקה שביל הנהר תוקן; מבוגרים יכולים ללכת בבטחה"
+  },
+  {
+    "id": "C087",
+    "category": "תאורת רחוב",
+    "district": "Ramat Chen",
+    "date": "2026-04-13",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פנסי רחוב סולאריים מהבהבים; תקלה?"
+  },
+  {
+    "id": "C088",
+    "category": "פינוי אשפה",
+    "district": "Bursa District",
+    "date": "2026-04-13",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אשפת השוק לא פונתה ביום ראשון בלילה; בית ספר סמוך"
+  },
+  {
+    "id": "C089",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-13",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "תלונות על נביחות כלבים; הבעלים קיבל אזהרה"
+  },
+  {
+    "id": "C090",
+    "category": "חניה",
+    "district": "Marom Nave",
+    "date": "2026-04-13",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "כאוס הורדת תלמידים בכל בוקר; מסוכן"
+  },
+  {
+    "id": "C091",
+    "category": "פינוי אשפה",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אזור המורשת מתלכלך; תדמית התיירות בסיכון"
+  },
+  {
+    "id": "C092",
+    "category": "מפגע דרך",
+    "district": "Shikun Vatikim",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "אבן משתלבת רופפת; תייר עיקם את הקרסול"
+  },
+  {
+    "id": "C093",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-12",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תחזוקת המזרקה הייתה מצוינת; עובדת יפה"
+  },
+  {
+    "id": "C094",
+    "category": "תאורת רחוב",
+    "district": "Tel Hashomer",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "כל אזור הרציף חשוך; האם בטוח בלילה?"
+  },
+  {
+    "id": "C095",
+    "category": "פינוי אשפה",
+    "district": "Tel Hashomer",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "פסולת מסירות דיג לא מפונה כראוי"
+  },
+  {
+    "id": "C096",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-11",
+    "status": "resolved",
+    "sentiment": "neutral",
+    "description": "הפסטיבל היה רועש אך מאורגן; סביר"
+  },
+  {
+    "id": "C097",
+    "category": "חניה",
+    "district": "National Park",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "רוכבים והולכי רגל חולקים שביל; צריך הפרדה"
+  },
+  {
+    "id": "C098",
+    "category": "פינוי אשפה",
+    "district": "Ramat Chen",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבנייה החדשה מייצרת יותר פסולת מכמות הפחים"
+  },
+  {
+    "id": "C099",
+    "category": "מפגע דרך",
+    "district": "City Center",
+    "date": "2026-04-11",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "עבודות הכביש נעשו היטב עם הפרעה מינימלית"
+  },
+  {
+    "id": "C100",
+    "category": "גנים ונוף",
+    "district": "Ramat Chen",
+    "date": "2026-04-11",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "מגרש הספורט שופץ; הילדים ממש שמחים"
+  },
+  {
+    "id": "C101",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-28",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C102",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C103",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-28",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C104",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-02",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C105",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C106",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-25",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C107",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C108",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-20",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C109",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-12",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C110",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-17",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C111",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-07",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C112",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-01",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C113",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-02",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C114",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C115",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-18",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C116",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C117",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C118",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-21",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C119",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-09",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C120",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C121",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-23",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C122",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-04",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C123",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-01",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C124",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-08",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C125",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C126",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-10",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C127",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-07",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C128",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-08",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C129",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-04",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C130",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-28",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C131",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-24",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C132",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-10",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C133",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-16",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C134",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-27",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C135",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C136",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-03",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C137",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-30",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C138",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-28",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C139",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-16",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C140",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C141",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-14",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C142",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-27",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C143",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-14",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C144",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-05",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C145",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C146",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-21",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C147",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-06",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C148",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-22",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C149",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-27",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C150",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-23",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C151",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-29",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C152",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C153",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-30",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C154",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-13",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C155",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-03",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C156",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-29",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C157",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-23",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C158",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-11",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C159",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C160",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-01",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C161",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-07",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C162",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C163",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-13",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C164",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-05",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C165",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C166",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C167",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-07",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C168",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C169",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-23",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C170",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-08",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C171",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-03",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C172",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C173",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-25",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C174",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-03",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C175",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-08",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C176",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-28",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C177",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-12",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C178",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-11",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C179",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-21",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C180",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C181",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-28",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C182",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-08",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C183",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-09",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C184",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-16",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C185",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-09",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C186",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-16",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C187",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-29",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C188",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-25",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C189",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C190",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-13",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C191",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C192",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C193",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-12",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C194",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-27",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C195",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C196",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-25",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C197",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C198",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C199",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-30",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C200",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-02",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C201",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C202",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-08",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C203",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C204",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C205",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-25",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C206",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-15",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C207",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-01",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C208",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-16",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C209",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-30",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C210",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-25",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C211",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-08",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C212",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C213",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C214",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-10",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C215",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-23",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C216",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-06",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C217",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-21",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C218",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-08",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C219",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C220",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-01",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C221",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C222",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-13",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C223",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C224",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C225",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C226",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-29",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C227",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-29",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C228",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C229",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-02",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C230",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C231",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-07",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C232",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C233",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-20",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C234",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-02",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C235",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-25",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C236",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-16",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C237",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-02",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C238",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-19",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C239",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-24",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C240",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-30",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C241",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-23",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C242",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-15",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C243",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C244",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-17",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C245",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-13",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C246",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-18",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C247",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C248",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C249",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C250",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-10",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C251",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-24",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C252",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C253",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-15",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C254",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-21",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C255",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C256",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-25",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C257",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C258",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C259",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-22",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C260",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-13",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C261",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-21",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C262",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-08",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C263",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-26",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C264",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-08",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C265",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C266",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-04",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C267",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-17",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C268",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-07",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C269",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-29",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C270",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C271",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-26",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C272",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C273",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C274",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-29",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C275",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-20",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C276",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-24",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C277",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C278",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C279",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-28",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C280",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-20",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C281",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-12",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C282",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-01",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C283",
+    "category": "כלבים משוטטים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-22",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C284",
+    "category": "השלכת פסולת",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-20",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C285",
+    "category": "פינוי אשפה",
+    "district": "Neve Efraim",
+    "date": "2026-04-15",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C286",
+    "category": "רעש",
+    "district": "Ramat Chen",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C287",
+    "category": "חניה",
+    "district": "Industrial Zone",
+    "date": "2026-04-08",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C288",
+    "category": "מפגע דרך",
+    "district": "Old City",
+    "date": "2026-04-02",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C289",
+    "category": "תאורת רחוב",
+    "district": "North District",
+    "date": "2026-04-11",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C290",
+    "category": "גנים ונוף",
+    "district": "Marom Nave",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C291",
+    "category": "גרפיטי",
+    "district": "City Center",
+    "date": "2026-04-26",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C292",
+    "category": "הצפות",
+    "district": "Bursa District",
+    "date": "2026-04-14",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C293",
+    "category": "מפגע עצים",
+    "district": "Ramat Amidar",
+    "date": "2026-04-01",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C294",
+    "category": "נזק במדרכה",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-19",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C295",
+    "category": "פיקוח בעלי חיים",
+    "district": "Neve Efraim",
+    "date": "2026-04-12",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C296",
+    "category": "שירותים ציבוריים",
+    "district": "Ramat Chen",
+    "date": "2026-04-20",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C297",
+    "category": "זיהום אוויר",
+    "district": "Industrial Zone",
+    "date": "2026-04-11",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  },
+  {
+    "id": "C298",
+    "category": "כלבים משוטטים",
+    "district": "Old City",
+    "date": "2026-04-21",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הצוות הגיע לבצע בדיקה אך הבעיה לא נפתרה"
+  },
+  {
+    "id": "C299",
+    "category": "השלכת פסולת",
+    "district": "North District",
+    "date": "2026-04-15",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "ציוד שבור שמסכן ילדים ומבוגרים באזור"
+  },
+  {
+    "id": "C300",
+    "category": "פינוי אשפה",
+    "district": "Marom Nave",
+    "date": "2026-04-02",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הבעיה חוזרת על עצמה כבר שבועות ולא טופלה"
+  },
+  {
+    "id": "C301",
+    "category": "רעש",
+    "district": "City Center",
+    "date": "2026-04-10",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "מצב מסוכן הדורש טיפול מיידי"
+  },
+  {
+    "id": "C302",
+    "category": "חניה",
+    "district": "Bursa District",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הבעיה השפיעה על איכות החיים של התושבים"
+  },
+  {
+    "id": "C303",
+    "category": "מפגע דרך",
+    "district": "Ramat Amidar",
+    "date": "2026-04-29",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש טיפול דחוף לפני שהמצב יחמיר"
+  },
+  {
+    "id": "C304",
+    "category": "תאורת רחוב",
+    "district": "Kiryat Borochov",
+    "date": "2026-04-17",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "כבר פניתי פעם שנייה בנושא ועדיין אין מענה"
+  },
+  {
+    "id": "C305",
+    "category": "גנים ונוף",
+    "district": "Neve Efraim",
+    "date": "2026-04-19",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "הסתדר לבסוף - תודה לצוות עיריית רמת גן"
+  },
+  {
+    "id": "C306",
+    "category": "גרפיטי",
+    "district": "Ramat Chen",
+    "date": "2026-04-16",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "האזור נראה זנוח ומוזנח מזה זמן רב"
+  },
+  {
+    "id": "C307",
+    "category": "הצפות",
+    "district": "Industrial Zone",
+    "date": "2026-04-11",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "הבעיה גורמת למפגע ציבורי ולסיכון בטיחות"
+  },
+  {
+    "id": "C308",
+    "category": "מפגע עצים",
+    "district": "Old City",
+    "date": "2026-04-02",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "תושבים רבים מתלוננים על אותו הנושא"
+  },
+  {
+    "id": "C309",
+    "category": "נזק במדרכה",
+    "district": "North District",
+    "date": "2026-04-16",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "הטיפול היה מהיר ויעיל - שירות מצוין"
+  },
+  {
+    "id": "C310",
+    "category": "פיקוח בעלי חיים",
+    "district": "Marom Nave",
+    "date": "2026-04-11",
+    "status": "in_progress",
+    "sentiment": "neutral",
+    "description": "עדיין ממתין לתגובה מאז שדיווחתי"
+  },
+  {
+    "id": "C311",
+    "category": "שירותים ציבוריים",
+    "district": "City Center",
+    "date": "2026-04-18",
+    "status": "resolved",
+    "sentiment": "positive",
+    "description": "המצב השתפר לאחר הטיפול שנעשה"
+  },
+  {
+    "id": "C312",
+    "category": "זיהום אוויר",
+    "district": "Bursa District",
+    "date": "2026-04-29",
+    "status": "open",
+    "sentiment": "negative",
+    "description": "נדרש מעקב מתמשך ולא רק פתרון חד-פעמי"
+  }
+]

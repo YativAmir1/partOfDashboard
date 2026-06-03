@@ -1,0 +1,110 @@
+[
+  {
+    "id": "ANO-001",
+    "timestamp": "2026-04-26T09:55:00Z",
+    "type": "waste_overflow",
+    "district": "Industrial Zone",
+    "description": "נפח גלישת הביוב גבוה פי 3 מהממוצע היומי; סף סביבתי נחצה וצוות סביבתי של שפ״ע עודכן דרך CRM.",
+    "severity": "high",
+    "resolved": false
+  },
+  {
+    "id": "ANO-002",
+    "timestamp": "2026-04-26T09:45:00Z",
+    "type": "complaint_spike",
+    "district": "Marom Nave",
+    "description": "פניות CRM בנושא פסולת עלו ב-340% ביחס לממוצע 7 ימים בשעתיים האחרונות; מנוע הקורלציה סימן חריגה.",
+    "severity": "high",
+    "resolved": false
+  },
+  {
+    "id": "ANO-003",
+    "timestamp": "2026-04-26T09:30:00Z",
+    "type": "power_fault",
+    "district": "City Center",
+    "description": "הפסקת חשמל משפיעה על 3 בנייני מגורים ו-847 יחידות; מתאם התשתיות העירוני עודכן דרך CRM.",
+    "severity": "high",
+    "resolved": false
+  },
+  {
+    "id": "ANO-004",
+    "timestamp": "2026-04-26T09:10:00Z",
+    "type": "traffic_anomaly",
+    "district": "City Center",
+    "description": "תקלה ברמזור גורמת לעיכובים מתגלגלים בארבעה צמתים; דפוס GIS חריג זוהה על ידי הבינה.",
+    "severity": "medium",
+    "resolved": false
+  },
+  {
+    "id": "ANO-005",
+    "timestamp": "2026-04-26T08:55:00Z",
+    "type": "safety_incident",
+    "district": "Shikun Vatikim",
+    "description": "פניות בטיחות בשיכון ותיקים עלו ב-180% מול הממוצע החודשי; זוהה מקבץ מרחבי חריג.",
+    "severity": "high",
+    "resolved": false
+  },
+  {
+    "id": "ANO-006",
+    "timestamp": "2026-04-26T08:30:00Z",
+    "type": "utility_pressure",
+    "district": "Marom Nave",
+    "description": "קריאת לחץ גז נמוכה ב-22% מהתקין בתחנת ניטור N-4; טופל לאחר בדיקת שטח של שפ״ע.",
+    "severity": "medium",
+    "resolved": true
+  },
+  {
+    "id": "ANO-007",
+    "timestamp": "2026-04-26T08:00:00Z",
+    "type": "waste_route",
+    "district": "Bursa District",
+    "description": "נתוני GPS של רכב איסוף שפ״ע מצביעים על דילוג על 3 רחובות; מערכת BI זיהתה סטייה מהמסלול.",
+    "severity": "medium",
+    "resolved": false
+  },
+  {
+    "id": "ANO-008",
+    "timestamp": "2026-04-26T07:45:00Z",
+    "type": "response_time",
+    "district": "Tel Hashomer",
+    "description": "זמן תגובת חירום בתל השומר הגיע ל-58 דקות מול סף SLA של 45 דקות; הופעלה הסלמת CRM.",
+    "severity": "high",
+    "resolved": false
+  },
+  {
+    "id": "ANO-009",
+    "timestamp": "2026-04-26T07:00:00Z",
+    "type": "cctv_offline",
+    "district": "Bursa District",
+    "description": "שלוש מצלמות CCTV ירדו יחד במתחם הבורסה; חשד לתקלה במתג רשת.",
+    "severity": "medium",
+    "resolved": true
+  },
+  {
+    "id": "ANO-010",
+    "timestamp": "2026-04-25T22:15:00Z",
+    "type": "noise_complaint",
+    "district": "City Center",
+    "description": "פניות CRM על רעש מעבודות לילה במרכז העיר גבוהות פי 5 מהרגיל; נדרשת בדיקת עמידה בחוקי עזר.",
+    "severity": "low",
+    "resolved": false
+  },
+  {
+    "id": "ANO-011",
+    "timestamp": "2026-04-25T18:00:00Z",
+    "type": "complaint_spike",
+    "district": "Industrial Zone",
+    "description": "פניות על ריחות מאזור התעשייה עלו פי 6 מקו הבסיס; מקור פסולת שפ״ע אומת בשטח.",
+    "severity": "high",
+    "resolved": true
+  },
+  {
+    "id": "ANO-012",
+    "timestamp": "2026-04-25T14:30:00Z",
+    "type": "traffic_anomaly",
+    "district": "National Park",
+    "description": "תנועה איטית חריגה בשדרות הפארק הלאומי; הבינה חוזה עומס הקשור לפנייה.",
+    "severity": "low",
+    "resolved": true
+  }
+]

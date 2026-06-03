@@ -1,0 +1,283 @@
+@import "tailwindcss";
+
+:root {
+  /* Ramat Gan Official Brand Colors */
+  --rg-dark-blue:   #1f5fa6;
+  --rg-dark-blue-contrast: #175091;
+  --rg-blue:        #009dc3;
+  --rg-bright-blue: #2ad5ff;
+  --rg-light-blue:  #96cdf2;
+  --rg-dark-green:  #459524;
+  --rg-light-green: #b0c000;
+  --rg-yellow:      #ffbb00;
+  --rg-orange:      #f37d00;
+  --rg-red:         #d96350;
+  --rg-emergency:   #f7942d;
+  --rg-dark-pink:   #cf4761;
+
+  /* Highlight tints */
+  --rg-blue-highlights:        #e0f9ff;
+  --rg-green-highlights:       #f1faed;
+  --rg-orange-highlights:      #fff1e2;
+  --rg-pink-highlights:        #ffeff2;
+  --rg-light-green-highlights: #f7f9e6;
+
+  /* Design tokens — light theme */
+  --background:           #f4f4f4;
+  --foreground:           #1a1a1a;
+  --card:                 #ffffff;
+  --card-foreground:      #1a1a1a;
+  --border:               #d0d0d0;
+  --input:                #d0d0d0;
+  --primary:              #1f5fa6;
+  --primary-foreground:   #ffffff;
+  --secondary:            #eef4fb;
+  --secondary-foreground: #585858;
+  --muted:                #f4f4f4;
+  --muted-foreground:     #585858;
+  --accent:               #1f5fa6;
+  --accent-foreground:    #ffffff;
+  --destructive:          #d96350;
+  --ring:                 #1f5fa6;
+  --radius:               0.5rem;
+  --success:              #459524;
+  --warning:              #ffbb00;
+  --danger:               #d96350;
+}
+
+:root.dark-mode {
+  --background:           #0f172a;
+  --foreground:           #e2e8f0;
+  --card:                 #1e293b;
+  --card-foreground:      #f8fafc;
+  --border:               #334155;
+  --input:                #475569;
+  --secondary:            #172033;
+  --secondary-foreground: #cbd5e1;
+  --muted:                #111827;
+  --muted-foreground:     #94a3b8;
+}
+
+@theme inline {
+  --color-background:       var(--background);
+  --color-foreground:       var(--foreground);
+  --color-card:             var(--card);
+  --color-border:           var(--border);
+  --color-primary:          var(--primary);
+  --color-muted:            var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-success:          var(--success);
+  --color-warning:          var(--warning);
+  --color-danger:           var(--danger);
+  --font-sans: var(--font-heebo), "Heebo", system-ui, sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* App-wide dark mode overrides for existing hardcoded Tailwind hex utilities. */
+.dark-mode body,
+.dark-mode [class*="bg-[#f4f4f4]"] {
+  background-color: #0f172a !important;
+}
+
+.dark-mode .bg-white,
+.dark-mode [class*="bg-[#f8f9fb]"],
+.dark-mode [class*="bg-[#eef4fb]"],
+.dark-mode [class*="bg-[#f5f9ff]"] {
+  background-color: #1e293b !important;
+}
+
+.dark-mode [class*="bg-[#e8eaed]"],
+.dark-mode [class*="bg-[#e8e8e8]"] {
+  background-color: #334155 !important;
+}
+
+.dark-mode [class*="border-[#d0d0d0]"],
+.dark-mode [class*="border-[#e8e8e8]"],
+.dark-mode [class*="border-[#e8eaed]"] {
+  border-color: #334155 !important;
+}
+
+.dark-mode [class*="text-[#1a1a1a]"] {
+  color: #f8fafc !important;
+}
+
+.dark-mode [class*="text-[#585858]"],
+.dark-mode [class*="text-[#707070]"] {
+  color: #cbd5e1 !important;
+}
+
+.dark-mode [class*="text-[#999999]"],
+.dark-mode [class*="text-[#999]"],
+.dark-mode [class*="text-[#d0d0d0]"] {
+  color: #94a3b8 !important;
+}
+
+.dark-mode [class*="hover:bg-[#f4f4f4]"]:hover {
+  background-color: #334155 !important;
+}
+
+.dark-mode [class*="hover:border-[#707070]"]:hover,
+.dark-mode [class*="hover:border-[#475569]"]:hover {
+  border-color: #64748b !important;
+}
+
+.dark-mode .leaflet-container {
+  background: #111827;
+}
+
+.dark-mode .leaflet-popup-content-wrapper {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-color: #334155;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.dark-mode .leaflet-popup-tip {
+  background: #1e293b;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+/* Leaflet light map overrides */
+.leaflet-container {
+  background: #e8edf2;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #ffffff;
+  color: #1a1a1a;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+}
+
+.leaflet-popup-close-button {
+  color: #707070 !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 3px;
+}
+
+/* Count-up animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up {
+  animation: countUp 0.4s ease-out;
+}
+
+/* Alert banner slide-in */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.alert-slide-in {
+  animation: slideDown 0.4s ease-out;
+}
+
+/* Blink for AI active status */
+@keyframes aiPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+.ai-pulse {
+  animation: aiPulse 1.5s ease-in-out infinite;
+}
+
+/* CCTV scan line */
+@keyframes cctv-scan {
+  0%   { top: -30%; }
+  100% { top: 100%; }
+}
+.cctv-scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  animation: cctv-scan 5s linear infinite;
+}
+
+/* Hazard toast */
+@keyframes hazard-slide-in {
+  from { transform: translateX(-110%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes hazard-slide-out {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-110%); opacity: 0; }
+}
+@keyframes hazard-progress {
+  from { width: 100%; }
+  to   { width: 0%;   }
+}
+
+/* Map hazard marker pulse ring */
+@keyframes hazard-pulse-ring {
+  0%   { box-shadow: 0 0 0 0    rgba(217, 99, 80, 0.75); }
+  70%  { box-shadow: 0 0 0 12px rgba(217, 99, 80, 0);   }
+  100% { box-shadow: 0 0 0 0    rgba(217, 99, 80, 0);    }
+}
+
+/* Open complaint marker ping — scale-based, half visual radius */
+@keyframes complaint-ping {
+  0%   { transform: scale(1);    opacity: 0.6; }
+  70%  { transform: scale(1.35); opacity: 0;   }
+  100% { transform: scale(1.35); opacity: 0;   }
+}
+
+/* Moving crew/vehicle marker pulse ring */
+@keyframes crew-moving-pulse {
+  0%   { box-shadow: 0 2px 6px rgba(0,0,0,0.45), 0 0 0 0   rgba(255,255,255,0.55); }
+  70%  { box-shadow: 0 2px 6px rgba(0,0,0,0.45), 0 0 0 10px rgba(255,255,255,0);   }
+  100% { box-shadow: 0 2px 6px rgba(0,0,0,0.45), 0 0 0 0   rgba(255,255,255,0);   }
+}
+
+/* Risk zone fill-opacity pulse — CSS-only, no React state interval */
+@keyframes risk-zone-pulse {
+  0%, 100% { fill-opacity: 0.07; }
+  50%       { fill-opacity: 0.15; }
+}
+.risk-zone-pulse {
+  animation: risk-zone-pulse 1.4s ease-in-out infinite;
+}
+
+/* Scenario spike marker scale pulse */
+@keyframes map-spike-pulse {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.18); }
+}
+
+/* Highlighted incident marker scale pulse */
+@keyframes map-highlight-pulse {
+  0%, 100% { transform: scale(1);    }
+  50%       { transform: scale(1.15); }
+}

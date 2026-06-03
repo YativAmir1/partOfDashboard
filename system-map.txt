@@ -1,0 +1,413 @@
+מפת מערכת - לוח הבקרה העירוני של רמת גן
+==========================================
+תאריך: 04/05/2026
+==========================================
+
+
+1. סקירה כללית ברמה גבוהה
+--------------------------
+
+לוח בקרה עירוני מבוסס Next.js 16 / React 19 עבור עיריית רמת גן. המערכת היא
+פרונטאנד בלבד — אין קריאות API, אין שרת, אין מסד נתונים. כל הנתונים הם
+קבצי JSON סטטיים הנטענים בזמן בנייה. ממשק המשתמש בעברית (RTL, גופן Heebo)
+ומדמה מערכת בקרה עירונית מבוססת בינה מלאכותית על פני שישה מסכים.
+
+סטאק טכנולוגי:
+  - Next.js App Router
+  - React 19
+  - TypeScript
+  - Tailwind CSS v4
+  - shadcn/ui
+  - Recharts (גרפים)
+  - Leaflet (מפות)
+  - Playwright (בדיקות E2E)
+
+
+2. פירוט רכיבים — שכבת האפליקציה (app/)
+-----------------------------------------
+
+layout.tsx
+  - מיקום: dashboard/app/layout.tsx
+  - תפקיד: מעטפת שורש — מגדיר dir="rtl", גופן Heebo, עוטף ב-DemoContext ו-HazardContext, מרכיב Header, Sidebar, AlertBanner, HazardToast
+  - סוג: ניתוב / פריסה
+
+page.tsx
+  - מיקום: dashboard/app/page.tsx
+  - תפקיד: הפניה מיידית ל-/overview
+  - סוג: ניתוב
+
+overview/page.tsx
+  - מיקום: dashboard/app/overview/page.tsx
+  - תפקיד: לוח הבריאות העירוני הראשי — מדדי KPI, גאוג' בריאות, התראות, פאנל מתאם AI, קטגוריות מובילות, מגמה של 30 יום
+  - סוג: UI + מצב
+
+map/page.tsx
+  - מיקום: dashboard/app/map/page.tsx
+  - תפקיד: מפת Leaflet עם סמנים, פחים חכמים, מצלמות, צוותי שטח, פילטרים
+  - סוג: UI + מצב
+
+operations/page.tsx
+  - מיקום: dashboard/app/operations/page.tsx
+  - תפקיד: טבלת אירועים, משפך בקשות, גרף זמני תגובה, בלוקים של זיהוי AI
+  - סוג: UI + מצב
+
+citizens/page.tsx
+  - מיקום: dashboard/app/citizens/page.tsx
+  - תפקיד: אנליטיקת תלונות, גאוג' SLA, פירוט ערוצים, מודול קשר 106
+  - סוג: UI + מצב
+
+employees/page.tsx
+  - מיקום: dashboard/app/employees/page.tsx
+  - תפקיד: 5 כרטיסי מחלקה, לוחות זמנים של צוותים, רצועת KPI כוח אדם
+  - סוג: UI
+
+insights/page.tsx
+  - מיקום: dashboard/app/insights/page.tsx
+  - תפקיד: המלצות AI, יומן אנומליות, מדדי יעילות, שרשרת היגיון תרחיש
+  - סוג: UI + מצב
+
+cameras/page.tsx
+  - מיקום: dashboard/app/cameras/page.tsx
+  - תפקיד: רשת מצלמות מעקב (סטטוס, אירוע אחרון)
+  - סוג: UI
+
+
+רכיבי פריסה (components/layout/)
+----------------------------------
+
+Header.tsx
+  - תפקיד: סרגל עליון — לוגו, שעון חי, כפתור הרצת תרחיש, איפוס דמו
+  - תלוי ב: useDemo()
+
+Sidebar.tsx
+  - תפקיד: ניווט שמאלי (6 נתיבים + מצלמות), מצב פעיל, next/navigation
+  - סוג: ניתוב
+
+AlertBanner.tsx
+  - תפקיד: סרט התראה ברוחב מלא המופיע כאשר phase !== "idle"
+  - תלוי ב: useDemo()
+
+HazardToast.tsx
+  - תפקיד: טוסט המופיע לאחר 30 שניות כאשר hazardRevealed=true
+  - תלוי ב: useHazard()
+
+ThemeProvider.tsx
+  - תפקיד: עוטף ערכת נושא shadcn
+  - תלוי ב: shadcn/ui
+
+
+רכיבים משותפים (components/shared/)
+-------------------------------------
+
+PriorityBadge.tsx
+  - תפקיד: תווית עדיפות בצבע עם עברית
+  - props: priority: Priority
+
+StatusBadge.tsx
+  - תפקיד: נקודת צבע + תווית סטטוס בעברית
+  - props: status: IncidentStatus
+
+SentimentIcon.tsx
+  - תפקיד: כדור צבעוני לסנטימנט חיובי/ניטרלי/שלילי
+  - props: sentiment: string
+
+SparklineChart.tsx
+  - תפקיד: קו מיני של Recharts לכרטיסי KPI
+  - props: data: number[]
+
+
+רכיבי סקירה כללית (components/overview/)
+------------------------------------------
+
+KpiCard.tsx
+  - תפקיד: כרטיס מדד עם תווית, ערך, דלתא, ספארקליין, אייקון
+  - נתונים: props מ-overview/page.tsx
+
+CityHealthGauge.tsx
+  - תפקיד: גאוג' SVG חצי-מעגלי (0-100, מונפש)
+  - נתונים: prop "score"; useDemo() לאנימציה
+
+CriticalAlertsSection.tsx
+  - תפקיד: רשת אירועים קריטיים עם אינדיקטור דחיפות פועם
+  - נתונים: incidents.json
+
+WeatherWidget.tsx
+  - תפקיד: תחזית 7 ימים עם אמוג'י ומאורעות
+  - נתונים: מוקד קשיח (hardcoded)
+
+TopCategoriesWidget.tsx
+  - תפקיד: סרגלי קטגוריות עם פילטר שכונה
+  - נתונים: useTopCategories(district)
+
+RequestFunnelChart.tsx
+  - תפקיד: משפך אירועים לפי שכונה (Recharts)
+  - נתונים: useRequestFunnel(district)
+
+ChannelDonutChart.tsx
+  - תפקיד: עוגת ערוצי פנייה נכנסת (Recharts)
+  - נתונים: contactMetrics.json
+
+
+רכיבי תושבים (components/citizens/)
+--------------------------------------
+
+ComplaintVolumeChart.tsx
+  - תפקיד: מגמת תלונות 30 יום (Recharts קו)
+  - נתונים: trends.json
+
+SlaGauge.tsx
+  - תפקיד: גאוג' אחוז SLA
+  - נתונים: useSlaMetrics()
+
+Contact106Module.tsx
+  - תפקיד: סטטיסטיקות הסטת שיחות (סה"כ / הוסטו / אנושי)
+  - נתונים: contactMetrics.json
+
+ChannelEfficiencyTable.tsx
+  - תפקיד: שיעורי פתרון והסלמה לפי ערוץ
+  - נתונים: useChannelEfficiency(filters)
+
+DistrictLoad.tsx
+  - תפקיד: חלק תלונות לפי שכונה (סרגלים)
+  - נתונים: useDistrictLoad(filters)
+
+
+רכיבי תפעול (components/operations/)
+---------------------------------------
+
+IncidentTable.tsx
+  - תפקיד: רשימת אירועים ניתנת למיון, פילטור וחיפוש
+  - נתונים: incidents.json
+
+AiDetectionBlock.tsx
+  - תפקיד: רשימת אירועים שזוהו לאחרונה ע"י AI
+  - נתונים: anomalies.json + useDemo()
+
+ResponseTimeChart.tsx
+  - תפקיד: מגמת זמן תגובה היסטורית
+  - נתונים: trends.json
+
+
+רכיבי תובנות (components/insights/)
+--------------------------------------
+
+RecommendationCard.tsx
+  - תפקיד: המלצת AI בודדת עם סרגל ביטחון
+  - נתונים: recommendations.json + useDemo()
+
+AnomalyLog.tsx
+  - תפקיד: אנומליות שזוהו עם חומרה + שכונה
+  - נתונים: anomalies.json
+
+EfficiencyMetrics.tsx
+  - תפקיד: יעילות ערוצים, ביצועי שטח, SLA
+  - נתונים: useChannelEfficiency(), useFieldStats(), useSlaMetrics()
+
+ScenarioPanel.tsx
+  - תפקיד: מציג שרשרת היגיון AI בת 4 שלבים במהלך תרחיש פעיל
+  - נתונים: useDemo()
+
+
+רכיבי מפה (components/map/)
+------------------------------
+
+CityMap.tsx
+  - תפקיד: מפת Leaflet עם כל השכבות (סמנים, פחים, מצלמות, צוותים)
+  - נתונים: markers.json, cameras.json, תרחיש מ-useDemo()
+
+CategoryFilter.tsx
+  - תפקיד: כפתורי מתג לקטגוריות אירועים ושכבות מפה
+  - נתונים: state מקומי → props ל-CityMap
+
+MapLegend.tsx
+  - תפקיד: מקרא מפה לסוגי אייקונים
+  - סוג: UI בלבד
+
+
+3. ספקי הקשר (context/)
+------------------------
+
+DemoContext.tsx
+  - תפקיד: מנהל מצב תרחיש AI (7 שלבים), אנימציית KPI, המלצה ומשימה שנוצרו
+  - נצרך ע"י: Header, AlertBanner, CityHealthGauge, ScenarioPanel, AiDetectionBlock, CityMap, דף insights
+
+  שלבי התרחיש:
+    idle → anomaly_detected (0 שנ') → ai_correlation (6 שנ') →
+    recommendation_created (11 שנ') → task_dispatched (16 שנ') →
+    citizen_updated (22 שנ') → kpi_improving (28 שנ') → resolved (60 שנ')
+
+HazardContext.tsx
+  - תפקיד: טיימר של 30 שניות שחושף אירוע תאונה רגיש
+  - נצרך ע"י: HazardToast, IncidentTable
+
+
+4. הוקים (hooks/)
+------------------
+
+useCountUp(target, duration=600)
+  - מחזיר: מספר מונפש (requestAnimationFrame)
+  - מקור: props
+
+useContactMetrics()
+  - מחזיר: פירוט ערוצי פנייה נכנסת
+  - מקור: contactMetrics.json
+
+useChannelEfficiency(filters)
+  - מחזיר: שיעורי פתרון/הסלמה לפי ערוץ
+  - מקור: operationalMetrics.json
+
+useDistrictLoad(filters)
+  - מחזיר: חלוקת תלונות לפי שכונה
+  - מקור: complaints.json
+
+useFieldStats()
+  - מחזיר: שיעורי שיוך/פתרון שטח
+  - מקור: contactMetrics.json
+
+useLiveTicker(maxEvents=8)
+  - מחזיר: רשימת אירועים חיה (מחזור 9 שנ')
+  - מקור: תבניות קשיחות (hardcoded)
+
+useRequestFunnel(district?)
+  - מחזיר: שלבי משפך אירועים
+  - מקור: incidents.json + contactMetrics.json
+
+useSlaMetrics()
+  - מחזיר: אחוז עמידה ב-SLA, זמני תגובה/פתרון ממוצעים
+  - מקור: operationalMetrics.json
+
+useTopCategories(district?)
+  - מחזיר: 6 קטגוריות תלונות מובילות, עם פילטר אופציונלי
+  - מקור: complaints.json
+
+
+5. ספריות / כלי עזר (lib/)
+----------------------------
+
+types.ts
+  - תפקיד: כל ממשקי TypeScript של הדומיין
+  - סוג: טיפוסים
+
+  טיפוסי ליבה:
+    - IncidentType: "waste" | "traffic" | "safety" | "utilities" | "parks"
+    - Priority: "critical" | "high" | "medium" | "low"
+    - IncidentStatus: "open" | "in_progress" | "resolved"
+    - District: 8 שכונות
+    - SourceType: 6 מקורות (תלונת תושב, מצלמה, AI, מפקח שטח, חיישן, תחזוקה מונעת)
+    - Incident, Complaint, Task, Anomaly, AIRecommendation, CameraFeed, MunicipalTeam
+    - ScenarioPhase, DemoScenarioData
+
+hebrew.ts
+  - תפקיד: מיפויי תוויות עברית לשכונות, קטגוריות, סטטוסים, מקורות
+  - סוג: כלי עזר
+
+data.ts
+  - תפקיד: קבועי צבע, פונקציות עזר לטעינת נתונים
+  - סוג: כלי עזר
+
+utils.ts
+  - תפקיד: cn() — מאחד className של Tailwind (clsx + tailwind-merge)
+  - סוג: כלי עזר
+
+
+6. נתוני דמה (data/)
+---------------------
+
+קובץ                    | רשומות | שדות עיקריים
+------------------------|--------|--------------------------------------------
+complaints.json         | ~1400  | id, category, district, date, status, sentiment
+incidents.json          | ~150   | id, type, priority, status, assignee, source
+markers.json            | ~500   | id, lat, lng, category, district, aiNote
+tasks.json              | ~50    | id, title, assignee, priority, status, source
+cameras.json            | ~25    | id, name, district, status, lastEvent, streamUrl
+anomalies.json          | ~30    | id, type, district, severity, resolved
+recommendations.json    | ~20    | id, priority, confidence, title, description
+trends.json             | 30     | day, date, complaints, slaCompliance, satisfaction
+contactMetrics.json     | 1 מסמך | totalIncomingRequests, requestsByChannel, funnel
+operationalMetrics.json | 1 מסמך | sla (avgResponseTime, slaBreachRate), channelEfficiency
+complaintClusters.json  | ~30    | אשכולות גיאוגרפיים של תלונות
+departments.json        | ~10    | מטאדאטה של מחלקות
+employeesData.ts        | 5 מח' | MunicipalDept[] עם 25+ צוותים, לוחות, עובדים
+
+
+7. זרימת נתונים וסקירת נתוני דמה
+-----------------------------------
+
+קבצי JSON סטטיים / .ts (data/)
+          ↓
+   lib/data.ts (קבועים, טעינות)
+          ↓
+   הוקים מותאמים (hooks/) — פילטר, אגרגציה, חישוב
+          ↓
+   דפי פייג' (app/*/page.tsx) — state מקומי (שכונה נבחרת, פילטר)
+          ↓
+   רכיבי תכונה (components/*/) — תצוגה בלבד
+
+שתי זרימות גלובליות חוצות-מערכת:
+  1. DemoContext — מצב תרחיש מוזרק ל-~8 רכיבים שונים בכל הדפים במקביל
+  2. HazardContext — טיימר משותף בין הטוסט לכל רכיב שמסנן את אירוע התאונה
+
+אין קריאות רשת בשום מקום בקוד. כל ההוקים קוראים מ-JSON מיובא מקומית.
+
+
+8. הנחות ואזורים לא ברורים
+-----------------------------
+
+streamUrl במצלמות
+  - השדה קיים ב-cameras.json אך לא מוצג כלשהו — כרטיסי המצלמה מציגים סטטוס בלבד
+
+complaintClusters.json
+  - הנתונים קיימים אך לא ברור אם קיים רכיב שמשתמש בהם פעיל כרגע
+
+WeatherWidget
+  - נתוני מזג אוויר מקודדים קשיח בקוד — עדכונים עתידיים דורשים עריכת קוד ישירה
+
+useLiveTicker
+  - תבניות מקודדות קשיח — לא ברור איזה רכיב מרנדר את הטיקר כרגע
+
+departments.json לעומת employeesData.ts
+  - שני מקורות נתונים נפרדים עם מטרה חופפת — ההתאמה ביניהם לא ברורה
+
+גבולות שכונות במפה
+  - לסמנים יש תוויות שכונה אך אין שכבת פולי/גבול על מפת Leaflet
+
+
+9. מוכנות לצד שרת (Backend Readiness)
+---------------------------------------
+
+הקוד בנוי עם תפרים נקיים מאוד לחיבור עם צד שרת.
+
+א. שליפת נתונים
+   כל הוק מייבא JSON ישירות. כל הוק יצטרך להיות מוחלף
+   בקריאת fetch / SWR / React Query לנקודת קצה של API.
+   חתימות ההוקים וצורות הנתונים המוחזרות כבר יציבות —
+   רכיבי הדפים לא יצטרכו להשתנות.
+
+ב. זמן אמת
+   useLiveTicker ו-DemoContext מדמים אירועים חיים בטיימרים.
+   אלה יוחלפו ב-WebSocket או ב-SSE.
+   מבנה ה-Context כבר מבודד היטב.
+
+ג. טיפוסים
+   lib/types.ts הוא כבר חוזה API יציב.
+   הממשקים ממפים בצורה נקייה למשאבי REST:
+   /incidents, /complaints, /tasks, /cameras וכו'.
+
+ד. אימות
+   אין שכבת אימות בשום מקום. הוספת session-based או JWT
+   תדרוש עטיפת ה-layout השורש והוספת middleware.
+
+ה. פעולות כתיבה (Mutations)
+   אין פעולות כתיבה כרגע — אין טפסים שמגישים לשום מקום.
+   שיגור המשימה בדמו הוא קוסמטי בלבד. כל פעולה מדומה
+   (שגר משימה, עדכן סטטוס) תהפוך ל-POST / PATCH אמיתי.
+
+ו. משתני סביבה
+   next.config.ts מגביל את כתובת הפיתוח ל-127.0.0.1 בלבד.
+   אין משתן NEXT_PUBLIC_API_URL או דומה מוגדר בשום מקום.
+
+סיכום:
+   הפרונטאנד בנוי היטב ואגנוסטי לצד שרת. העבודה העיקרית
+   היא להחליף 9 הוקים (אחד לכל תחום נתונים) בקריאות fetch
+   אמיתיות, לחבר שכבת WebSocket או polling לאירועים חיים,
+   ולהוסיף middleware לאימות.

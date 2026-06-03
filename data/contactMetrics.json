@@ -1,0 +1,51 @@
+{
+  "metrics": {
+    "totalIncomingRequests": 312,
+    "requestsByChannel": {
+      "שיחה עם נציג - 109": 91,
+      "ווטסאפ ראש העיר": 53,
+      "אפליקציה ראש העיר": 45,
+      "אפליקציה": 35,
+      "אתר סימפלצ'אט": 26,
+      "בוט קולי": 21,
+      "פורטל אינטרנט": 18,
+      "ווטסאפ": 9,
+      "פייסבוק לשכת ראש העיר": 7,
+      "מייל": 5,
+      "הגעה פיזית": 2
+    },
+    "informationalRequests": 131
+  },
+  "metrics7d": {
+    "totalIncomingRequests": 121,
+    "requestsByChannel": {
+      "שיחה עם נציג - 109": 34,
+      "ווטסאפ ראש העיר": 21,
+      "אפליקציה ראש העיר": 17,
+      "אפליקציה": 13,
+      "אתר סימפלצ'אט": 11,
+      "בוט קולי": 9,
+      "פורטל אינטרנט": 7,
+      "ווטסאפ": 4,
+      "פייסבוק לשכת ראש העיר": 3,
+      "מייל": 1,
+      "הגעה פיזית": 1
+    },
+    "informationalRequests": 50
+  },
+  "funnel": [
+    { "status": "new",              "count": 312 },
+    { "status": "inProgress",       "count": 218 },
+    { "status": "assignedToField",  "count": 127 },
+    { "status": "resolved",         "count":  89 },
+    { "status": "misrouted",        "count":  12 }
+  ],
+  "topCategories": [
+    { "name": "פינוי אשפה", "count": 98, "percentage": 31 },
+    { "name": "רעש",              "count": 62, "percentage": 20 },
+    { "name": "חניה",            "count": 54, "percentage": 17 },
+    { "name": "מפגע דרך",            "count": 41, "percentage": 13 },
+    { "name": "תאורת רחוב",    "count": 33, "percentage": 11 },
+    { "name": "גנים ונוף",              "count": 24, "percentage":  8 }
+  ]
+}

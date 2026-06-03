@@ -1,0 +1,9 @@
+[
+  {"name":"שפ״ע וחזות העיר","avgResponseMin":28,"incidentCount":28},
+  {"name":"בקרת תנועה","avgResponseMin":22,"incidentCount":14},
+  {"name":"ביטחון ובטיחות","avgResponseMin":35,"incidentCount":12},
+  {"name":"תשתיות עירוניות","avgResponseMin":41,"incidentCount":11},
+  {"name":"גנים ונוף","avgResponseMin":52,"incidentCount":5},
+  {"name":"יחידה סביבתית","avgResponseMin":58,"incidentCount":4},
+  {"name":"פיקוח בנייה","avgResponseMin":44,"incidentCount":3}
+]

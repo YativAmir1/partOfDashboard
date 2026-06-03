@@ -1,0 +1,51 @@
+
+> dashboard@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+Error: spawn EPERM
+    at ChildProcess.spawn (node:internal/child_process:441:11)
+    at spawn (node:child_process:796:9)
+    at fork (node:child_process:174:10)
+    at C:\Users\amirya\Desktop\Projects\RamtGan\dashboard\node_modules\next\dist\cli\next-dev.js:253:45
+    at new Promise (<anonymous>)
+    at startServer (C:\Users\amirya\Desktop\Projects\RamtGan\dashboard\node_modules\next\dist\cli\next-dev.js:221:16)
+    at runDevServer (C:\Users\amirya\Desktop\Projects\RamtGan\dashboard\node_modules\next\dist\cli\next-dev.js:355:23)
+    at Module.nextDev (C:\Users\amirya\Desktop\Projects\RamtGan\dashboard\node_modules\next\dist\cli\next-dev.js:363:11) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'spawn'
+}
+
+> dashboard@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+✓ Ready in 497ms
+⨯ Another next dev server is already running.
+
+- Local:        http://localhost:3000
+- PID:          15468
+- Dir:          C:\Users\amirya\Desktop\Projects\RamtGan\dashboard
+- Log:          .next\dev\logs\next-development.log
+
+Run taskkill /PID 15468 /F to stop it.
+[?25h
+
+> dashboard@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://127.0.0.1:3000
+- Network:       http://127.0.0.1:3000
+✓ Ready in 665ms
+⨯ Another next dev server is already running.
+
+- Local:        http://localhost:3000
+- PID:          16412
+- Dir:          C:\Users\amirya\Desktop\Projects\RamtGan\dashboard
+- Log:          .next\dev\logs\next-development.log
+
+Run taskkill /PID 16412 /F to stop it.
+[?25h

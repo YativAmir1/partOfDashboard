@@ -1,0 +1,15 @@
+{
+  "sla": {
+    "avgResponseTime": 18,
+    "avgResolutionTime": 47,
+    "slaBreachRate": 12
+  },
+  "channelEfficiency": [
+    { "channel": "טלפון 109",     "resolutionRate": 78, "escalationRate": 14 },
+    { "channel": "אפליקציה",      "resolutionRate": 85, "escalationRate":  8 },
+    { "channel": "פורטל אינטרנט", "resolutionRate": 72, "escalationRate": 18 },
+    { "channel": "ווטסאפ",        "resolutionRate": 80, "escalationRate": 11 },
+    { "channel": "מייל",          "resolutionRate": 64, "escalationRate": 24 },
+    { "channel": "הגעה פיזית",    "resolutionRate": 90, "escalationRate":  5 }
+  ]
+}

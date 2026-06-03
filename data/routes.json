@@ -1,0 +1,245 @@
+{
+  "templates": [
+    {
+      "id": "tmpl-001",
+      "name": "מסלול ניקיון מזרחי",
+      "streets": ["שדרות ירושלים", "דוד בן גוריון", "דרך יצחק רבין"],
+      "category": "waste",
+      "estimatedDurationMin": 180
+    },
+    {
+      "id": "tmpl-002",
+      "name": "מסלול בורסה ואבא הלל",
+      "streets": ["אבא הלל", "תובל", "היצירה", "דרך מנחם בגין"],
+      "category": "waste",
+      "estimatedDurationMin": 180
+    },
+    {
+      "id": "tmpl-003",
+      "name": "מסלול מרכז העיר",
+      "streets": ["ביאליק", "הרצל", "קריניצי", "הרא\"ה"],
+      "category": "waste",
+      "estimatedDurationMin": 180
+    },
+    {
+      "id": "tmpl-004",
+      "name": "מסלול צירים ראשיים",
+      "streets": ["ז'בוטינסקי", "אבא הלל", "בן גוריון", "רוקח"],
+      "category": "waste",
+      "estimatedDurationMin": 180
+    },
+    {
+      "id": "tmpl-005",
+      "name": "מסלול פארקים ומשחקים",
+      "streets": ["שדרות ירושלים", "הרצל", "פארק גבעת השחר"],
+      "category": "parks",
+      "estimatedDurationMin": 150
+    },
+    {
+      "id": "tmpl-006",
+      "name": "מסלול גנים וציבור",
+      "streets": ["פארק רמת גן", "גן לאומי", "שדרות כוגמן"],
+      "category": "parks",
+      "estimatedDurationMin": 180
+    },
+    {
+      "id": "tmpl-007",
+      "name": "מסלול ביקורת שילוט",
+      "streets": ["ז'בוטינסקי", "אבא הלל", "בגין", "ביאליק"],
+      "category": "safety",
+      "estimatedDurationMin": 120
+    }
+  ],
+  "schedules": [
+    {
+      "id": "sch-001",
+      "templateId": "tmpl-001",
+      "dayOfWeek": ["sun", "tue", "thu"],
+      "scheduledStartTime": "06:00",
+      "scheduledEndTime": "09:00",
+      "assignedTeam": "צוות ניקיון א׳",
+      "requiredCompletionPct": 85
+    },
+    {
+      "id": "sch-002",
+      "templateId": "tmpl-002",
+      "dayOfWeek": ["sun", "mon", "wed", "thu"],
+      "scheduledStartTime": "09:00",
+      "scheduledEndTime": "12:00",
+      "assignedTeam": "צוות ניקיון ב׳",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "sch-003",
+      "templateId": "tmpl-003",
+      "dayOfWeek": ["sun", "tue", "wed", "thu"],
+      "scheduledStartTime": "07:00",
+      "scheduledEndTime": "10:00",
+      "assignedTeam": "צוות ניקיון ג׳",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "sch-004",
+      "templateId": "tmpl-004",
+      "dayOfWeek": ["sun", "mon", "tue", "wed", "thu"],
+      "scheduledStartTime": "12:00",
+      "scheduledEndTime": "15:00",
+      "assignedTeam": "צוות צירים",
+      "requiredCompletionPct": 90
+    },
+    {
+      "id": "sch-005",
+      "templateId": "tmpl-005",
+      "dayOfWeek": ["sun", "tue", "thu"],
+      "scheduledStartTime": "08:00",
+      "scheduledEndTime": "10:30",
+      "assignedTeam": "צוות גנים",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "wsch-001",
+      "templateId": "tmpl-001",
+      "dayOfWeek": ["sun", "wed"],
+      "scheduledStartTime": "08:00",
+      "scheduledEndTime": "12:00",
+      "assignedTeam": "צוות ניקיון א׳",
+      "vehicle": "רכב 17",
+      "requiredCompletionPct": 85
+    },
+    {
+      "id": "wsch-002",
+      "templateId": "tmpl-002",
+      "dayOfWeek": ["sun"],
+      "scheduledStartTime": "14:00",
+      "scheduledEndTime": "16:00",
+      "assignedTeam": "צוות ניקיון ב׳",
+      "vehicle": "רכב 22",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "wsch-003",
+      "templateId": "tmpl-003",
+      "dayOfWeek": ["mon", "wed"],
+      "scheduledStartTime": "07:00",
+      "scheduledEndTime": "10:00",
+      "assignedTeam": "צוות ניקיון ג׳",
+      "vehicle": "רכב 11",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "wsch-004",
+      "templateId": "tmpl-004",
+      "dayOfWeek": ["mon"],
+      "scheduledStartTime": "13:00",
+      "scheduledEndTime": "15:00",
+      "assignedTeam": "צוות צירים",
+      "vehicle": "רכב 18",
+      "requiredCompletionPct": 90
+    },
+    {
+      "id": "wsch-005",
+      "templateId": "tmpl-006",
+      "dayOfWeek": ["tue", "fri"],
+      "scheduledStartTime": "08:00",
+      "scheduledEndTime": "11:00",
+      "assignedTeam": "צוות גינון 3",
+      "requiredCompletionPct": 80
+    },
+    {
+      "id": "wsch-006",
+      "templateId": "tmpl-007",
+      "dayOfWeek": ["tue"],
+      "scheduledStartTime": "15:00",
+      "scheduledEndTime": "17:00",
+      "assignedTeam": "צוות שילוט 2",
+      "requiredCompletionPct": 80
+    }
+  ],
+  "executions": [
+    {
+      "id": "exec-001",
+      "scheduleId": "sch-001",
+      "date": "2026-05-28",
+      "actualStartTime": "06:05",
+      "actualEndTime": "09:10",
+      "completionPct": 95,
+      "notes": ""
+    },
+    {
+      "id": "exec-002",
+      "scheduleId": "sch-002",
+      "date": "2026-05-28",
+      "actualStartTime": "09:00",
+      "completionPct": 60
+    },
+    {
+      "id": "exec-003",
+      "scheduleId": "sch-003",
+      "date": "2026-05-28",
+      "actualStartTime": "07:20",
+      "completionPct": 45
+    },
+    {
+      "id": "exec-004",
+      "scheduleId": "sch-004",
+      "date": "2026-05-28",
+      "completionPct": 0
+    },
+    {
+      "id": "exec-005",
+      "scheduleId": "sch-005",
+      "date": "2026-05-28",
+      "actualStartTime": "08:00",
+      "actualEndTime": "10:35",
+      "completionPct": 90
+    }
+  ],
+  "complaints": [
+    {
+      "id": "rc-001",
+      "executionId": "exec-001",
+      "description": "פח אשפה לא פונה ברחוב בן גוריון",
+      "street": "דוד בן גוריון",
+      "timestamp": "2026-05-28T08:42:00",
+      "lat": 32.074733,
+      "lng": 34.819324
+    },
+    {
+      "id": "rc-002",
+      "executionId": "exec-005",
+      "description": "פחי אשפה מגולשים ליד גינת הילדים",
+      "street": "ביאליק",
+      "timestamp": "2026-05-28T09:15:00",
+      "lat": 32.082037,
+      "lng": 34.813313
+    },
+    {
+      "id": "rc-003",
+      "executionId": "exec-005",
+      "description": "פסולת שלא פונתה ליד השטח הירוק",
+      "street": "ארלוזורוב",
+      "timestamp": "2026-05-28T09:30:00",
+      "lat": 32.079246,
+      "lng": 34.810857
+    },
+    {
+      "id": "rc-004",
+      "executionId": "exec-005",
+      "description": "שאריות גיזום חוסמות את המדרכה",
+      "street": "בורוכוב",
+      "timestamp": "2026-05-28T10:00:00",
+      "lat": 32.080127,
+      "lng": 34.811566,
+      "category": "waste"
+    },
+    {
+      "id": "rc-005",
+      "executionId": "exec-005",
+      "description": "אשפה מפוזרת ליד ספסלי הפארק",
+      "street": "שלמה בן יוסף",
+      "timestamp": "2026-05-28T10:20:00",
+      "lat": 32.079175,
+      "lng": 34.810259
+    }
+  ]
+}

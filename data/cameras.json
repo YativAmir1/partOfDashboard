@@ -1,0 +1,90 @@
+[
+  {
+    "id": "CAM-001",
+    "name": "ז'בוטינסקי / בית השיטה",
+    "district": "Marom Nave",
+    "location": "כניסה צפונית למרום נווה",
+    "status": "online",
+    "lastEvent": "תנועת הולכי רגל · תנאים תקינים",
+    "lastEventTime": "2026-04-29T10:41:00Z",
+    "eventType": "none",
+    "videoSrc": "/cameras/camera1.mp4"
+  },
+  {
+    "id": "CAM-002",
+    "name": "כיכר המועצה",
+    "district": "Marom Nave",
+    "location": "כיכר מרכזית מרום נווה",
+    "status": "online",
+    "lastEvent": "חנייה חריגה · נרשמה",
+    "lastEventTime": "2026-04-29T10:22:00Z",
+    "eventType": "traffic",
+    "videoSrc": "/cameras/camera2.mp4"
+  },
+  {
+    "id": "CAM-003",
+    "name": "שדרות דוד המלך",
+    "district": "Marom Nave",
+    "location": "כניסה דרומית למרום נווה",
+    "status": "online",
+    "lastEvent": "תנועה תקינה",
+    "lastEventTime": "2026-04-29T09:58:00Z",
+    "eventType": "none",
+    "videoSrc": "/cameras/camera3.mp4"
+  },
+  {
+    "id": "CAM-004",
+    "name": "ביאליק / הרצל",
+    "district": "City Center",
+    "location": "מרכז העיר",
+    "status": "online",
+    "lastEvent": "הולך רגל חצה ללא זכות קדימה · נרשם",
+    "lastEventTime": "2026-04-29T10:35:00Z",
+    "eventType": "safety",
+    "videoSrc": "/cameras/camera4.mp4"
+  },
+  {
+    "id": "CAM-005",
+    "name": "שלמה המלך / אבא הלל",
+    "district": "Ramat Chen",
+    "location": "צומת מרכזי רמת חן",
+    "status": "online",
+    "lastEvent": "עומס תנועה מתון · זמן המתנה 4 דקות",
+    "lastEventTime": "2026-04-29T10:38:00Z",
+    "eventType": "traffic",
+    "videoSrc": "/cameras/camera5.mp4"
+  },
+  {
+    "id": "CAM-006",
+    "name": "שער כניסה מזרח",
+    "district": "Industrial Zone",
+    "location": "אזור תעשייה מזרח",
+    "status": "online",
+    "lastEvent": "רכב חשוד חנה · נבדק על ידי אבטחה",
+    "lastEventTime": "2026-04-29T08:12:00Z",
+    "eventType": "safety",
+    "videoSrc": "/cameras/camera6.mp4"
+  },
+  {
+    "id": "CAM-007",
+    "name": "שביל הפארק הלאומי",
+    "district": "National Park",
+    "location": "שביל מרכזי גן לאומי",
+    "status": "online",
+    "lastEvent": "פעילות ספורט · תנאים תקינים",
+    "lastEventTime": "2026-04-29T10:11:00Z",
+    "eventType": "none",
+    "videoSrc": "/cameras/camera7.mp4"
+  },
+  {
+    "id": "CAM-008",
+    "name": "הרצל / שיכון ותיקים",
+    "district": "Shikun Vatikim",
+    "location": "שיכון ותיקים מרכז",
+    "status": "online",
+    "lastEvent": "השלכת פסולת לא חוקית · נרשמה",
+    "lastEventTime": "2026-04-29T09:44:00Z",
+    "eventType": "waste",
+    "videoSrc": "/cameras/camera8.mp4"
+  }
+]

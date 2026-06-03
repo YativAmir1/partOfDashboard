@@ -1,0 +1,530 @@
+"use client";
+
+import { useMemo, useState, useEffect } from "react";
+import {
+  Route,
+  CheckCircle2,
+  PlayCircle,
+  Clock,
+  AlertTriangle,
+  BarChart3,
+  MessageSquareWarning,
+  Calendar,
+  CalendarDays,
+} from "lucide-react";
+import {
+  routeTemplates,
+  routeSchedules,
+  routeExecutions,
+  routeComplaints,
+} from "@/lib/data";
+import {
+  calculateRouteStatus,
+  ROUTE_STATUS_LABELS,
+  ROUTE_STATUS_COLORS,
+} from "@/lib/routeUtils";
+import { WeeklyGrid } from "@/components/routes/WeeklyGrid";
+import { RouteDetailDrawer } from "@/components/routes/RouteDetailDrawer";
+import { EditScheduleModal } from "@/components/routes/EditScheduleModal";
+import { CategoryBreakdown } from "@/components/routes/CategoryBreakdown";
+import { TimelineChart } from "@/components/routes/TimelineChart";
+import { ComplaintStreets } from "@/components/routes/ComplaintStreets";
+import { TeamPerformance } from "@/components/routes/TeamPerformance";
+import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
+import type {
+  RouteRow,
+  RouteSchedule,
+  CalculatedRouteStatus,
+  DayKey,
+} from "@/lib/types";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type ViewMode = "daily" | "weekly";
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+const DAY_ORDER: DayKey[] = ["sun", "mon", "tue", "wed", "thu", "fri"];
+
+const DAY_LABELS: Record<DayKey, string> = {
+  sun: "ראשון",
+  mon: "שני",
+  tue: "שלישי",
+  wed: "רביעי",
+  thu: "חמישי",
+  fri: "שישי",
+};
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function getMockNow(): Date {
+  return new Date();
+}
+
+function getTodayDayKey(d: Date): DayKey {
+  const keys: DayKey[] = ["sun", "mon", "tue", "wed", "thu", "fri"];
+  const idx = d.getDay();
+  return idx < 6 ? keys[idx] : "fri";
+}
+
+// ─── Sub-components ───────────────────────────────────────────────────────────
+
+function StatusBadge({ status }: { status: CalculatedRouteStatus }) {
+  const color = ROUTE_STATUS_COLORS[status];
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold"
+      style={{ background: color + "20", color }}
+    >
+      <span
+        className="w-1.5 h-1.5 rounded-full shrink-0"
+        style={{ background: color }}
+      />
+      {ROUTE_STATUS_LABELS[status]}
+    </span>
+  );
+}
+
+function CompletionBar({ pct }: { pct: number }) {
+  const color = pct >= 80 ? "#459524" : pct >= 50 ? "#f37d00" : "#d96350";
+  return (
+    <div className="flex items-center gap-2 min-w-[80px]">
+      <div className="flex-1 h-1.5 bg-[#f0f0f0] rounded-full overflow-hidden">
+        <div
+          className="h-full rounded-full transition-all"
+          style={{ width: `${pct}%`, background: color }}
+        />
+      </div>
+      <span className="text-xs font-semibold tabular-nums" style={{ color }}>
+        {pct}%
+      </span>
+    </div>
+  );
+}
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
+export default function RoutesPage() {
+  const now = getMockNow();
+  const todayDayKey = getTodayDayKey(now);
+
+  // ── Mutable schedule state (supports local edits) ──────────────────────────
+  const [schedules, setSchedules] = useState<RouteSchedule[]>(routeSchedules);
+
+  // ── View state ─────────────────────────────────────────────────────────────
+  const [viewMode, setViewMode] = useState<ViewMode>("daily");
+  const [selectedDay, setSelectedDay] = useState<DayKey>(todayDayKey);
+
+  // ── Drawer / modal state ───────────────────────────────────────────────────
+  const [detailScheduleId, setDetailScheduleId] = useState<string | null>(null);
+  const [editingSchedule, setEditingSchedule] = useState<RouteSchedule | null>(null);
+
+  // Auto-open drawer when navigated from map with ?scheduleId=
+  useEffect(() => {
+    const id = new URLSearchParams(window.location.search).get("scheduleId");
+    if (id) setDetailScheduleId(id);
+  }, []);
+
+  // ── Derived: active schedules for planning views ───────────────────────────
+  const activeSchedules = useMemo(
+    () => schedules.filter((s) => s.active !== false),
+    [schedules]
+  );
+
+  // ── Derived: detail drawer row (auto-updates after edits) ──────────────────
+  const detailRow = useMemo<RouteRow | null>(() => {
+    if (!detailScheduleId) return null;
+    const schedule = schedules.find((s) => s.id === detailScheduleId);
+    if (!schedule) return null;
+    const template = routeTemplates.find((t) => t.id === schedule.templateId);
+    if (!template) return null;
+    const execution = routeExecutions.find((e) => e.scheduleId === schedule.id);
+    const complaintCount = execution
+      ? routeComplaints.filter((c) => c.executionId === execution.id).length
+      : 0;
+    const status = execution
+      ? calculateRouteStatus(schedule, execution, complaintCount, now)
+      : "scheduled";
+    return { template, schedule, execution, complaintCount, status };
+  }, [detailScheduleId, schedules]);
+
+  // ── Today's execution rows (KPI source) ────────────────────────────────────
+  const todayRows = useMemo<RouteRow[]>(() => {
+    const rows: RouteRow[] = [];
+    for (const execution of routeExecutions) {
+      const schedule = schedules.find((s) => s.id === execution.scheduleId);
+      if (!schedule || schedule.active === false) continue;
+      const template = routeTemplates.find((t) => t.id === schedule.templateId)!;
+      const complaintCount = routeComplaints.filter(
+        (c) => c.executionId === execution.id
+      ).length;
+      const status = calculateRouteStatus(schedule, execution, complaintCount, now);
+      rows.push({ template, schedule, execution, complaintCount, status });
+    }
+    return rows;
+  }, [schedules]);
+
+  // ── Daily view rows ─────────────────────────────────────────────────────────
+  const dailyRows = useMemo<RouteRow[]>(() => {
+    const daySchedules = activeSchedules
+      .filter((s) => s.dayOfWeek.includes(selectedDay))
+      .sort((a, b) => a.scheduledStartTime.localeCompare(b.scheduledStartTime));
+
+    return daySchedules.map((schedule) => {
+      const template = routeTemplates.find((t) => t.id === schedule.templateId)!;
+      const execution =
+        selectedDay === todayDayKey
+          ? routeExecutions.find((e) => e.scheduleId === schedule.id)
+          : undefined;
+      const complaintCount = execution
+        ? routeComplaints.filter((c) => c.executionId === execution.id).length
+        : 0;
+      const status = execution
+        ? calculateRouteStatus(schedule, execution, complaintCount, now)
+        : "scheduled";
+      return { template, schedule, execution, complaintCount, status };
+    });
+  }, [selectedDay, todayDayKey, activeSchedules]);
+
+  // ── KPI aggregation ─────────────────────────────────────────────────────────
+  const kpis = useMemo(() => {
+    const total = todayRows.length;
+    const completed = todayRows.filter((r) => r.status === "completed").length;
+    const inProgress = todayRows.filter((r) => r.status === "in_progress").length;
+    const delayed = todayRows.filter((r) => r.status === "delayed").length;
+    const attention = todayRows.filter(
+      (r) => r.status === "requires_attention"
+    ).length;
+    const startedRows = todayRows.filter(
+      (r) => r.execution && r.execution.completionPct > 0
+    );
+    const avgCompletion =
+      startedRows.length > 0
+        ? Math.round(
+            startedRows.reduce((s, r) => s + r.execution!.completionPct, 0) /
+              startedRows.length
+          )
+        : 0;
+    const totalComplaints = todayRows.reduce(
+      (s, r) => s + r.complaintCount,
+      0
+    );
+    return { total, completed, inProgress, delayed, attention, avgCompletion, totalComplaints };
+  }, [todayRows]);
+
+  const kpiCards: Array<{
+    label: string;
+    value: number;
+    unit?: string;
+    icon: LucideIcon;
+    color: string;
+  }> = [
+    { label: "מסלולים היום",   value: kpis.total,           icon: Route,                color: "#1f5fa6" },
+    { label: "הושלמו",          value: kpis.completed,       icon: CheckCircle2,         color: "#459524" },
+    { label: "בביצוע",          value: kpis.inProgress,      icon: PlayCircle,           color: "#f37d00" },
+    { label: "באיחור",          value: kpis.delayed,         icon: Clock,                color: "#d96350" },
+    { label: "דורשים התערבות",  value: kpis.attention,       icon: AlertTriangle,        color: "#4b5563" },
+    { label: "השלמה ממוצעת",   value: kpis.avgCompletion,   icon: BarChart3,            color: "#009dc3", unit: "%" },
+    { label: "תלונות היום",     value: kpis.totalComplaints, icon: MessageSquareWarning, color: "#d96350" },
+  ];
+
+  const isToday = selectedDay === todayDayKey;
+
+  // ── Save handler ────────────────────────────────────────────────────────────
+  function handleSaveSchedule(updated: RouteSchedule) {
+    setSchedules((prev) =>
+      prev.map((s) => (s.id === updated.id ? updated : s))
+    );
+    setEditingSchedule(null);
+    // drawer stays open and auto-updates via detailRow memo
+  }
+
+  return (
+    <div className="space-y-6 max-w-[1400px]">
+      {/* ── Header ──────────────────────────────────────────────────────── */}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold text-[#1a1a1a]">ניהול מסלולים</h2>
+          <p className="text-sm text-[#585858] mt-0.5">
+            מסלולים תפעוליים מתוכננים · ביצוע ומעקב יומי · {kpis.total} מסלולים היום
+          </p>
+        </div>
+
+        {/* View toggle */}
+        <div className="flex gap-1 bg-[#f4f4f4] rounded-lg p-1 shrink-0">
+          {(
+            [
+              { mode: "daily" as ViewMode,  label: "תצוגה יומית",  Icon: Calendar     },
+              { mode: "weekly" as ViewMode, label: "תצוגה שבועית", Icon: CalendarDays },
+            ] as const
+          ).map(({ mode, label, Icon }) => (
+            <button
+              key={mode}
+              onClick={() => setViewMode(mode)}
+              className={cn(
+                "flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition-colors",
+                viewMode === mode
+                  ? "bg-white text-[#1f5fa6] shadow-sm"
+                  : "text-[#585858] hover:text-[#1a1a1a]"
+              )}
+            >
+              <Icon size={14} />
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* ── KPI cards (always today's operational data) ──────────────────── */}
+      <div>
+        <p className="text-[10px] font-semibold text-[#999999] uppercase tracking-wider mb-2">
+          סטטוס תפעולי · היום
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-7 gap-3">
+          {kpiCards.map(({ label, value, unit, icon: Icon, color }) => (
+            <div
+              key={label}
+              className="bg-white border border-[#d0d0d0] rounded-xl p-3 flex flex-col gap-2 hover:border-[#1f5fa6] transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-medium text-[#585858] leading-tight">
+                  {label}
+                </span>
+                <div
+                  className="w-6 h-6 rounded-md flex items-center justify-center shrink-0"
+                  style={{ background: color + "22" }}
+                >
+                  <Icon size={12} style={{ color }} />
+                </div>
+              </div>
+              <div className="flex items-baseline gap-0.5">
+                <span className="text-2xl font-bold text-[#1a1a1a] tabular-nums">
+                  {value}
+                </span>
+                {unit && <span className="text-sm text-[#585858]">{unit}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <CategoryBreakdown rows={todayRows} />
+
+      {/* ── Daily view ───────────────────────────────────────────────────── */}
+      {viewMode === "daily" && (
+        <div className="space-y-4">
+          {/* Day selector */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {DAY_ORDER.map((day) => {
+              const active = day === selectedDay;
+              const isCurrentDay = day === todayDayKey;
+              return (
+                <button
+                  key={day}
+                  onClick={() => setSelectedDay(day)}
+                  className="px-3 py-1.5 rounded-full text-xs font-medium border transition-colors"
+                  style={
+                    active
+                      ? { background: "#1f5fa6", color: "#fff", borderColor: "#1f5fa6" }
+                      : { background: "#f4f4f4", color: "#585858", borderColor: "#d0d0d0" }
+                  }
+                >
+                  {DAY_LABELS[day]}
+                  {isCurrentDay && (
+                    <span
+                      className="mr-1 text-[9px] font-bold"
+                      style={{ color: active ? "#bbddff" : "#1f5fa6" }}
+                    >
+                      ★
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Routes table */}
+          <div className="bg-white border border-[#d0d0d0] rounded-xl overflow-hidden">
+            <div className="px-5 py-4 border-b border-[#d0d0d0] flex items-center justify-between">
+              <div>
+                <p className="text-sm font-semibold text-[#1a1a1a]">
+                  מסלולים ליום {DAY_LABELS[selectedDay]}
+                </p>
+                <p className="text-[11px] text-[#999999] mt-0.5">
+                  {dailyRows.length} מסלולים מתוכננים
+                  {!isToday && (
+                    <span className="mr-2 text-[#1f5fa6]">· נתוני תכנון בלבד</span>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            {dailyRows.length === 0 ? (
+              <div className="px-5 py-10 text-center text-sm text-[#999999]">
+                אין מסלולים מתוכננים ליום זה
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-[#f0f0f0] bg-[#fafafa]">
+                      {[
+                        "שם מסלול",
+                        "צירי המסלול",
+                        "שעות מתוכננות",
+                        "צוות / רכב",
+                        "סטטוס",
+                        ...(isToday ? ["השלמה", "תלונות"] : []),
+                        "",
+                      ].map((h, i) => (
+                        <th
+                          key={i}
+                          className="text-right px-4 py-3 text-[11px] font-semibold text-[#585858] uppercase tracking-wider whitespace-nowrap"
+                        >
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dailyRows.map((row, i) => (
+                      <tr
+                        key={`${row.schedule.id}-${selectedDay}`}
+                        className={cn(
+                          "border-b border-[#f0f0f0] hover:bg-[#fafbff] transition-colors",
+                          i === dailyRows.length - 1 && "border-b-0"
+                        )}
+                      >
+                        <td className="px-4 py-3 font-medium text-[#1a1a1a] whitespace-nowrap">
+                          {row.template.name}
+                        </td>
+                        <td className="px-4 py-3 text-[#585858]">
+                          <span className="flex flex-wrap gap-1">
+                            {row.template.streets.map((street, idx) => (
+                              <span
+                                key={street}
+                                className="inline-flex items-center gap-1"
+                              >
+                                <span className="text-xs">{street}</span>
+                                {idx < row.template.streets.length - 1 && (
+                                  <span className="text-[#cccccc] text-[10px]">
+                                    ←
+                                  </span>
+                                )}
+                              </span>
+                            ))}
+                          </span>
+                        </td>
+                        <td className="px-4 py-3 text-[#585858] whitespace-nowrap tabular-nums">
+                          {row.schedule.scheduledStartTime}–
+                          {row.schedule.scheduledEndTime}
+                        </td>
+                        <td className="px-4 py-3 text-[#585858] whitespace-nowrap">
+                          {row.schedule.vehicle ? (
+                            <span>
+                              <span className="font-medium text-[#1a1a1a]">
+                                {row.schedule.vehicle}
+                              </span>
+                              <span className="text-[#999999] text-[11px] mr-1">
+                                · {row.schedule.assignedTeam}
+                              </span>
+                            </span>
+                          ) : (
+                            row.schedule.assignedTeam
+                          )}
+                        </td>
+                        <td className="px-4 py-3">
+                          <StatusBadge status={row.status} />
+                        </td>
+                        {isToday && (
+                          <>
+                            <td className="px-4 py-3">
+                              {row.execution ? (
+                                <CompletionBar pct={row.execution.completionPct} />
+                              ) : (
+                                <span className="text-[#cccccc] text-xs">—</span>
+                              )}
+                            </td>
+                            <td className="px-4 py-3 text-center">
+                              {row.complaintCount > 0 ? (
+                                <span
+                                  className="inline-flex items-center justify-center w-6 h-6 rounded-full text-[11px] font-bold"
+                                  style={{
+                                    background:
+                                      row.complaintCount > 3
+                                        ? "#d9635020"
+                                        : "#f3f4f6",
+                                    color:
+                                      row.complaintCount > 3
+                                        ? "#d96350"
+                                        : "#585858",
+                                  }}
+                                >
+                                  {row.complaintCount}
+                                </span>
+                              ) : (
+                                <span className="text-[#cccccc] text-xs">—</span>
+                              )}
+                            </td>
+                          </>
+                        )}
+                        <td className="px-4 py-3 text-center">
+                          <button
+                            onClick={() => setDetailScheduleId(row.schedule.id)}
+                            className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap"
+                          >
+                            פרטים
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {isToday && (
+            <>
+              <TimelineChart rows={todayRows} now={now} />
+              <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                <ComplaintStreets complaints={routeComplaints} />
+                <TeamPerformance rows={todayRows} />
+              </div>
+            </>
+          )}
+        </div>
+      )}
+
+      {/* ── Weekly view ──────────────────────────────────────────────────── */}
+      {viewMode === "weekly" && (
+        <WeeklyGrid
+          now={now}
+          todayDayKey={todayDayKey}
+          schedules={activeSchedules}
+          onClickRoute={(id) => setDetailScheduleId(id)}
+        />
+      )}
+
+      {/* ── Detail drawer ────────────────────────────────────────────────── */}
+      {detailRow && (
+        <RouteDetailDrawer
+          row={detailRow}
+          onClose={() => setDetailScheduleId(null)}
+          onEdit={() => setEditingSchedule(detailRow.schedule)}
+        />
+      )}
+
+      {/* ── Edit schedule modal ──────────────────────────────────────────── */}
+      {editingSchedule && (
+        <EditScheduleModal
+          schedule={editingSchedule}
+          templates={routeTemplates}
+          onSave={handleSaveSchedule}
+          onClose={() => setEditingSchedule(null)}
+        />
+      )}
+    </div>
+  );
+}
