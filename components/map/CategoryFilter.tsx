@@ -60,11 +60,17 @@ const STATUS_ITEMS: { key: string; label: string; icon: LucideIcon; color: strin
   { key: "in_progress", label: "בטיפול", icon: Clock,       color: "#1f5fa6" },
 ];
 
-const ROUTE_FILTER_OPTIONS: { key: RouteMapFilter; label: string }[] = [
-  { key: "today",     label: "מסלולי היום"        },
-  { key: "week",      label: "מסלולי השבוע"        },
-  { key: "delayed",   label: "באיחור"              },
-  { key: "attention", label: "דורשים התערבות"      },
+const ROUTE_TIME_OPTIONS: { key: RouteMapFilter; label: string }[] = [
+  { key: "today", label: "מסלולי היום"  },
+  { key: "week",  label: "מסלולי השבוע" },
+];
+
+const ROUTE_STATUS_OPTIONS: { key: string; label: string; color: string; dashed: boolean }[] = [
+  { key: "in_progress",        label: "בביצוע",          color: "#1E88E5", dashed: false },
+  { key: "delayed",            label: "באיחור",           color: "#d96350", dashed: false },
+  { key: "requires_attention", label: "דורש התערבות",     color: "#FB8C00", dashed: false },
+  { key: "scheduled",          label: "מתוכנן",           color: "#1f5fa6", dashed: true  },
+  { key: "completed",          label: "הושלם",            color: "#459524", dashed: false },
 ];
 
 interface Props {
@@ -80,6 +86,8 @@ interface Props {
   onToggleRoutes?: () => void;
   routeFilter?: RouteMapFilter;
   onSetRouteFilter?: (f: RouteMapFilter) => void;
+  routeStatusFilters?: Set<string>;
+  onToggleRouteStatus?: (s: string) => void;
   hasFocusedRoute?: boolean;
 }
 
@@ -96,6 +104,8 @@ export function LayerFilter({
   onToggleRoutes,
   routeFilter = "today",
   onSetRouteFilter,
+  routeStatusFilters = new Set(),
+  onToggleRouteStatus,
   hasFocusedRoute = false,
 }: Props) {
   return (
@@ -169,7 +179,7 @@ export function LayerFilter({
         {showRoutes && (
           <div className="mt-1.5 space-y-0.5">
             {[
-              ...ROUTE_FILTER_OPTIONS,
+              ...ROUTE_TIME_OPTIONS,
               ...(hasFocusedRoute
                 ? [{ key: "focused" as RouteMapFilter, label: "מסלול נבחר בלבד" }]
                 : []),
@@ -179,14 +189,52 @@ export function LayerFilter({
                 onClick={() => onSetRouteFilter?.(key)}
                 className="w-full text-right text-[10px] px-2 py-0.5 rounded-md transition-colors"
                 style={{
-                  background:  routeFilter === key ? "#1f5fa620" : "transparent",
-                  color:       routeFilter === key ? "#1f5fa6"   : "#707070",
-                  fontWeight:  routeFilter === key ? 600         : 400,
+                  background: routeFilter === key ? "#1f5fa620" : "transparent",
+                  color:      routeFilter === key ? "#1f5fa6"   : "#707070",
+                  fontWeight: routeFilter === key ? 600         : 400,
                 }}
               >
                 {label}
               </button>
             ))}
+            <div className="border-t border-[#e8e8e8] my-1.5" />
+            {ROUTE_STATUS_OPTIONS.map(({ key, label, color, dashed }) => {
+              const active = routeStatusFilters.has(key);
+              return (
+                <label key={key} className="flex items-center gap-2 cursor-pointer group">
+                  <div
+                    className="w-4 h-4 rounded border-2 flex items-center justify-center transition-colors shrink-0"
+                    style={{
+                      borderColor:     color,
+                      backgroundColor: active ? color + "33" : "transparent",
+                    }}
+                  >
+                    {active && <div className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />}
+                  </div>
+                  <input
+                    type="checkbox"
+                    className="sr-only"
+                    checked={active}
+                    onChange={() => onToggleRouteStatus?.(key)}
+                  />
+                  <svg width="22" height="8" viewBox="0 0 22 8" className="shrink-0">
+                    <line
+                      x1="2" y1="4" x2="20" y2="4"
+                      stroke={active ? color : "#b0b0b0"}
+                      strokeWidth="2.5"
+                      strokeDasharray={dashed ? "4 3" : undefined}
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  <span
+                    className="text-xs transition-colors group-hover:text-[#1a1a1a]"
+                    style={{ color: active ? color : "#707070", fontWeight: active ? 600 : 400 }}
+                  >
+                    {label}
+                  </span>
+                </label>
+              );
+            })}
           </div>
         )}
       </div>

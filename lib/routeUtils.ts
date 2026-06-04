@@ -49,8 +49,8 @@ export const ROUTE_STATUS_LABELS: Record<CalculatedRouteStatus, string> = {
 
 export const ROUTE_STATUS_COLORS: Record<CalculatedRouteStatus, string> = {
   scheduled:           "#1f5fa6",
-  in_progress:         "#f37d00",
+  in_progress:         "#1E88E5",
   completed:           "#459524",
   delayed:             "#d96350",
-  requires_attention:  "#4b5563",
+  requires_attention:  "#FB8C00",
 };

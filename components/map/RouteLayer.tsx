@@ -223,10 +223,11 @@ function FlyToRoute({ coords }: { coords: [number, number][] }) {
 
 interface Props {
   filter: RouteMapFilter;
+  statusFilters?: Set<string>;
   focusedScheduleId: string | null;
 }
 
-export function RouteLayer({ filter, focusedScheduleId }: Props) {
+export function RouteLayer({ filter, statusFilters, focusedScheduleId }: Props) {
   const execBySchedule = useMemo(() => {
     const m = new Map<string, (typeof routeExecutions)[0]>();
     routeExecutions.forEach((e) => m.set(e.scheduleId, e));
@@ -261,23 +262,20 @@ export function RouteLayer({ filter, focusedScheduleId }: Props) {
   }, [execBySchedule, complaintsByExecution]);
 
   const visibleRows = useMemo(() => {
+    let rows: typeof allRows;
     switch (filter) {
-      case "today":
-        return allRows.filter((r) => r.isToday);
-      case "week":
-        return allRows;
-      case "delayed":
-        return allRows.filter((r) => r.status === "delayed");
-      case "attention":
-        return allRows.filter((r) => r.status === "requires_attention");
-      case "focused":
-        return focusedScheduleId
-          ? allRows.filter((r) => r.schedule.id === focusedScheduleId)
-          : allRows.filter((r) => r.isToday);
-      default:
-        return allRows.filter((r) => r.isToday);
+      case "week":    rows = allRows; break;
+      case "focused": rows = focusedScheduleId
+        ? allRows.filter((r) => r.schedule.id === focusedScheduleId)
+        : allRows.filter((r) => r.isToday);
+        break;
+      default:        rows = allRows.filter((r) => r.isToday); break;
     }
-  }, [allRows, filter, focusedScheduleId]);
+    if (statusFilters && statusFilters.size > 0) {
+      rows = rows.filter((r) => statusFilters.has(r.status));
+    }
+    return rows;
+  }, [allRows, filter, statusFilters, focusedScheduleId]);
 
   const focusedCoords = useMemo(() => {
     if (!focusedScheduleId || filter !== "focused") return null;
@@ -381,7 +379,14 @@ export function RouteLayer({ filter, focusedScheduleId }: Props) {
                 color,
                 weight: isFocused ? 7 : 4,
                 opacity: isFocused ? 1 : 0.82,
-                dashArray: status === "scheduled" ? "8 5" : undefined,
+                dashArray:
+                  status === "scheduled"  ? "8 5"  :
+                  status === "in_progress" ? "16 8" :
+                  undefined,
+                className:
+                  status === "in_progress"       ? "route-flow-path"     :
+                  status === "requires_attention" ? "route-attention-path" :
+                  undefined,
                 interactive: false,
               }}
             />

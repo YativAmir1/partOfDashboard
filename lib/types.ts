@@ -341,7 +341,7 @@ export interface RouteRow {
   status: CalculatedRouteStatus;
 }
 
-export type RouteMapFilter = "today" | "week" | "delayed" | "attention" | "focused";
+export type RouteMapFilter = "today" | "week" | "focused";
 
 export interface DemoScenarioData {
   phase: ScenarioPhase;

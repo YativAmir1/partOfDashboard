@@ -12,6 +12,7 @@ interface MapState {
   statusFilters: Set<string>;
   showRoutes: boolean;
   routeFilter: RouteMapFilter;
+  routeStatusFilters: Set<string>;
   focusedRouteScheduleId: string | null;
   setActiveCategories: (v: Set<IncidentType>) => void;
   setActiveLayers: (v: Set<string>) => void;
@@ -20,6 +21,7 @@ interface MapState {
   setStatusFilters: (v: Set<string>) => void;
   setShowRoutes: (v: boolean | ((prev: boolean) => boolean)) => void;
   setRouteFilter: (v: RouteMapFilter) => void;
+  setRouteStatusFilters: (v: Set<string>) => void;
   setFocusedRouteScheduleId: (v: string | null) => void;
 }
 
@@ -31,8 +33,9 @@ export function MapStateProvider({ children }: { children: ReactNode }) {
   const [selectedDistrict, setSelectedDistrict] = useState<District | null>(null);
   const [viewMode,         setViewMode]         = useState<MapViewMode>("map");
   const [statusFilters,    setStatusFilters]    = useState<Set<string>>(new Set(["open", "in_progress"]));
-  const [showRoutes,       setShowRoutes]       = useState(false);
-  const [routeFilter,      setRouteFilter]      = useState<RouteMapFilter>("today");
+  const [showRoutes,          setShowRoutes]          = useState(false);
+  const [routeFilter,         setRouteFilter]         = useState<RouteMapFilter>("today");
+  const [routeStatusFilters,  setRouteStatusFilters]  = useState<Set<string>>(new Set());
   const [focusedRouteScheduleId, setFocusedRouteScheduleId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -51,8 +54,9 @@ export function MapStateProvider({ children }: { children: ReactNode }) {
       selectedDistrict, setSelectedDistrict,
       viewMode,         setViewMode,
       statusFilters,    setStatusFilters,
-      showRoutes,       setShowRoutes,
-      routeFilter,      setRouteFilter,
+      showRoutes,          setShowRoutes,
+      routeFilter,         setRouteFilter,
+      routeStatusFilters,  setRouteStatusFilters,
       focusedRouteScheduleId, setFocusedRouteScheduleId,
     }}>
       {children}

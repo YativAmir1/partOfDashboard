@@ -29,6 +29,7 @@ interface Props {
   viewMode?: MapViewMode;
   showRoutes?: boolean;
   routeFilter?: RouteMapFilter;
+  routeStatusFilters?: Set<string>;
   focusedRouteScheduleId?: string | null;
 }
 
@@ -309,6 +310,7 @@ export default function CityMap({
   viewMode = "map",
   showRoutes = false,
   routeFilter = "today",
+  routeStatusFilters,
   focusedRouteScheduleId = null,
 }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -609,6 +611,7 @@ export default function CityMap({
       {viewMode === "map" && showRoutes && (
         <RouteLayer
           filter={routeFilter}
+          statusFilters={routeStatusFilters}
           focusedScheduleId={focusedRouteScheduleId}
         />
       )}

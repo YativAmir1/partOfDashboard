@@ -281,3 +281,20 @@ body {
   0%, 100% { transform: scale(1);    }
   50%       { transform: scale(1.15); }
 }
+
+/* Route: flowing dashes for in_progress */
+@keyframes route-flow {
+  to { stroke-dashoffset: -24; }
+}
+.route-flow-path {
+  animation: route-flow 0.9s linear infinite;
+}
+
+/* Route: glow pulse for requires_attention */
+@keyframes route-attention-pulse {
+  0%, 100% { stroke-opacity: 0.85; filter: drop-shadow(0 0 2px #FFA726); }
+  50%       { stroke-opacity: 1;    filter: drop-shadow(0 0 7px #FFA726) drop-shadow(0 0 12px #FB8C00); }
+}
+.route-attention-path {
+  animation: route-attention-pulse 1.8s ease-in-out infinite;
+}

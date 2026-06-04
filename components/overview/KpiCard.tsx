@@ -60,27 +60,29 @@ export function KpiCard({
             <span className="text-2xl font-bold text-[#1a1a1a] count-up">{display}</span>
             {unit && <span className="text-sm text-[#585858]">{unit}</span>}
           </div>
-          {delta !== undefined && (
-            <span
-              className={cn(
-                "text-xs font-medium",
-                isPositive && "text-[#459524]",
-                isNegative && "text-[#d96350]",
-                !isPositive && !isNegative && "text-[#585858]"
-              )}
-            >
-              {delta > 0 ? "+" : ""}
-              {delta}
-              {unit}
-              {base !== undefined
-                ? <span className="text-[#999999] font-normal"> מול {base}{unit}</span>
-                : <span className="text-[#999999] font-normal"> מול בסיס</span>
-              }
-            </span>
-          )}
-          {period && (
-            <span className="text-[10px] text-[#bbbbbb]">{period}</span>
-          )}
+          <div className="flex flex-col gap-0.5">
+            {delta !== undefined && (
+              <span
+                className={cn(
+                  "text-xs font-medium",
+                  isPositive && "text-[#459524]",
+                  isNegative && "text-[#d96350]",
+                  !isPositive && !isNegative && "text-[#585858]"
+                )}
+              >
+                {delta > 0 ? "+" : ""}
+                {delta}
+                {unit}
+                {base !== undefined
+                  ? <><br /><span className="text-[#999999] font-normal">מול {base}{unit}</span></>
+                  : <><br /><span className="text-[#999999] font-normal">מול בסיס</span></>
+                }
+              </span>
+            )}
+            {period && (
+              <span className="text-[10px] text-[#bbbbbb]">{period}</span>
+            )}
+          </div>
         </div>
         {sparkData && (
           <SparklineChart

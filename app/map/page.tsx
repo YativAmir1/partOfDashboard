@@ -23,8 +23,9 @@ export default function MapPage() {
     selectedDistrict, setSelectedDistrict,
     viewMode,         setViewMode,
     statusFilters,    setStatusFilters,
-    showRoutes,       setShowRoutes,
-    routeFilter,      setRouteFilter,
+    showRoutes,          setShowRoutes,
+    routeFilter,         setRouteFilter,
+    routeStatusFilters,  setRouteStatusFilters,
     focusedRouteScheduleId, setFocusedRouteScheduleId,
   } = useMapState();
 
@@ -64,6 +65,12 @@ export default function MapPage() {
     setActiveLayers(next);
   };
 
+  const toggleRouteStatus = (s: string) => {
+    const next = new Set(routeStatusFilters);
+    if (next.has(s)) next.delete(s); else next.add(s);
+    setRouteStatusFilters(next);
+  };
+
   const visibleCount =
     markers.filter((m) => activeCategories.has(m.category)).length +
     (activeLayers.has("risk_zone") ? riskPredictions.length : 0) +
@@ -99,21 +106,22 @@ export default function MapPage() {
             viewMode={viewMode}
             showRoutes={showRoutes}
             routeFilter={routeFilter}
+            routeStatusFilters={routeStatusFilters}
             focusedRouteScheduleId={focusedRouteScheduleId}
           />
           <div className="absolute top-[80px] left-[10px] z-[1000]">
             <MapViewToggle mode={viewMode} onToggle={toggleViewMode} />
           </div>
           {showRoutes && (
-            <div className="absolute bottom-3 left-3 z-[1000] rounded-xl border border-[#d0d0d0] bg-white/90 backdrop-blur-sm px-3 py-2.5 shadow-md" dir="rtl">
+            <div className="absolute bottom-3 left-3 z-[1000] rounded-xl border-2 border-[#1f5fa6] bg-white/95 backdrop-blur-sm px-3 py-2.5 shadow-lg" dir="rtl">
               <p className="text-[10px] font-bold text-[#585858] uppercase tracking-wider mb-2">מקרא מסלולים</p>
               <div className="space-y-1.5">
                 {([
-                  { color: "#f37d00", label: "בביצוע",            dashed: false },
+                  { color: "#1E88E5", label: "בביצוע",            dashed: false },
+                  { color: "#d96350", label: "באיחור",            dashed: false },
+                  { color: "#FB8C00", label: "דורש התערבות",      dashed: false },
                   { color: "#1f5fa6", label: "מתוכנן",            dashed: true  },
                   { color: "#459524", label: "הושלם",             dashed: false },
-                  { color: "#d96350", label: "באיחור",            dashed: false },
-                  { color: "#4b5563", label: "דורש התערבות",      dashed: false },
                 ] as { color: string; label: string; dashed: boolean }[]).map(({ color, label, dashed }) => (
                   <div key={label} className="flex items-center gap-2">
                     <svg width="28" height="8" viewBox="0 0 28 8" className="shrink-0">
@@ -146,6 +154,8 @@ export default function MapPage() {
               onToggleRoutes={() => setShowRoutes(!showRoutes)}
               routeFilter={routeFilter}
               onSetRouteFilter={(f) => setRouteFilter(f)}
+              routeStatusFilters={routeStatusFilters}
+              onToggleRouteStatus={toggleRouteStatus}
               hasFocusedRoute={focusedRouteScheduleId !== null}
             />
           </div>
