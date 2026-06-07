@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { X, Plus, Trash2, MapPin, Navigation, Flag, Loader2, AlertCircle } from "lucide-react";
 import { EMPLOYEES_DATA } from "@/data/employeesData";
+import { resolveAddressToRawCoords, buildSmartPolyline, samplePolyline } from "@/lib/geocoding";
 import type { DayKey, IncidentType } from "@/lib/types";
 
 const DAY_OPTIONS: { key: DayKey; label: string }[] = [
@@ -125,6 +126,29 @@ export function AddRouteModal({ onClose, onCreated }: Props) {
     setError(null);
     setLoading(true);
 
+    // Phase 1: geocode in the browser (uses the user's IP — no server timeout risk)
+    const streets = [
+      form.startAddress.trim(),
+      ...form.stops.map((s) => s.trim()).filter(Boolean),
+      form.endAddress.trim(),
+    ];
+    let coords: [number, number][];
+    try {
+      const groups = await Promise.all(streets.map(resolveAddressToRawCoords));
+      const polyline = samplePolyline(buildSmartPolyline(groups), 15);
+      if (polyline.length < 2) {
+        setError("לא ניתן לאתר את הכתובות שהוזנו. אנא בדוק את הכתובות ונסה שנית.");
+        setLoading(false);
+        return;
+      }
+      coords = polyline;
+    } catch {
+      setError("שגיאה בזיהוי הכתובות. בדוק את החיבור ונסה שנית.");
+      setLoading(false);
+      return;
+    }
+
+    // Phase 2: save to server — fast, no external calls
     try {
       const res = await fetch("/api/routes", {
         method: "POST",
@@ -133,9 +157,8 @@ export function AddRouteModal({ onClose, onCreated }: Props) {
           name: form.name.trim(),
           category: form.category,
           estimatedDurationMin: form.estimatedDurationMin,
-          startAddress: form.startAddress.trim(),
-          stops: form.stops.map((s) => s.trim()).filter(Boolean),
-          endAddress: form.endAddress.trim(),
+          streets,
+          coords,
           assignedTeam: selectedTeam.name,
           teamRef: selectedTeam.id,
           dayOfWeek: form.dayOfWeek,

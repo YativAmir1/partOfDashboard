@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 import { put, list } from "@vercel/blob";
-import { resolveAddressToRawCoords, buildSmartPolyline, samplePolyline } from "@/lib/geocoding";
 import type { RouteTemplate, RouteSchedule, IncidentType, DayKey } from "@/lib/types";
 
 export const maxDuration = 300;
@@ -118,9 +117,8 @@ interface CreateRouteBody {
   name: string;
   category: IncidentType;
   estimatedDurationMin: number;
-  startAddress: string;
-  stops: string[];
-  endAddress: string;
+  streets: string[];
+  coords: [number, number][];
   assignedTeam: string;
   teamRef?: string;
   vehicleRef?: string;
@@ -143,9 +141,8 @@ export async function POST(req: NextRequest) {
     name,
     category,
     estimatedDurationMin,
-    startAddress,
-    stops,
-    endAddress,
+    streets,
+    coords,
     assignedTeam,
     teamRef,
     vehicleRef,
@@ -155,26 +152,7 @@ export async function POST(req: NextRequest) {
     requiredCompletionPct,
   } = body;
 
-  const allInputs = [startAddress, ...stops.filter(Boolean), endAddress];
-  let allCoordGroups: [number, number][][];
-  try {
-    allCoordGroups = await Promise.all(
-      allInputs.map((input) => resolveAddressToRawCoords(input)),
-    );
-  } catch {
-    return NextResponse.json(
-      { error: "שגיאה בזיהוי הכתובות. אנא נסה שנית." },
-      { status: 500 },
-    );
-  }
-
-  // Stitch segments at their natural intersection points, then sample
-  const polyline: [number, number][] = samplePolyline(
-    buildSmartPolyline(allCoordGroups),
-    15,
-  );
-
-  if (polyline.length < 2) {
+  if (!Array.isArray(coords) || coords.length < 2) {
     return NextResponse.json(
       { error: "לא ניתן לאתר את הכתובות שהוזנו. אנא בדוק את הכתובות ונסה שנית." },
       { status: 422 },
@@ -188,7 +166,7 @@ export async function POST(req: NextRequest) {
   const template: RouteTemplate = {
     id: templateId,
     name,
-    streets: allInputs,
+    streets,
     category,
     estimatedDurationMin,
   };
@@ -210,8 +188,8 @@ export async function POST(req: NextRequest) {
   const data = await readData();
   data.templates.push(template);
   data.schedules.push(schedule);
-  data.coordsMap[templateId] = polyline;
+  data.coordsMap[templateId] = coords;
   await writeData(data);
 
-  return NextResponse.json({ template, schedule, coords: polyline }, { status: 201 });
+  return NextResponse.json({ template, schedule, coords }, { status: 201 });
 }
