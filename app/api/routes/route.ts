@@ -24,7 +24,12 @@ async function readData(): Promise<CustomRoutesFile> {
       return { templates: [], schedules: [], coordsMap: {} };
     }
   }
-  const { blobs } = await list({ prefix: BLOB_KEY });
+  let blobs: { url: string }[];
+  try {
+    ({ blobs } = await list({ prefix: BLOB_KEY }));
+  } catch {
+    return { templates: [], schedules: [], coordsMap: {} };
+  }
   if (blobs.length === 0) {
     let seed: CustomRoutesFile;
     try {
@@ -151,11 +156,17 @@ export async function POST(req: NextRequest) {
   } = body;
 
   const allInputs = [startAddress, ...stops.filter(Boolean), endAddress];
-  // Run all geocoding calls in parallel — Overpass has no rate limit and the
-  // primary path; Nominatim fallback is rare and short enough to accept concurrently.
-  const allCoordGroups = await Promise.all(
-    allInputs.map((input) => resolveAddressToRawCoords(input)),
-  );
+  let allCoordGroups: [number, number][][];
+  try {
+    allCoordGroups = await Promise.all(
+      allInputs.map((input) => resolveAddressToRawCoords(input)),
+    );
+  } catch {
+    return NextResponse.json(
+      { error: "שגיאה בזיהוי הכתובות. אנא נסה שנית." },
+      { status: 500 },
+    );
+  }
 
   // Stitch segments at their natural intersection points, then sample
   const polyline: [number, number][] = samplePolyline(

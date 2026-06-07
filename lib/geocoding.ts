@@ -62,9 +62,19 @@ async function nominatimGeocode(
     `?q=${encodeURIComponent(query)}` +
     `&format=json&limit=5&accept-language=he` +
     `&countrycodes=il&viewbox=${RG_VIEWBOX}&bounded=1`;
-  const res = await fetch(url, {
-    headers: { "User-Agent": "RamatGanDashboard/1.0" },
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 8_000);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: { "User-Agent": "RamatGanDashboard/1.0" },
+      signal: controller.signal,
+    });
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) return null;
   const data = (await res.json()) as Array<{ lat: string; lon: string }>;
   for (const item of data) {
@@ -202,9 +212,6 @@ async function fetchOverpass(query: string): Promise<[number, number][]> {
 async function overpassStreetGeometry(
   streetName: string,
 ): Promise<[number, number][]> {
-  // Strategy 1 — admin boundary (most precise: excludes streets with the same
-  // name in Bnei Brak / Givat Shmuel). Requires the Ramat Gan boundary relation
-  // to be present in OSM.
   const adminQuery = [
     `[out:json][bbox:${RG.minLat},${RG.minLon},${RG.maxLat},${RG.maxLon}];`,
     `area["name"="רמת גן"]["admin_level"="8"]->.rg;`,
@@ -212,11 +219,6 @@ async function overpassStreetGeometry(
     `(._;>;);out body;`,
   ].join("");
 
-  const fromAdmin = await fetchOverpass(adminQuery);
-  if (fromAdmin.length > 0) return fromAdmin;
-
-  // Strategy 2 — bounding-box fallback (used when the admin relation isn't
-  // available in OSM). Still excludes service roads via the highway filter.
   const bboxQuery = [
     `[out:json];`,
     `way["name"="${streetName}"]["highway"~"^(${DRIVABLE_HIGHWAY})$"]`,
@@ -224,7 +226,14 @@ async function overpassStreetGeometry(
     `(._;>;);out body;`,
   ].join("");
 
-  return fetchOverpass(bboxQuery);
+  // Run both strategies in parallel — cuts worst-case Overpass time from 24s to 12s.
+  // Prefer admin-boundary result (more precise) when both return data.
+  const [fromAdmin, fromBbox] = await Promise.all([
+    fetchOverpass(adminQuery),
+    fetchOverpass(bboxQuery),
+  ]);
+  if (fromAdmin.length > 0) return fromAdmin;
+  return fromBbox;
 }
 
 // ─── Smart polyline helpers ───────────────────────────────────────────────────
