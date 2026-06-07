@@ -1,14 +1,14 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { LayerFilter } from "@/components/map/CategoryFilter";
 import { markers, complaints, cameras } from "@/lib/data";
 import { riskPredictions } from "@/lib/riskPredictions";
 import { useHazard } from "@/context/HazardContext";
 import { useMapState } from "@/context/MapStateContext";
 import { useDistrictLoad } from "@/hooks/useDistrictLoad";
-import type { District, IncidentType } from "@/lib/types";
+import type { District, IncidentType, RouteTemplate, RouteSchedule } from "@/lib/types";
 import { MapPin } from "lucide-react";
 import { MapViewToggle, type MapViewMode } from "@/components/map/MapViewToggle";
 import { districtLabel } from "@/lib/hebrew";
@@ -17,6 +17,21 @@ import { DistrictPanel } from "@/components/map/DistrictPanel";
 const CityMap = dynamic(() => import("@/components/map/CityMap"), { ssr: false });
 
 export default function MapPage() {
+  const [additionalTemplates, setAdditionalTemplates] = useState<RouteTemplate[]>([]);
+  const [additionalSchedules, setAdditionalSchedules] = useState<RouteSchedule[]>([]);
+  const [additionalCoordsMap, setAdditionalCoordsMap] = useState<Record<string, [number, number][]>>({});
+
+  useEffect(() => {
+    fetch("/api/routes")
+      .then((r) => r.json())
+      .then((data: { templates: RouteTemplate[]; schedules: RouteSchedule[]; coordsMap: Record<string, [number, number][]> }) => {
+        setAdditionalTemplates(data.templates ?? []);
+        setAdditionalSchedules(data.schedules ?? []);
+        setAdditionalCoordsMap(data.coordsMap ?? {});
+      })
+      .catch(() => {/* non-critical */});
+  }, []);
+
   const {
     activeCategories, setActiveCategories,
     activeLayers,     setActiveLayers,
@@ -27,6 +42,7 @@ export default function MapPage() {
     routeFilter,         setRouteFilter,
     routeStatusFilters,  setRouteStatusFilters,
     focusedRouteScheduleId, setFocusedRouteScheduleId,
+    heatmapSource,           setHeatmapSource,
   } = useMapState();
 
   const toggleViewMode = () => setViewMode(viewMode === "map" ? "heatmap" : "map");
@@ -108,9 +124,18 @@ export default function MapPage() {
             routeFilter={routeFilter}
             routeStatusFilters={routeStatusFilters}
             focusedRouteScheduleId={focusedRouteScheduleId}
+            additionalTemplates={additionalTemplates}
+            additionalSchedules={additionalSchedules}
+            additionalCoordsMap={additionalCoordsMap}
+            heatmapSource={heatmapSource}
           />
           <div className="absolute top-[80px] left-[10px] z-[1000]">
-            <MapViewToggle mode={viewMode} onToggle={toggleViewMode} />
+            <MapViewToggle
+              mode={viewMode}
+              onToggle={toggleViewMode}
+              heatmapSource={heatmapSource}
+              onHeatmapSourceChange={setHeatmapSource}
+            />
           </div>
           {showRoutes && (
             <div className="absolute bottom-3 left-3 z-[1000] rounded-xl border-2 border-[#1f5fa6] bg-white/95 backdrop-blur-sm px-3 py-2.5 shadow-lg" dir="rtl">

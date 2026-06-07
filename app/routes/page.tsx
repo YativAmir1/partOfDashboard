@@ -11,6 +11,8 @@ import {
   MessageSquareWarning,
   Calendar,
   CalendarDays,
+  Plus,
+  Trash2,
 } from "lucide-react";
 import {
   routeTemplates,
@@ -23,9 +25,11 @@ import {
   ROUTE_STATUS_LABELS,
   ROUTE_STATUS_COLORS,
 } from "@/lib/routeUtils";
+import { getRouteHistory, getRouteTrend, type TrendDirection } from "@/lib/routeHistory";
 import { WeeklyGrid } from "@/components/routes/WeeklyGrid";
 import { RouteDetailDrawer } from "@/components/routes/RouteDetailDrawer";
 import { EditScheduleModal } from "@/components/routes/EditScheduleModal";
+import { AddRouteModal } from "@/components/routes/AddRouteModal";
 import { CategoryBreakdown } from "@/components/routes/CategoryBreakdown";
 import { TimelineChart } from "@/components/routes/TimelineChart";
 import { ComplaintStreets } from "@/components/routes/ComplaintStreets";
@@ -35,6 +39,7 @@ import type { LucideIcon } from "lucide-react";
 import type {
   RouteRow,
   RouteSchedule,
+  RouteTemplate,
   CalculatedRouteStatus,
   DayKey,
   TimeWindow,
@@ -143,6 +148,10 @@ export default function RoutesPage() {
   // ── Mutable schedule state (supports local edits) ──────────────────────────
   const [schedules, setSchedules] = useState<RouteSchedule[]>(routeSchedules);
 
+  // ── Custom routes state (fetched from API) ─────────────────────────────────
+  const [customTemplates, setCustomTemplates] = useState<RouteTemplate[]>([]);
+  const [customSchedules, setCustomSchedules] = useState<RouteSchedule[]>([]);
+
   // ── View state ─────────────────────────────────────────────────────────────
   const [viewMode, setViewMode] = useState<ViewMode>("daily");
   const [selectedDay, setSelectedDay] = useState<DayKey>(todayDayKey);
@@ -150,6 +159,7 @@ export default function RoutesPage() {
   // ── Drawer / modal state ───────────────────────────────────────────────────
   const [detailScheduleId, setDetailScheduleId] = useState<string | null>(null);
   const [editingSchedule, setEditingSchedule] = useState<RouteSchedule | null>(null);
+  const [showAddModal, setShowAddModal] = useState(false);
 
   // Auto-open drawer when navigated from map with ?scheduleId=
   useEffect(() => {
@@ -157,18 +167,45 @@ export default function RoutesPage() {
     if (id) setDetailScheduleId(id);
   }, []);
 
+  // Fetch custom routes from API
+  useEffect(() => {
+    fetch("/api/routes")
+      .then((r) => r.json())
+      .then((data: { templates: RouteTemplate[]; schedules: RouteSchedule[] }) => {
+        setCustomTemplates(data.templates ?? []);
+        setCustomSchedules(data.schedules ?? []);
+      })
+      .catch(() => {/* non-critical */});
+  }, []);
+
+  function refreshCustomRoutes() {
+    fetch("/api/routes")
+      .then((r) => r.json())
+      .then((data: { templates: RouteTemplate[]; schedules: RouteSchedule[] }) => {
+        setCustomTemplates(data.templates ?? []);
+        setCustomSchedules(data.schedules ?? []);
+      })
+      .catch(() => {/* non-critical */});
+  }
+
+  // ── All templates (static + custom) ───────────────────────────────────────
+  const allTemplates = useMemo(
+    () => [...routeTemplates, ...customTemplates],
+    [customTemplates],
+  );
+
   // ── Derived: active schedules for planning views ───────────────────────────
   const activeSchedules = useMemo(
-    () => schedules.filter((s) => s.active !== false),
-    [schedules]
+    () => [...schedules, ...customSchedules].filter((s) => s.active !== false),
+    [schedules, customSchedules],
   );
 
   // ── Derived: detail drawer row (auto-updates after edits) ──────────────────
   const detailRow = useMemo<RouteRow | null>(() => {
     if (!detailScheduleId) return null;
-    const schedule = schedules.find((s) => s.id === detailScheduleId);
+    const schedule = [...schedules, ...customSchedules].find((s) => s.id === detailScheduleId);
     if (!schedule) return null;
-    const template = routeTemplates.find((t) => t.id === schedule.templateId);
+    const template = allTemplates.find((t) => t.id === schedule.templateId);
     if (!template) return null;
     const execution = routeExecutions.find((e) => e.scheduleId === schedule.id);
     const complaintCount = execution
@@ -178,23 +215,27 @@ export default function RoutesPage() {
       ? calculateRouteStatus(schedule, execution, complaintCount, now)
       : "scheduled";
     return { template, schedule, execution, complaintCount, status };
-  }, [detailScheduleId, schedules]);
+  }, [detailScheduleId, schedules, customSchedules, allTemplates]);
 
-  // ── Today's execution rows (KPI source) ────────────────────────────────────
+  // ── Today's rows (KPI source) — all schedules active today, not just executed ─
+  // Building from activeSchedules (instead of routeExecutions) means custom routes
+  // with no execution yet appear as "scheduled" and are counted in every widget.
   const todayRows = useMemo<RouteRow[]>(() => {
-    const rows: RouteRow[] = [];
-    for (const execution of routeExecutions) {
-      const schedule = schedules.find((s) => s.id === execution.scheduleId);
-      if (!schedule || schedule.active === false) continue;
-      const template = routeTemplates.find((t) => t.id === schedule.templateId)!;
-      const complaintCount = routeComplaints.filter(
-        (c) => c.executionId === execution.id
-      ).length;
-      const status = calculateRouteStatus(schedule, execution, complaintCount, now);
-      rows.push({ template, schedule, execution, complaintCount, status });
-    }
-    return rows;
-  }, [schedules]);
+    const todaySchedules = activeSchedules.filter((s) =>
+      s.dayOfWeek.includes(todayDayKey)
+    );
+    return todaySchedules.map((schedule) => {
+      const template = allTemplates.find((t) => t.id === schedule.templateId)!;
+      const execution = routeExecutions.find((e) => e.scheduleId === schedule.id);
+      const complaintCount = execution
+        ? routeComplaints.filter((c) => c.executionId === execution.id).length
+        : 0;
+      const status = execution
+        ? calculateRouteStatus(schedule, execution, complaintCount, now)
+        : "scheduled";
+      return { template, schedule, execution, complaintCount, status };
+    });
+  }, [activeSchedules, allTemplates, todayDayKey]);
 
   // ── Daily view rows ─────────────────────────────────────────────────────────
   const dailyRows = useMemo<RouteRow[]>(() => {
@@ -203,7 +244,7 @@ export default function RoutesPage() {
       .sort((a, b) => a.scheduledStartTime.localeCompare(b.scheduledStartTime));
 
     return daySchedules.map((schedule) => {
-      const template = routeTemplates.find((t) => t.id === schedule.templateId)!;
+      const template = allTemplates.find((t) => t.id === schedule.templateId)!;
       const execution =
         selectedDay === todayDayKey
           ? routeExecutions.find((e) => e.scheduleId === schedule.id)
@@ -216,7 +257,23 @@ export default function RoutesPage() {
         : "scheduled";
       return { template, schedule, execution, complaintCount, status };
     });
-  }, [selectedDay, todayDayKey, activeSchedules]);
+  }, [selectedDay, todayDayKey, activeSchedules, allTemplates]);
+
+  // ── Trend map (4-week performance direction per schedule) ───────────────────
+  const trendMap = useMemo(() => {
+    const map = new Map<string, TrendDirection | null>();
+    for (const row of dailyRows) {
+      const history = getRouteHistory(
+        row.schedule.id,
+        row.schedule.requiredCompletionPct,
+        routeExecutions,
+        routeComplaints,
+        8
+      );
+      map.set(row.schedule.id, history.length >= 4 ? getRouteTrend(history) : null);
+    }
+    return map;
+  }, [dailyRows]);
 
   // ── KPI aggregation ─────────────────────────────────────────────────────────
   const kpis = useMemo(() => {
@@ -264,11 +321,37 @@ export default function RoutesPage() {
 
   // ── Save handler ────────────────────────────────────────────────────────────
   function handleSaveSchedule(updated: RouteSchedule) {
-    setSchedules((prev) =>
-      prev.map((s) => (s.id === updated.id ? updated : s))
-    );
+    if (updated.id.startsWith("sch-custom-")) {
+      // Optimistic local update + fire-and-forget persist to custom-routes.json
+      setCustomSchedules((prev) =>
+        prev.map((s) => (s.id === updated.id ? updated : s))
+      );
+      fetch(`/api/routes?scheduleId=${encodeURIComponent(updated.id)}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updated),
+      }).catch(() => {/* non-critical */});
+    } else {
+      setSchedules((prev) =>
+        prev.map((s) => (s.id === updated.id ? updated : s))
+      );
+    }
     setEditingSchedule(null);
     // drawer stays open and auto-updates via detailRow memo
+  }
+
+  // ── Delete custom route handler ──────────────────────────────────────────────
+  function handleDeleteRoute(scheduleId: string) {
+    if (!window.confirm("האם למחוק את המסלול?")) return;
+    fetch(`/api/routes?scheduleId=${encodeURIComponent(scheduleId)}`, { method: "DELETE" })
+      .then((r) => r.json())
+      .then((res) => {
+        if (res.ok) {
+          if (detailScheduleId === scheduleId) setDetailScheduleId(null);
+          refreshCustomRoutes();
+        }
+      })
+      .catch(() => {/* non-critical */});
   }
 
   return (
@@ -282,8 +365,18 @@ export default function RoutesPage() {
           </p>
         </div>
 
-        {/* View toggle */}
-        <div className="flex gap-1 bg-[#f4f4f4] rounded-lg p-1 shrink-0">
+        {/* Actions: add route + view toggle */}
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={() => setShowAddModal(true)}
+            className="flex items-center gap-2 px-3.5 py-2 bg-[#1f5fa6] text-white text-sm font-semibold rounded-lg hover:bg-[#174f8f] transition-colors shadow-sm"
+          >
+            <Plus size={15} />
+            מסלול חדש
+          </button>
+
+          {/* View toggle */}
+          <div className="flex gap-1 bg-[#f4f4f4] rounded-lg p-1">
           {(
             [
               { mode: "daily" as ViewMode,  label: "תצוגה יומית",  Icon: Calendar     },
@@ -304,6 +397,7 @@ export default function RoutesPage() {
               {label}
             </button>
           ))}
+          </div>
         </div>
       </div>
 
@@ -406,6 +500,7 @@ export default function RoutesPage() {
                         "שעות מתוכננות",
                         "צוות / רכב",
                         "סטטוס",
+                        "מגמה",
                         ...(isToday ? ["השלמה", "תלונות"] : []),
                         "",
                       ].map((h, i) => (
@@ -463,10 +558,10 @@ export default function RoutesPage() {
                                   {windows.length} הפעלות
                                 </span>
                               ) : (
-                                <>
+                                <span dir="ltr">
                                   {row.schedule.scheduledStartTime}–
                                   {row.schedule.scheduledEndTime}
-                                </>
+                                </span>
                               )}
                             </td>
                             <td className="px-4 py-3 text-[#585858] whitespace-nowrap">
@@ -485,6 +580,19 @@ export default function RoutesPage() {
                             </td>
                             <td className="px-4 py-3">
                               <StatusBadge status={row.status} />
+                            </td>
+                            <td className="px-4 py-3">
+                              {(() => {
+                                const trend = trendMap.get(row.schedule.id);
+                                if (!trend) return <span className="text-[#cccccc] text-xs">—</span>;
+                                const cfg = {
+                                  improving: { s: "↑", c: "#459524" },
+                                  stable:    { s: "→", c: "#999999" },
+                                  worsening: { s: "↓", c: "#d96350" },
+                                };
+                                const { s, c } = cfg[trend];
+                                return <span className="text-sm font-bold" style={{ color: c }}>{s}</span>;
+                              })()}
                             </td>
                             {isToday && (
                               <>
@@ -513,12 +621,23 @@ export default function RoutesPage() {
                               </>
                             )}
                             <td className="px-4 py-3 text-center">
-                              <button
-                                onClick={() => setDetailScheduleId(row.schedule.id)}
-                                className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap cursor-pointer"
-                              >
-                                פרטים
-                              </button>
+                              <div className="flex items-center justify-center gap-1.5">
+                                <button
+                                  onClick={() => setDetailScheduleId(row.schedule.id)}
+                                  className="px-3 py-1 text-xs font-medium text-[#1f5fa6] border border-[#1f5fa6] rounded-lg hover:bg-[#eef4fb] transition-colors whitespace-nowrap cursor-pointer"
+                                >
+                                  פרטים
+                                </button>
+                                {row.schedule.id.startsWith("sch-custom-") && (
+                                  <button
+                                    onClick={() => handleDeleteRoute(row.schedule.id)}
+                                    title="מחק מסלול"
+                                    className="p-1.5 text-[#d96350] border border-[#d96350] rounded-lg hover:bg-[#fdf2f0] transition-colors cursor-pointer"
+                                  >
+                                    <Trash2 size={13} />
+                                  </button>
+                                )}
+                              </div>
                             </td>
                           </tr>
 
@@ -556,6 +675,7 @@ export default function RoutesPage() {
                                 <td className="px-4 py-2">
                                   <WindowPhaseBadge phase={phase} />
                                 </td>
+                                <td />
                                 {isToday && <><td /><td /></>}
                                 <td className="px-4 py-2 text-center">
                                   <button
@@ -579,7 +699,7 @@ export default function RoutesPage() {
 
           {isToday && (
             <>
-              <TimelineChart rows={todayRows} now={now} />
+              <TimelineChart rows={dailyRows} now={now} />
               <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                 <ComplaintStreets complaints={routeComplaints} />
                 <TeamPerformance rows={todayRows} />
@@ -595,6 +715,7 @@ export default function RoutesPage() {
           now={now}
           todayDayKey={todayDayKey}
           schedules={activeSchedules}
+          templates={allTemplates}
           onClickRoute={(id) => setDetailScheduleId(id)}
         />
       )}
@@ -612,9 +733,17 @@ export default function RoutesPage() {
       {editingSchedule && (
         <EditScheduleModal
           schedule={editingSchedule}
-          templates={routeTemplates}
+          templates={allTemplates}
           onSave={handleSaveSchedule}
           onClose={() => setEditingSchedule(null)}
+        />
+      )}
+
+      {/* ── Add route modal ──────────────────────────────────────────────── */}
+      {showAddModal && (
+        <AddRouteModal
+          onClose={() => setShowAddModal(false)}
+          onCreated={refreshCustomRoutes}
         />
       )}
     </div>

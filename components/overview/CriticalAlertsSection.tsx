@@ -78,10 +78,9 @@ export function CriticalAlertsSection() {
           const iconColor = CATEGORY_COLOR[inc.type];
 
           return (
-            <Link
+            <div
               key={inc.id}
-              href={`/operations?incident=${inc.id}`}
-              className="group relative flex flex-col gap-3 bg-white rounded-lg border border-[#f0bbb4] hover:border-[#d96350] hover:shadow-md transition-all duration-150 p-4 cursor-pointer"
+              className="relative flex flex-col gap-3 bg-white rounded-lg border border-[#f0bbb4] p-4"
             >
               {/* Pulsing urgency dot */}
               <span className="absolute top-3 left-3 flex h-2.5 w-2.5">
@@ -123,15 +122,9 @@ export function CriticalAlertsSection() {
                 </div>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={inc.status} />
-                  <span
-                    className="flex items-center gap-1 text-[11px] font-semibold text-[#d96350] group-hover:gap-2 transition-all"
-                  >
-                    לטיפול
-                    <ArrowLeft size={10} />
-                  </span>
                 </div>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

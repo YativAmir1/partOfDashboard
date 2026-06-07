@@ -7,12 +7,14 @@ import {
   LayoutDashboard,
   Map,
   Route,
+  Truck,
 } from "lucide-react";
 
 const NAV = [
   { href: "/overview", label: "תמונת מצב עירונית", icon: LayoutDashboard },
   { href: "/map",      label: "מפת העיר",           icon: Map },
   { href: "/routes",   label: "ניהול מסלולים",       icon: Route },
+  { href: "/fleet",    label: "כלים וצוותות",        icon: Truck },
 ];
 
 export function Sidebar() {

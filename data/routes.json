@@ -3,49 +3,81 @@
     {
       "id": "tmpl-001",
       "name": "מסלול ניקיון מזרחי",
-      "streets": ["שדרות ירושלים", "דוד בן גוריון", "דרך יצחק רבין"],
+      "streets": [
+        "שדרות ירושלים",
+        "דוד בן גוריון",
+        "דרך יצחק רבין"
+      ],
       "category": "waste",
       "estimatedDurationMin": 180
     },
     {
       "id": "tmpl-002",
       "name": "מסלול בורסה ואבא הלל",
-      "streets": ["אבא הלל", "תובל", "היצירה", "דרך מנחם בגין"],
+      "streets": [
+        "אבא הלל",
+        "תובל",
+        "היצירה",
+        "דרך מנחם בגין"
+      ],
       "category": "waste",
       "estimatedDurationMin": 180
     },
     {
       "id": "tmpl-003",
       "name": "מסלול מרכז העיר",
-      "streets": ["ביאליק", "הרצל", "קריניצי", "הרא\"ה"],
+      "streets": [
+        "ביאליק",
+        "הרצל",
+        "קריניצי",
+        "הרא\"ה"
+      ],
       "category": "waste",
       "estimatedDurationMin": 180
     },
     {
       "id": "tmpl-004",
       "name": "מסלול צירים ראשיים",
-      "streets": ["ז'בוטינסקי", "אבא הלל", "בן גוריון", "רוקח"],
+      "streets": [
+        "ז'בוטינסקי",
+        "אבא הלל",
+        "בן גוריון",
+        "רוקח"
+      ],
       "category": "waste",
       "estimatedDurationMin": 180
     },
     {
       "id": "tmpl-005",
       "name": "מסלול פארקים ומשחקים",
-      "streets": ["שדרות ירושלים", "הרצל", "פארק גבעת השחר"],
+      "streets": [
+        "שדרות ירושלים",
+        "הרצל",
+        "פארק גבעת השחר"
+      ],
       "category": "parks",
       "estimatedDurationMin": 150
     },
     {
       "id": "tmpl-006",
       "name": "מסלול גנים וציבור",
-      "streets": ["פארק רמת גן", "גן לאומי", "שדרות כוגמן"],
+      "streets": [
+        "פארק רמת גן",
+        "גן לאומי",
+        "שדרות כוגמן"
+      ],
       "category": "parks",
       "estimatedDurationMin": 180
     },
     {
       "id": "tmpl-007",
       "name": "מסלול ביקורת שילוט",
-      "streets": ["ז'בוטינסקי", "אבא הלל", "בגין", "ביאליק"],
+      "streets": [
+        "ז'בוטינסקי",
+        "אבא הלל",
+        "בגין",
+        "ביאליק"
+      ],
       "category": "safety",
       "estimatedDurationMin": 120
     }
@@ -54,16 +86,27 @@
     {
       "id": "sch-001",
       "templateId": "tmpl-001",
-      "dayOfWeek": ["sun", "tue", "thu"],
+      "dayOfWeek": [
+        "sun",
+        "tue",
+        "thu"
+      ],
       "scheduledStartTime": "06:00",
       "scheduledEndTime": "09:00",
       "assignedTeam": "צוות ניקיון א׳",
+      "teamRef": "waste-a",
+      "vehicleRef": "RG-301",
       "requiredCompletionPct": 85
     },
     {
       "id": "sch-002",
       "templateId": "tmpl-002",
-      "dayOfWeek": ["sun", "mon", "wed", "thu"],
+      "dayOfWeek": [
+        "sun",
+        "mon",
+        "wed",
+        "thu"
+      ],
       "scheduledStartTime": "09:00",
       "scheduledEndTime": "12:00",
       "assignedTeam": "צוות ניקיון ב׳",
@@ -72,7 +115,12 @@
     {
       "id": "sch-003",
       "templateId": "tmpl-003",
-      "dayOfWeek": ["sun", "tue", "wed", "thu"],
+      "dayOfWeek": [
+        "sun",
+        "tue",
+        "wed",
+        "thu"
+      ],
       "scheduledStartTime": "07:00",
       "scheduledEndTime": "10:00",
       "assignedTeam": "צוות ניקיון ג׳",
@@ -81,7 +129,13 @@
     {
       "id": "sch-004",
       "templateId": "tmpl-004",
-      "dayOfWeek": ["sun", "mon", "tue", "wed", "thu"],
+      "dayOfWeek": [
+        "sun",
+        "mon",
+        "tue",
+        "wed",
+        "thu"
+      ],
       "scheduledStartTime": "12:00",
       "scheduledEndTime": "15:00",
       "assignedTeam": "צוות צירים",
@@ -90,36 +144,54 @@
     {
       "id": "sch-005",
       "templateId": "tmpl-005",
-      "dayOfWeek": ["sun", "tue", "thu"],
+      "dayOfWeek": [
+        "sun",
+        "tue",
+        "thu"
+      ],
       "scheduledStartTime": "08:00",
       "scheduledEndTime": "10:30",
       "assignedTeam": "צוות גנים",
+      "teamRef": "parks-garden",
+      "vehicleRef": "RG-411",
       "requiredCompletionPct": 80
     },
     {
       "id": "wsch-001",
       "templateId": "tmpl-001",
-      "dayOfWeek": ["sun", "wed"],
+      "dayOfWeek": [
+        "sun",
+        "wed"
+      ],
       "scheduledStartTime": "08:00",
       "scheduledEndTime": "12:00",
       "assignedTeam": "צוות ניקיון א׳",
       "vehicle": "רכב 17",
+      "teamRef": "waste-a",
+      "vehicleRef": "RG-301",
       "requiredCompletionPct": 85
     },
     {
       "id": "wsch-002",
       "templateId": "tmpl-002",
-      "dayOfWeek": ["sun"],
+      "dayOfWeek": [
+        "sun"
+      ],
       "scheduledStartTime": "14:00",
       "scheduledEndTime": "16:00",
       "assignedTeam": "צוות ניקיון ב׳",
       "vehicle": "רכב 22",
+      "teamRef": "waste-b",
+      "vehicleRef": "RG-302",
       "requiredCompletionPct": 80
     },
     {
       "id": "wsch-003",
       "templateId": "tmpl-003",
-      "dayOfWeek": ["mon", "wed"],
+      "dayOfWeek": [
+        "mon",
+        "wed"
+      ],
       "scheduledStartTime": "07:00",
       "scheduledEndTime": "10:00",
       "assignedTeam": "צוות ניקיון ג׳",
@@ -129,7 +201,9 @@
     {
       "id": "wsch-004",
       "templateId": "tmpl-004",
-      "dayOfWeek": ["mon"],
+      "dayOfWeek": [
+        "mon"
+      ],
       "scheduledStartTime": "13:00",
       "scheduledEndTime": "15:00",
       "assignedTeam": "צוות צירים",
@@ -139,7 +213,10 @@
     {
       "id": "wsch-005",
       "templateId": "tmpl-006",
-      "dayOfWeek": ["tue", "fri"],
+      "dayOfWeek": [
+        "tue",
+        "fri"
+      ],
       "scheduledStartTime": "08:00",
       "scheduledEndTime": "11:00",
       "assignedTeam": "צוות גינון 3",
@@ -148,7 +225,9 @@
     {
       "id": "wsch-006",
       "templateId": "tmpl-007",
-      "dayOfWeek": ["tue"],
+      "dayOfWeek": [
+        "tue"
+      ],
       "scheduledStartTime": "15:00",
       "scheduledEndTime": "17:00",
       "assignedTeam": "צוות שילוט 2",
@@ -156,6 +235,1302 @@
     }
   ],
   "executions": [
+    {
+      "id": "hist-sch-001-20260419",
+      "scheduleId": "sch-001",
+      "date": "2026-04-19",
+      "actualStartTime": "06:11",
+      "actualEndTime": "09:02",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-sch-001-20260421",
+      "scheduleId": "sch-001",
+      "date": "2026-04-21",
+      "actualStartTime": "06:04",
+      "actualEndTime": "09:15",
+      "completionPct": 82
+    },
+    {
+      "id": "hist-sch-001-20260423",
+      "scheduleId": "sch-001",
+      "date": "2026-04-23",
+      "actualStartTime": "06:10",
+      "actualEndTime": "09:09",
+      "completionPct": 86
+    },
+    {
+      "id": "hist-sch-001-20260426",
+      "scheduleId": "sch-001",
+      "date": "2026-04-26",
+      "actualStartTime": "06:06",
+      "actualEndTime": "09:00",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-sch-001-20260428",
+      "scheduleId": "sch-001",
+      "date": "2026-04-28",
+      "actualStartTime": "06:12",
+      "actualEndTime": "09:14",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-sch-001-20260430",
+      "scheduleId": "sch-001",
+      "date": "2026-04-30",
+      "actualStartTime": "06:05",
+      "actualEndTime": "09:07",
+      "completionPct": 86
+    },
+    {
+      "id": "hist-sch-001-20260503",
+      "scheduleId": "sch-001",
+      "date": "2026-05-03",
+      "actualStartTime": "06:00",
+      "actualEndTime": "09:06",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-sch-001-20260505",
+      "scheduleId": "sch-001",
+      "date": "2026-05-05",
+      "actualStartTime": "06:06",
+      "actualEndTime": "09:00",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-sch-001-20260507",
+      "scheduleId": "sch-001",
+      "date": "2026-05-07",
+      "actualStartTime": "06:12",
+      "actualEndTime": "09:14",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-001-20260510",
+      "scheduleId": "sch-001",
+      "date": "2026-05-10",
+      "actualStartTime": "06:08",
+      "actualEndTime": "09:04",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-001-20260512",
+      "scheduleId": "sch-001",
+      "date": "2026-05-12",
+      "actualStartTime": "06:01",
+      "actualEndTime": "08:58",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-sch-001-20260514",
+      "scheduleId": "sch-001",
+      "date": "2026-05-14",
+      "actualStartTime": "06:07",
+      "actualEndTime": "09:12",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-001-20260517",
+      "scheduleId": "sch-001",
+      "date": "2026-05-17",
+      "actualStartTime": "06:03",
+      "actualEndTime": "09:03",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-sch-001-20260519",
+      "scheduleId": "sch-001",
+      "date": "2026-05-19",
+      "actualStartTime": "06:09",
+      "actualEndTime": "08:58",
+      "completionPct": 96
+    },
+    {
+      "id": "hist-sch-001-20260521",
+      "scheduleId": "sch-001",
+      "date": "2026-05-21",
+      "actualStartTime": "06:02",
+      "actualEndTime": "09:11",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-001-20260524",
+      "scheduleId": "sch-001",
+      "date": "2026-05-24",
+      "actualStartTime": "06:11",
+      "actualEndTime": "09:02",
+      "completionPct": 99
+    },
+    {
+      "id": "hist-sch-001-20260526",
+      "scheduleId": "sch-001",
+      "date": "2026-05-26",
+      "actualStartTime": "06:04",
+      "actualEndTime": "08:56",
+      "completionPct": 96
+    },
+    {
+      "id": "hist-sch-002-20260419",
+      "scheduleId": "sch-002",
+      "date": "2026-04-19",
+      "actualStartTime": "09:03",
+      "actualEndTime": "12:03",
+      "completionPct": 83
+    },
+    {
+      "id": "hist-sch-002-20260420",
+      "scheduleId": "sch-002",
+      "date": "2026-04-20",
+      "actualStartTime": "09:05",
+      "actualEndTime": "11:59",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-sch-002-20260422",
+      "scheduleId": "sch-002",
+      "date": "2026-04-22",
+      "actualStartTime": "09:11",
+      "actualEndTime": "12:13",
+      "completionPct": 86
+    },
+    {
+      "id": "hist-sch-002-20260423",
+      "scheduleId": "sch-002",
+      "date": "2026-04-23",
+      "actualStartTime": "09:02",
+      "actualEndTime": "12:10",
+      "completionPct": 79
+    },
+    {
+      "id": "hist-sch-002-20260426",
+      "scheduleId": "sch-002",
+      "date": "2026-04-26",
+      "actualStartTime": "09:10",
+      "actualEndTime": "12:01",
+      "completionPct": 83
+    },
+    {
+      "id": "hist-sch-002-20260427",
+      "scheduleId": "sch-002",
+      "date": "2026-04-27",
+      "actualStartTime": "09:01",
+      "actualEndTime": "11:58",
+      "completionPct": 76
+    },
+    {
+      "id": "hist-sch-002-20260429",
+      "scheduleId": "sch-002",
+      "date": "2026-04-29",
+      "actualStartTime": "09:07",
+      "actualEndTime": "12:12",
+      "completionPct": 79
+    },
+    {
+      "id": "hist-sch-002-20260430",
+      "scheduleId": "sch-002",
+      "date": "2026-04-30",
+      "actualStartTime": "09:09",
+      "actualEndTime": "12:08",
+      "completionPct": 79
+    },
+    {
+      "id": "hist-sch-002-20260503",
+      "scheduleId": "sch-002",
+      "date": "2026-05-03",
+      "actualStartTime": "09:05",
+      "actualEndTime": "12:07",
+      "completionPct": 75
+    },
+    {
+      "id": "hist-sch-002-20260504",
+      "scheduleId": "sch-002",
+      "date": "2026-05-04",
+      "actualStartTime": "09:07",
+      "actualEndTime": "12:04",
+      "completionPct": 76
+    },
+    {
+      "id": "hist-sch-002-20260506",
+      "scheduleId": "sch-002",
+      "date": "2026-05-06",
+      "actualStartTime": "09:01",
+      "actualEndTime": "11:58",
+      "completionPct": 70
+    },
+    {
+      "id": "hist-sch-002-20260507",
+      "scheduleId": "sch-002",
+      "date": "2026-05-07",
+      "actualStartTime": "09:04",
+      "actualEndTime": "12:15",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-sch-002-20260510",
+      "scheduleId": "sch-002",
+      "date": "2026-05-10",
+      "actualStartTime": "09:12",
+      "actualEndTime": "12:05",
+      "completionPct": 75
+    },
+    {
+      "id": "hist-sch-002-20260511",
+      "scheduleId": "sch-002",
+      "date": "2026-05-11",
+      "actualStartTime": "09:03",
+      "actualEndTime": "12:02",
+      "completionPct": 68
+    },
+    {
+      "id": "hist-sch-002-20260513",
+      "scheduleId": "sch-002",
+      "date": "2026-05-13",
+      "actualStartTime": "09:08",
+      "actualEndTime": "11:56",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-sch-002-20260514",
+      "scheduleId": "sch-002",
+      "date": "2026-05-14",
+      "actualStartTime": "09:11",
+      "actualEndTime": "12:13",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-sch-002-20260517",
+      "scheduleId": "sch-002",
+      "date": "2026-05-17",
+      "actualStartTime": "09:08",
+      "actualEndTime": "12:05",
+      "completionPct": 68
+    },
+    {
+      "id": "hist-sch-002-20260518",
+      "scheduleId": "sch-002",
+      "date": "2026-05-18",
+      "actualStartTime": "09:11",
+      "actualEndTime": "12:02",
+      "completionPct": 69
+    },
+    {
+      "id": "hist-sch-002-20260520",
+      "scheduleId": "sch-002",
+      "date": "2026-05-20",
+      "actualStartTime": "09:04",
+      "actualEndTime": "12:15",
+      "completionPct": 63
+    },
+    {
+      "id": "hist-sch-002-20260521",
+      "scheduleId": "sch-002",
+      "date": "2026-05-21",
+      "actualStartTime": "09:07",
+      "actualEndTime": "12:12",
+      "completionPct": 64
+    },
+    {
+      "id": "hist-sch-002-20260524",
+      "scheduleId": "sch-002",
+      "date": "2026-05-24",
+      "actualStartTime": "09:03",
+      "actualEndTime": "12:03",
+      "completionPct": 60
+    },
+    {
+      "id": "hist-sch-002-20260525",
+      "scheduleId": "sch-002",
+      "date": "2026-05-25",
+      "actualStartTime": "09:06",
+      "actualEndTime": "12:00",
+      "completionPct": 61
+    },
+    {
+      "id": "hist-sch-002-20260527",
+      "scheduleId": "sch-002",
+      "date": "2026-05-27",
+      "actualStartTime": "09:12",
+      "actualEndTime": "12:14",
+      "completionPct": 64
+    },
+    {
+      "id": "hist-sch-003-20260419",
+      "scheduleId": "sch-003",
+      "date": "2026-04-19",
+      "actualStartTime": "07:08",
+      "actualEndTime": "10:04",
+      "completionPct": 75
+    },
+    {
+      "id": "hist-sch-003-20260421",
+      "scheduleId": "sch-003",
+      "date": "2026-04-21",
+      "actualStartTime": "07:01",
+      "actualEndTime": "09:57",
+      "completionPct": 52
+    },
+    {
+      "id": "hist-sch-003-20260422",
+      "scheduleId": "sch-003",
+      "date": "2026-04-22",
+      "actualStartTime": "07:04",
+      "actualEndTime": "10:14",
+      "completionPct": 62
+    },
+    {
+      "id": "hist-sch-003-20260423",
+      "scheduleId": "sch-003",
+      "date": "2026-04-23",
+      "actualStartTime": "07:06",
+      "actualEndTime": "10:11",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-sch-003-20260426",
+      "scheduleId": "sch-003",
+      "date": "2026-04-26",
+      "actualStartTime": "07:03",
+      "actualEndTime": "10:02",
+      "completionPct": 60
+    },
+    {
+      "id": "hist-sch-003-20260428",
+      "scheduleId": "sch-003",
+      "date": "2026-04-28",
+      "actualStartTime": "07:09",
+      "actualEndTime": "09:56",
+      "completionPct": 79
+    },
+    {
+      "id": "hist-sch-003-20260429",
+      "scheduleId": "sch-003",
+      "date": "2026-04-29",
+      "actualStartTime": "07:11",
+      "actualEndTime": "10:13",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-sch-003-20260430",
+      "scheduleId": "sch-003",
+      "date": "2026-04-30",
+      "actualStartTime": "07:02",
+      "actualEndTime": "10:09",
+      "completionPct": 56
+    },
+    {
+      "id": "hist-sch-003-20260503",
+      "scheduleId": "sch-003",
+      "date": "2026-05-03",
+      "actualStartTime": "07:09",
+      "actualEndTime": "10:08",
+      "completionPct": 80
+    },
+    {
+      "id": "hist-sch-003-20260505",
+      "scheduleId": "sch-003",
+      "date": "2026-05-05",
+      "actualStartTime": "07:03",
+      "actualEndTime": "10:02",
+      "completionPct": 59
+    },
+    {
+      "id": "hist-sch-003-20260506",
+      "scheduleId": "sch-003",
+      "date": "2026-05-06",
+      "actualStartTime": "07:06",
+      "actualEndTime": "09:59",
+      "completionPct": 69
+    },
+    {
+      "id": "hist-sch-003-20260507",
+      "scheduleId": "sch-003",
+      "date": "2026-05-07",
+      "actualStartTime": "07:08",
+      "actualEndTime": "09:56",
+      "completionPct": 78
+    },
+    {
+      "id": "hist-sch-003-20260510",
+      "scheduleId": "sch-003",
+      "date": "2026-05-10",
+      "actualStartTime": "07:04",
+      "actualEndTime": "10:06",
+      "completionPct": 65
+    },
+    {
+      "id": "hist-sch-003-20260512",
+      "scheduleId": "sch-003",
+      "date": "2026-05-12",
+      "actualStartTime": "07:10",
+      "actualEndTime": "10:00",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-sch-003-20260513",
+      "scheduleId": "sch-003",
+      "date": "2026-05-13",
+      "actualStartTime": "07:01",
+      "actualEndTime": "09:57",
+      "completionPct": 53
+    },
+    {
+      "id": "hist-sch-003-20260514",
+      "scheduleId": "sch-003",
+      "date": "2026-05-14",
+      "actualStartTime": "07:04",
+      "actualEndTime": "10:14",
+      "completionPct": 62
+    },
+    {
+      "id": "hist-sch-003-20260517",
+      "scheduleId": "sch-003",
+      "date": "2026-05-17",
+      "actualStartTime": "07:00",
+      "actualEndTime": "10:06",
+      "completionPct": 51
+    },
+    {
+      "id": "hist-sch-003-20260519",
+      "scheduleId": "sch-003",
+      "date": "2026-05-19",
+      "actualStartTime": "07:06",
+      "actualEndTime": "10:00",
+      "completionPct": 70
+    },
+    {
+      "id": "hist-sch-003-20260520",
+      "scheduleId": "sch-003",
+      "date": "2026-05-20",
+      "actualStartTime": "07:08",
+      "actualEndTime": "09:56",
+      "completionPct": 77
+    },
+    {
+      "id": "hist-sch-003-20260521",
+      "scheduleId": "sch-003",
+      "date": "2026-05-21",
+      "actualStartTime": "07:11",
+      "actualEndTime": "10:13",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-sch-003-20260524",
+      "scheduleId": "sch-003",
+      "date": "2026-05-24",
+      "actualStartTime": "07:08",
+      "actualEndTime": "10:04",
+      "completionPct": 75
+    },
+    {
+      "id": "hist-sch-003-20260526",
+      "scheduleId": "sch-003",
+      "date": "2026-05-26",
+      "actualStartTime": "07:01",
+      "actualEndTime": "09:58",
+      "completionPct": 54
+    },
+    {
+      "id": "hist-sch-003-20260527",
+      "scheduleId": "sch-003",
+      "date": "2026-05-27",
+      "actualStartTime": "07:04",
+      "actualEndTime": "09:55",
+      "completionPct": 64
+    },
+    {
+      "id": "hist-sch-004-20260419",
+      "scheduleId": "sch-004",
+      "date": "2026-04-19",
+      "actualStartTime": "12:12",
+      "actualEndTime": "15:05",
+      "completionPct": 95
+    },
+    {
+      "id": "hist-sch-004-20260420",
+      "scheduleId": "sch-004",
+      "date": "2026-04-20",
+      "actualStartTime": "12:02",
+      "actualEndTime": "15:01",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-sch-004-20260421",
+      "scheduleId": "sch-004",
+      "date": "2026-04-21",
+      "actualStartTime": "12:05",
+      "actualEndTime": "14:58",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-004-20260422",
+      "scheduleId": "sch-004",
+      "date": "2026-04-22",
+      "actualStartTime": "12:08",
+      "actualEndTime": "15:15",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-004-20260423",
+      "scheduleId": "sch-004",
+      "date": "2026-04-23",
+      "actualStartTime": "12:11",
+      "actualEndTime": "15:12",
+      "completionPct": 94
+    },
+    {
+      "id": "hist-sch-004-20260426",
+      "scheduleId": "sch-004",
+      "date": "2026-04-26",
+      "actualStartTime": "12:07",
+      "actualEndTime": "15:03",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-sch-004-20260427",
+      "scheduleId": "sch-004",
+      "date": "2026-04-27",
+      "actualStartTime": "12:10",
+      "actualEndTime": "15:00",
+      "completionPct": 94
+    },
+    {
+      "id": "hist-sch-004-20260428",
+      "scheduleId": "sch-004",
+      "date": "2026-04-28",
+      "actualStartTime": "12:01",
+      "actualEndTime": "14:57",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-sch-004-20260429",
+      "scheduleId": "sch-004",
+      "date": "2026-04-29",
+      "actualStartTime": "12:04",
+      "actualEndTime": "15:15",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-sch-004-20260430",
+      "scheduleId": "sch-004",
+      "date": "2026-04-30",
+      "actualStartTime": "12:06",
+      "actualEndTime": "15:10",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-sch-004-20260503",
+      "scheduleId": "sch-004",
+      "date": "2026-05-03",
+      "actualStartTime": "12:02",
+      "actualEndTime": "15:09",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-sch-004-20260504",
+      "scheduleId": "sch-004",
+      "date": "2026-05-04",
+      "actualStartTime": "12:04",
+      "actualEndTime": "15:06",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-004-20260505",
+      "scheduleId": "sch-004",
+      "date": "2026-05-05",
+      "actualStartTime": "12:07",
+      "actualEndTime": "15:03",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-sch-004-20260506",
+      "scheduleId": "sch-004",
+      "date": "2026-05-06",
+      "actualStartTime": "12:10",
+      "actualEndTime": "15:00",
+      "completionPct": 94
+    },
+    {
+      "id": "hist-sch-004-20260507",
+      "scheduleId": "sch-004",
+      "date": "2026-05-07",
+      "actualStartTime": "12:01",
+      "actualEndTime": "14:57",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-sch-004-20260510",
+      "scheduleId": "sch-004",
+      "date": "2026-05-10",
+      "actualStartTime": "12:09",
+      "actualEndTime": "15:07",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-004-20260511",
+      "scheduleId": "sch-004",
+      "date": "2026-05-11",
+      "actualStartTime": "12:12",
+      "actualEndTime": "15:04",
+      "completionPct": 95
+    },
+    {
+      "id": "hist-sch-004-20260512",
+      "scheduleId": "sch-004",
+      "date": "2026-05-12",
+      "actualStartTime": "12:03",
+      "actualEndTime": "15:01",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-sch-004-20260513",
+      "scheduleId": "sch-004",
+      "date": "2026-05-13",
+      "actualStartTime": "12:05",
+      "actualEndTime": "14:58",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-004-20260514",
+      "scheduleId": "sch-004",
+      "date": "2026-05-14",
+      "actualStartTime": "12:08",
+      "actualEndTime": "14:55",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-004-20260517",
+      "scheduleId": "sch-004",
+      "date": "2026-05-17",
+      "actualStartTime": "12:05",
+      "actualEndTime": "15:07",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-004-20260518",
+      "scheduleId": "sch-004",
+      "date": "2026-05-18",
+      "actualStartTime": "12:07",
+      "actualEndTime": "15:04",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-sch-004-20260519",
+      "scheduleId": "sch-004",
+      "date": "2026-05-19",
+      "actualStartTime": "12:10",
+      "actualEndTime": "15:01",
+      "completionPct": 94
+    },
+    {
+      "id": "hist-sch-004-20260520",
+      "scheduleId": "sch-004",
+      "date": "2026-05-20",
+      "actualStartTime": "12:01",
+      "actualEndTime": "14:57",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-sch-004-20260521",
+      "scheduleId": "sch-004",
+      "date": "2026-05-21",
+      "actualStartTime": "12:03",
+      "actualEndTime": "15:14",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-sch-004-20260524",
+      "scheduleId": "sch-004",
+      "date": "2026-05-24",
+      "actualStartTime": "12:12",
+      "actualEndTime": "15:05",
+      "completionPct": 95
+    },
+    {
+      "id": "hist-sch-004-20260525",
+      "scheduleId": "sch-004",
+      "date": "2026-05-25",
+      "actualStartTime": "12:03",
+      "actualEndTime": "15:02",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-sch-004-20260526",
+      "scheduleId": "sch-004",
+      "date": "2026-05-26",
+      "actualStartTime": "12:06",
+      "actualEndTime": "14:59",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-sch-004-20260527",
+      "scheduleId": "sch-004",
+      "date": "2026-05-27",
+      "actualStartTime": "12:08",
+      "actualEndTime": "14:56",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-sch-005-20260419",
+      "scheduleId": "sch-005",
+      "date": "2026-04-19",
+      "actualStartTime": "08:04",
+      "actualEndTime": "10:36",
+      "completionPct": 54
+    },
+    {
+      "id": "hist-sch-005-20260421",
+      "scheduleId": "sch-005",
+      "date": "2026-04-21",
+      "actualStartTime": "08:10",
+      "actualEndTime": "10:29",
+      "completionPct": 60
+    },
+    {
+      "id": "hist-sch-005-20260423",
+      "scheduleId": "sch-005",
+      "date": "2026-04-23",
+      "actualStartTime": "08:03",
+      "actualEndTime": "10:43",
+      "completionPct": 58
+    },
+    {
+      "id": "hist-sch-005-20260426",
+      "scheduleId": "sch-005",
+      "date": "2026-04-26",
+      "actualStartTime": "08:12",
+      "actualEndTime": "10:34",
+      "completionPct": 65
+    },
+    {
+      "id": "hist-sch-005-20260428",
+      "scheduleId": "sch-005",
+      "date": "2026-04-28",
+      "actualStartTime": "08:05",
+      "actualEndTime": "10:29",
+      "completionPct": 63
+    },
+    {
+      "id": "hist-sch-005-20260430",
+      "scheduleId": "sch-005",
+      "date": "2026-04-30",
+      "actualStartTime": "08:11",
+      "actualEndTime": "10:41",
+      "completionPct": 69
+    },
+    {
+      "id": "hist-sch-005-20260503",
+      "scheduleId": "sch-005",
+      "date": "2026-05-03",
+      "actualStartTime": "08:06",
+      "actualEndTime": "10:40",
+      "completionPct": 68
+    },
+    {
+      "id": "hist-sch-005-20260505",
+      "scheduleId": "sch-005",
+      "date": "2026-05-05",
+      "actualStartTime": "08:12",
+      "actualEndTime": "10:34",
+      "completionPct": 74
+    },
+    {
+      "id": "hist-sch-005-20260507",
+      "scheduleId": "sch-005",
+      "date": "2026-05-07",
+      "actualStartTime": "08:05",
+      "actualEndTime": "10:28",
+      "completionPct": 72
+    },
+    {
+      "id": "hist-sch-005-20260510",
+      "scheduleId": "sch-005",
+      "date": "2026-05-10",
+      "actualStartTime": "08:01",
+      "actualEndTime": "10:38",
+      "completionPct": 72
+    },
+    {
+      "id": "hist-sch-005-20260512",
+      "scheduleId": "sch-005",
+      "date": "2026-05-12",
+      "actualStartTime": "08:07",
+      "actualEndTime": "10:32",
+      "completionPct": 77
+    },
+    {
+      "id": "hist-sch-005-20260514",
+      "scheduleId": "sch-005",
+      "date": "2026-05-14",
+      "actualStartTime": "08:01",
+      "actualEndTime": "10:26",
+      "completionPct": 75
+    },
+    {
+      "id": "hist-sch-005-20260517",
+      "scheduleId": "sch-005",
+      "date": "2026-05-17",
+      "actualStartTime": "08:09",
+      "actualEndTime": "10:38",
+      "completionPct": 83
+    },
+    {
+      "id": "hist-sch-005-20260519",
+      "scheduleId": "sch-005",
+      "date": "2026-05-19",
+      "actualStartTime": "08:03",
+      "actualEndTime": "10:32",
+      "completionPct": 81
+    },
+    {
+      "id": "hist-sch-005-20260521",
+      "scheduleId": "sch-005",
+      "date": "2026-05-21",
+      "actualStartTime": "08:08",
+      "actualEndTime": "10:45",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-sch-005-20260524",
+      "scheduleId": "sch-005",
+      "date": "2026-05-24",
+      "actualStartTime": "08:04",
+      "actualEndTime": "10:36",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-sch-005-20260526",
+      "scheduleId": "sch-005",
+      "date": "2026-05-26",
+      "actualStartTime": "08:10",
+      "actualEndTime": "10:30",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-wsch-001-20260419",
+      "scheduleId": "wsch-001",
+      "date": "2026-04-19",
+      "actualStartTime": "08:05",
+      "actualEndTime": "12:07",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-wsch-001-20260422",
+      "scheduleId": "wsch-001",
+      "date": "2026-04-22",
+      "actualStartTime": "08:09",
+      "actualEndTime": "11:57",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-wsch-001-20260426",
+      "scheduleId": "wsch-001",
+      "date": "2026-04-26",
+      "actualStartTime": "08:09",
+      "actualEndTime": "12:09",
+      "completionPct": 91
+    },
+    {
+      "id": "hist-wsch-001-20260429",
+      "scheduleId": "wsch-001",
+      "date": "2026-04-29",
+      "actualStartTime": "08:01",
+      "actualEndTime": "11:57",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-wsch-001-20260503",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-03",
+      "actualStartTime": "08:03",
+      "actualEndTime": "12:03",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-wsch-001-20260506",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-06",
+      "actualStartTime": "08:07",
+      "actualEndTime": "12:12",
+      "completionPct": 89
+    },
+    {
+      "id": "hist-wsch-001-20260510",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-10",
+      "actualStartTime": "08:08",
+      "actualEndTime": "12:05",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-wsch-001-20260513",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-13",
+      "actualStartTime": "08:11",
+      "actualEndTime": "12:13",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-wsch-001-20260517",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-17",
+      "actualStartTime": "08:00",
+      "actualEndTime": "12:05",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-wsch-001-20260520",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-20",
+      "actualStartTime": "08:04",
+      "actualEndTime": "11:55",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-wsch-001-20260524",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-24",
+      "actualStartTime": "08:05",
+      "actualEndTime": "12:07",
+      "completionPct": 88
+    },
+    {
+      "id": "hist-wsch-001-20260527",
+      "scheduleId": "wsch-001",
+      "date": "2026-05-27",
+      "actualStartTime": "08:08",
+      "actualEndTime": "11:56",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-wsch-002-20260419",
+      "scheduleId": "wsch-002",
+      "date": "2026-04-19",
+      "actualStartTime": "14:00",
+      "actualEndTime": "16:06",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-wsch-002-20260426",
+      "scheduleId": "wsch-002",
+      "date": "2026-04-26",
+      "actualStartTime": "14:05",
+      "actualEndTime": "16:07",
+      "completionPct": 82
+    },
+    {
+      "id": "hist-wsch-002-20260503",
+      "scheduleId": "wsch-002",
+      "date": "2026-05-03",
+      "actualStartTime": "14:11",
+      "actualEndTime": "16:02",
+      "completionPct": 81
+    },
+    {
+      "id": "hist-wsch-002-20260510",
+      "scheduleId": "wsch-002",
+      "date": "2026-05-10",
+      "actualStartTime": "14:03",
+      "actualEndTime": "16:04",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-wsch-002-20260517",
+      "scheduleId": "wsch-002",
+      "date": "2026-05-17",
+      "actualStartTime": "14:08",
+      "actualEndTime": "16:04",
+      "completionPct": 68
+    },
+    {
+      "id": "hist-wsch-002-20260524",
+      "scheduleId": "wsch-002",
+      "date": "2026-05-24",
+      "actualStartTime": "14:00",
+      "actualEndTime": "16:06",
+      "completionPct": 58
+    },
+    {
+      "id": "hist-wsch-003-20260420",
+      "scheduleId": "wsch-003",
+      "date": "2026-04-20",
+      "actualStartTime": "07:06",
+      "actualEndTime": "10:09",
+      "completionPct": 83
+    },
+    {
+      "id": "hist-wsch-003-20260422",
+      "scheduleId": "wsch-003",
+      "date": "2026-04-22",
+      "actualStartTime": "07:12",
+      "actualEndTime": "10:15",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-wsch-003-20260427",
+      "scheduleId": "wsch-003",
+      "date": "2026-04-27",
+      "actualStartTime": "07:10",
+      "actualEndTime": "10:09",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-wsch-003-20260429",
+      "scheduleId": "wsch-003",
+      "date": "2026-04-29",
+      "actualStartTime": "07:04",
+      "actualEndTime": "09:55",
+      "completionPct": 82
+    },
+    {
+      "id": "hist-wsch-003-20260504",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-04",
+      "actualStartTime": "07:04",
+      "actualEndTime": "10:04",
+      "completionPct": 81
+    },
+    {
+      "id": "hist-wsch-003-20260506",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-06",
+      "actualStartTime": "07:10",
+      "actualEndTime": "10:10",
+      "completionPct": 86
+    },
+    {
+      "id": "hist-wsch-003-20260511",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-11",
+      "actualStartTime": "07:08",
+      "actualEndTime": "10:06",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-wsch-003-20260513",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-13",
+      "actualStartTime": "07:03",
+      "actualEndTime": "10:11",
+      "completionPct": 81
+    },
+    {
+      "id": "hist-wsch-003-20260518",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-18",
+      "actualStartTime": "07:00",
+      "actualEndTime": "10:06",
+      "completionPct": 79
+    },
+    {
+      "id": "hist-wsch-003-20260520",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-20",
+      "actualStartTime": "07:07",
+      "actualEndTime": "10:13",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-wsch-003-20260525",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-25",
+      "actualStartTime": "07:05",
+      "actualEndTime": "10:08",
+      "completionPct": 82
+    },
+    {
+      "id": "hist-wsch-003-20260527",
+      "scheduleId": "wsch-003",
+      "date": "2026-05-27",
+      "actualStartTime": "07:11",
+      "actualEndTime": "10:13",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-wsch-004-20260420",
+      "scheduleId": "wsch-004",
+      "date": "2026-04-20",
+      "actualStartTime": "13:11",
+      "actualEndTime": "15:02",
+      "completionPct": 95
+    },
+    {
+      "id": "hist-wsch-004-20260427",
+      "scheduleId": "wsch-004",
+      "date": "2026-04-27",
+      "actualStartTime": "13:07",
+      "actualEndTime": "15:02",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-wsch-004-20260504",
+      "scheduleId": "wsch-004",
+      "date": "2026-05-04",
+      "actualStartTime": "13:01",
+      "actualEndTime": "15:07",
+      "completionPct": 90
+    },
+    {
+      "id": "hist-wsch-004-20260511",
+      "scheduleId": "wsch-004",
+      "date": "2026-05-11",
+      "actualStartTime": "13:08",
+      "actualEndTime": "15:06",
+      "completionPct": 93
+    },
+    {
+      "id": "hist-wsch-004-20260518",
+      "scheduleId": "wsch-004",
+      "date": "2026-05-18",
+      "actualStartTime": "13:04",
+      "actualEndTime": "15:05",
+      "completionPct": 92
+    },
+    {
+      "id": "hist-wsch-004-20260525",
+      "scheduleId": "wsch-004",
+      "date": "2026-05-25",
+      "actualStartTime": "13:11",
+      "actualEndTime": "15:03",
+      "completionPct": 95
+    },
+    {
+      "id": "hist-wsch-005-20260421",
+      "scheduleId": "wsch-005",
+      "date": "2026-04-21",
+      "actualStartTime": "08:06",
+      "actualEndTime": "11:00",
+      "completionPct": 60
+    },
+    {
+      "id": "hist-wsch-005-20260424",
+      "scheduleId": "wsch-005",
+      "date": "2026-04-24",
+      "actualStartTime": "08:03",
+      "actualEndTime": "11:12",
+      "completionPct": 60
+    },
+    {
+      "id": "hist-wsch-005-20260428",
+      "scheduleId": "wsch-005",
+      "date": "2026-04-28",
+      "actualStartTime": "08:02",
+      "actualEndTime": "11:00",
+      "completionPct": 62
+    },
+    {
+      "id": "hist-wsch-005-20260501",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-01",
+      "actualStartTime": "08:09",
+      "actualEndTime": "10:57",
+      "completionPct": 69
+    },
+    {
+      "id": "hist-wsch-005-20260505",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-05",
+      "actualStartTime": "08:08",
+      "actualEndTime": "11:05",
+      "completionPct": 71
+    },
+    {
+      "id": "hist-wsch-005-20260508",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-08",
+      "actualStartTime": "08:05",
+      "actualEndTime": "10:57",
+      "completionPct": 72
+    },
+    {
+      "id": "hist-wsch-005-20260512",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-12",
+      "actualStartTime": "08:03",
+      "actualEndTime": "11:04",
+      "completionPct": 73
+    },
+    {
+      "id": "hist-wsch-005-20260515",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-15",
+      "actualStartTime": "08:12",
+      "actualEndTime": "11:15",
+      "completionPct": 81
+    },
+    {
+      "id": "hist-wsch-005-20260519",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-19",
+      "actualStartTime": "08:11",
+      "actualEndTime": "11:03",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-wsch-005-20260522",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-22",
+      "actualStartTime": "08:07",
+      "actualEndTime": "11:13",
+      "completionPct": 83
+    },
+    {
+      "id": "hist-wsch-005-20260526",
+      "scheduleId": "wsch-005",
+      "date": "2026-05-26",
+      "actualStartTime": "08:07",
+      "actualEndTime": "11:02",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-wsch-006-20260421",
+      "scheduleId": "wsch-006",
+      "date": "2026-04-21",
+      "actualStartTime": "15:11",
+      "actualEndTime": "17:01",
+      "completionPct": 87
+    },
+    {
+      "id": "hist-wsch-006-20260428",
+      "scheduleId": "wsch-006",
+      "date": "2026-04-28",
+      "actualStartTime": "15:06",
+      "actualEndTime": "17:01",
+      "completionPct": 84
+    },
+    {
+      "id": "hist-wsch-006-20260505",
+      "scheduleId": "wsch-006",
+      "date": "2026-05-05",
+      "actualStartTime": "15:01",
+      "actualEndTime": "17:06",
+      "completionPct": 80
+    },
+    {
+      "id": "hist-wsch-006-20260512",
+      "scheduleId": "wsch-006",
+      "date": "2026-05-12",
+      "actualStartTime": "15:08",
+      "actualEndTime": "17:05",
+      "completionPct": 85
+    },
+    {
+      "id": "hist-wsch-006-20260519",
+      "scheduleId": "wsch-006",
+      "date": "2026-05-19",
+      "actualStartTime": "15:04",
+      "actualEndTime": "17:04",
+      "completionPct": 82
+    },
+    {
+      "id": "hist-wsch-006-20260526",
+      "scheduleId": "wsch-006",
+      "date": "2026-05-26",
+      "actualStartTime": "15:11",
+      "actualEndTime": "17:03",
+      "completionPct": 87
+    },
     {
       "id": "exec-001",
       "scheduleId": "sch-001",
@@ -195,6 +1570,636 @@
     }
   ],
   "complaints": [
+    {
+      "id": "rhist-sch-001-20260426-1",
+      "executionId": "hist-sch-001-20260426",
+      "description": "פח אשפה לא פונה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-04-26T06:52:00"
+    },
+    {
+      "id": "rhist-sch-001-20260426-2",
+      "executionId": "hist-sch-001-20260426",
+      "description": "מכלי אשפה גדושים בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-04-26T06:09:00"
+    },
+    {
+      "id": "rhist-sch-001-20260426-3",
+      "executionId": "hist-sch-001-20260426",
+      "description": "אשפה מפוזרת בדוד בן גוריון",
+      "street": "דוד בן גוריון",
+      "timestamp": "2026-04-26T08:20:00"
+    },
+    {
+      "id": "rhist-sch-001-20260503-1",
+      "executionId": "hist-sch-001-20260503",
+      "description": "פח אשפה לא פונה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-03T07:53:00"
+    },
+    {
+      "id": "rhist-sch-001-20260503-2",
+      "executionId": "hist-sch-001-20260503",
+      "description": "אשפה מפוזרת בדוד בן גוריון",
+      "street": "דוד בן גוריון",
+      "timestamp": "2026-05-03T06:22:00"
+    },
+    {
+      "id": "rhist-sch-001-20260503-3",
+      "executionId": "hist-sch-001-20260503",
+      "description": "פח אשפה לא פונה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-03T07:57:00"
+    },
+    {
+      "id": "rhist-sch-001-20260514-1",
+      "executionId": "hist-sch-001-20260514",
+      "description": "פסולת שלא פונתה בדוד בן גוריון",
+      "street": "דוד בן גוריון",
+      "timestamp": "2026-05-14T06:36:00"
+    },
+    {
+      "id": "rhist-sch-002-20260423-1",
+      "executionId": "hist-sch-002-20260423",
+      "description": "מכלי אשפה גדושים בתובל",
+      "street": "תובל",
+      "timestamp": "2026-04-23T10:17:00"
+    },
+    {
+      "id": "rhist-sch-002-20260427-1",
+      "executionId": "hist-sch-002-20260427",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-04-27T10:46:00"
+    },
+    {
+      "id": "rhist-sch-002-20260427-2",
+      "executionId": "hist-sch-002-20260427",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-04-27T10:55:00"
+    },
+    {
+      "id": "rhist-sch-002-20260429-1",
+      "executionId": "hist-sch-002-20260429",
+      "description": "פסולת שלא פונתה בהיצירה",
+      "street": "היצירה",
+      "timestamp": "2026-04-29T09:42:00"
+    },
+    {
+      "id": "rhist-sch-002-20260429-2",
+      "executionId": "hist-sch-002-20260429",
+      "description": "מכלי אשפה גדושים בתובל",
+      "street": "תובל",
+      "timestamp": "2026-04-29T10:35:00"
+    },
+    {
+      "id": "rhist-sch-002-20260504-1",
+      "executionId": "hist-sch-002-20260504",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-04T11:52:00"
+    },
+    {
+      "id": "rhist-sch-002-20260504-2",
+      "executionId": "hist-sch-002-20260504",
+      "description": "פסולת שלא פונתה בתובל",
+      "street": "תובל",
+      "timestamp": "2026-05-04T11:19:00"
+    },
+    {
+      "id": "rhist-sch-002-20260506-1",
+      "executionId": "hist-sch-002-20260506",
+      "description": "פסולת שלא פונתה באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-06T10:35:00"
+    },
+    {
+      "id": "rhist-sch-002-20260506-2",
+      "executionId": "hist-sch-002-20260506",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-06T10:44:00"
+    },
+    {
+      "id": "rhist-sch-002-20260511-1",
+      "executionId": "hist-sch-002-20260511",
+      "description": "שאריות פינוי לא נקיות בהיצירה",
+      "street": "היצירה",
+      "timestamp": "2026-05-11T09:55:00"
+    },
+    {
+      "id": "rhist-sch-002-20260513-1",
+      "executionId": "hist-sch-002-20260513",
+      "description": "שאריות פינוי לא נקיות בתובל",
+      "street": "תובל",
+      "timestamp": "2026-05-13T11:37:00"
+    },
+    {
+      "id": "rhist-sch-002-20260517-1",
+      "executionId": "hist-sch-002-20260517",
+      "description": "מכלי אשפה גדושים באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-17T09:22:00"
+    },
+    {
+      "id": "rhist-sch-002-20260517-2",
+      "executionId": "hist-sch-002-20260517",
+      "description": "אשפה מפוזרת בתובל",
+      "street": "תובל",
+      "timestamp": "2026-05-17T11:48:00"
+    },
+    {
+      "id": "rhist-sch-002-20260520-1",
+      "executionId": "hist-sch-002-20260520",
+      "description": "פסולת שלא פונתה באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-20T09:50:00"
+    },
+    {
+      "id": "rhist-sch-002-20260521-1",
+      "executionId": "hist-sch-002-20260521",
+      "description": "פסולת שלא פונתה בהיצירה",
+      "street": "היצירה",
+      "timestamp": "2026-05-21T09:14:00"
+    },
+    {
+      "id": "rhist-sch-002-20260521-2",
+      "executionId": "hist-sch-002-20260521",
+      "description": "אשפה מפוזרת בהיצירה",
+      "street": "היצירה",
+      "timestamp": "2026-05-21T10:05:00"
+    },
+    {
+      "id": "rhist-sch-002-20260521-3",
+      "executionId": "hist-sch-002-20260521",
+      "description": "מכלי אשפה גדושים בתובל",
+      "street": "תובל",
+      "timestamp": "2026-05-21T10:56:00"
+    },
+    {
+      "id": "rhist-sch-002-20260524-1",
+      "executionId": "hist-sch-002-20260524",
+      "description": "פח אשפה לא פונה בהיצירה",
+      "street": "היצירה",
+      "timestamp": "2026-05-24T10:21:00"
+    },
+    {
+      "id": "rhist-sch-003-20260419-1",
+      "executionId": "hist-sch-003-20260419",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-19T09:58:00"
+    },
+    {
+      "id": "rhist-sch-003-20260419-2",
+      "executionId": "hist-sch-003-20260419",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-19T09:26:00"
+    },
+    {
+      "id": "rhist-sch-003-20260421-1",
+      "executionId": "hist-sch-003-20260421",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-21T07:59:00"
+    },
+    {
+      "id": "rhist-sch-003-20260421-2",
+      "executionId": "hist-sch-003-20260421",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-21T08:04:00"
+    },
+    {
+      "id": "rhist-sch-003-20260421-3",
+      "executionId": "hist-sch-003-20260421",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-21T08:10:00"
+    },
+    {
+      "id": "rhist-sch-003-20260422-1",
+      "executionId": "hist-sch-003-20260422",
+      "description": "פח אשפה לא פונה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-22T07:28:00"
+    },
+    {
+      "id": "rhist-sch-003-20260423-1",
+      "executionId": "hist-sch-003-20260423",
+      "description": "פח אשפה לא פונה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-23T09:57:00"
+    },
+    {
+      "id": "rhist-sch-003-20260423-2",
+      "executionId": "hist-sch-003-20260423",
+      "description": "פסולת שלא פונתה בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-04-23T07:42:00"
+    },
+    {
+      "id": "rhist-sch-003-20260423-3",
+      "executionId": "hist-sch-003-20260423",
+      "description": "מכלי אשפה גדושים בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-23T08:31:00"
+    },
+    {
+      "id": "rhist-sch-003-20260426-1",
+      "executionId": "hist-sch-003-20260426",
+      "description": "שאריות פינוי לא נקיות בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-04-26T08:00:00"
+    },
+    {
+      "id": "rhist-sch-003-20260428-1",
+      "executionId": "hist-sch-003-20260428",
+      "description": "שאריות פינוי לא נקיות בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-28T09:42:00"
+    },
+    {
+      "id": "rhist-sch-003-20260430-1",
+      "executionId": "hist-sch-003-20260430",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-30T07:54:00"
+    },
+    {
+      "id": "rhist-sch-003-20260430-2",
+      "executionId": "hist-sch-003-20260430",
+      "description": "פח אשפה לא פונה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-30T09:41:00"
+    },
+    {
+      "id": "rhist-sch-003-20260503-1",
+      "executionId": "hist-sch-003-20260503",
+      "description": "פח אשפה לא פונה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-03T09:08:00"
+    },
+    {
+      "id": "rhist-sch-003-20260505-1",
+      "executionId": "hist-sch-003-20260505",
+      "description": "שאריות פינוי לא נקיות בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-05-05T07:50:00"
+    },
+    {
+      "id": "rhist-sch-003-20260507-1",
+      "executionId": "hist-sch-003-20260507",
+      "description": "שאריות פינוי לא נקיות בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-07T09:32:00"
+    },
+    {
+      "id": "rhist-sch-003-20260513-1",
+      "executionId": "hist-sch-003-20260513",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-13T08:14:00"
+    },
+    {
+      "id": "rhist-sch-003-20260513-2",
+      "executionId": "hist-sch-003-20260513",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-13T08:20:00"
+    },
+    {
+      "id": "rhist-sch-003-20260513-3",
+      "executionId": "hist-sch-003-20260513",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-13T08:27:00"
+    },
+    {
+      "id": "rhist-sch-003-20260514-1",
+      "executionId": "hist-sch-003-20260514",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-14T07:44:00"
+    },
+    {
+      "id": "rhist-sch-003-20260517-1",
+      "executionId": "hist-sch-003-20260517",
+      "description": "פח אשפה לא פונה בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-05-17T08:53:00"
+    },
+    {
+      "id": "rhist-sch-003-20260517-2",
+      "executionId": "hist-sch-003-20260517",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-17T07:22:00"
+    },
+    {
+      "id": "rhist-sch-003-20260517-3",
+      "executionId": "hist-sch-003-20260517",
+      "description": "פח אשפה לא פונה בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-05-17T08:57:00"
+    },
+    {
+      "id": "rhist-sch-003-20260520-1",
+      "executionId": "hist-sch-003-20260520",
+      "description": "מכלי אשפה גדושים בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-05-20T09:17:00"
+    },
+    {
+      "id": "rhist-sch-003-20260520-2",
+      "executionId": "hist-sch-003-20260520",
+      "description": "פח אשפה לא פונה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-20T07:27:00"
+    },
+    {
+      "id": "rhist-sch-003-20260524-1",
+      "executionId": "hist-sch-003-20260524",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-24T09:57:00"
+    },
+    {
+      "id": "rhist-sch-003-20260524-2",
+      "executionId": "hist-sch-003-20260524",
+      "description": "פסולת שלא פונתה בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-24T09:25:00"
+    },
+    {
+      "id": "rhist-sch-003-20260526-1",
+      "executionId": "hist-sch-003-20260526",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-26T08:40:00"
+    },
+    {
+      "id": "rhist-sch-003-20260526-2",
+      "executionId": "hist-sch-003-20260526",
+      "description": "אשפה מפוזרת בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-26T08:49:00"
+    },
+    {
+      "id": "rhist-sch-004-20260430-1",
+      "executionId": "hist-sch-004-20260430",
+      "description": "פח אשפה לא פונה בז'בוטינסקי",
+      "street": "ז'בוטינסקי",
+      "timestamp": "2026-04-30T14:35:00"
+    },
+    {
+      "id": "rhist-sch-004-20260430-2",
+      "executionId": "hist-sch-004-20260430",
+      "description": "פסולת שלא פונתה באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-04-30T12:18:00"
+    },
+    {
+      "id": "rhist-sch-004-20260430-3",
+      "executionId": "hist-sch-004-20260430",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-04-30T13:05:00"
+    },
+    {
+      "id": "rhist-sch-004-20260520-1",
+      "executionId": "hist-sch-004-20260520",
+      "description": "פסולת שלא פונתה בז'בוטינסקי",
+      "street": "ז'בוטינסקי",
+      "timestamp": "2026-05-20T12:53:00"
+    },
+    {
+      "id": "rhist-sch-005-20260423-1",
+      "executionId": "hist-sch-005-20260423",
+      "description": "ענפים לא פונו בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-04-23T10:40:00"
+    },
+    {
+      "id": "rhist-sch-005-20260510-1",
+      "executionId": "hist-sch-005-20260510",
+      "description": "גינה לא טופלה בפארק גבעת השחר",
+      "street": "פארק גבעת השחר",
+      "timestamp": "2026-05-10T08:13:00"
+    },
+    {
+      "id": "rhist-sch-005-20260510-2",
+      "executionId": "hist-sch-005-20260510",
+      "description": "פסולת גינון הושארה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-10T09:39:00"
+    },
+    {
+      "id": "rhist-sch-005-20260512-1",
+      "executionId": "hist-sch-005-20260512",
+      "description": "גינה לא טופלה בפארק גבעת השחר",
+      "street": "פארק גבעת השחר",
+      "timestamp": "2026-05-12T09:44:00"
+    },
+    {
+      "id": "rhist-sch-005-20260512-2",
+      "executionId": "hist-sch-005-20260512",
+      "description": "ענפים לא פונו בפארק גבעת השחר",
+      "street": "פארק גבעת השחר",
+      "timestamp": "2026-05-12T09:14:00"
+    },
+    {
+      "id": "rhist-sch-005-20260514-1",
+      "executionId": "hist-sch-005-20260514",
+      "description": "ענפים לא פונו בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-14T08:40:00"
+    },
+    {
+      "id": "rhist-sch-005-20260514-2",
+      "executionId": "hist-sch-005-20260514",
+      "description": "ענפים לא פונו בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-14T08:43:00"
+    },
+    {
+      "id": "rhist-wsch-001-20260429-1",
+      "executionId": "hist-wsch-001-20260429",
+      "description": "פסולת שלא פונתה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-04-29T09:39:00"
+    },
+    {
+      "id": "rhist-wsch-001-20260506-1",
+      "executionId": "hist-wsch-001-20260506",
+      "description": "פסולת שלא פונתה בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-06T08:24:00"
+    },
+    {
+      "id": "rhist-wsch-001-20260517-1",
+      "executionId": "hist-wsch-001-20260517",
+      "description": "פח אשפה לא פונה בדרך יצחק רבין",
+      "street": "דרך יצחק רבין",
+      "timestamp": "2026-05-17T10:08:00"
+    },
+    {
+      "id": "rhist-wsch-001-20260517-2",
+      "executionId": "hist-wsch-001-20260517",
+      "description": "אשפה מפוזרת בשדרות ירושלים",
+      "street": "שדרות ירושלים",
+      "timestamp": "2026-05-17T08:06:00"
+    },
+    {
+      "id": "rhist-wsch-001-20260517-3",
+      "executionId": "hist-wsch-001-20260517",
+      "description": "פח אשפה לא פונה בדרך יצחק רבין",
+      "street": "דרך יצחק רבין",
+      "timestamp": "2026-05-17T10:09:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260419-1",
+      "executionId": "hist-wsch-002-20260419",
+      "description": "פח אשפה לא פונה בדרך מנחם בגין",
+      "street": "דרך מנחם בגין",
+      "timestamp": "2026-04-19T15:20:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260419-2",
+      "executionId": "hist-wsch-002-20260419",
+      "description": "מכלי אשפה גדושים באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-04-19T14:18:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260419-3",
+      "executionId": "hist-wsch-002-20260419",
+      "description": "פח אשפה לא פונה בדרך מנחם בגין",
+      "street": "דרך מנחם בגין",
+      "timestamp": "2026-04-19T15:23:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260517-1",
+      "executionId": "hist-wsch-002-20260517",
+      "description": "אשפה מפוזרת באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-17T16:03:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260517-2",
+      "executionId": "hist-wsch-002-20260517",
+      "description": "פסולת שלא פונתה בדרך מנחם בגין",
+      "street": "דרך מנחם בגין",
+      "timestamp": "2026-05-17T15:42:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260524-1",
+      "executionId": "hist-wsch-002-20260524",
+      "description": "פח אשפה לא פונה בדרך מנחם בגין",
+      "street": "דרך מנחם בגין",
+      "timestamp": "2026-05-24T15:20:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260524-2",
+      "executionId": "hist-wsch-002-20260524",
+      "description": "מכלי אשפה גדושים באבא הלל",
+      "street": "אבא הלל",
+      "timestamp": "2026-05-24T14:19:00"
+    },
+    {
+      "id": "rhist-wsch-002-20260524-3",
+      "executionId": "hist-wsch-002-20260524",
+      "description": "פח אשפה לא פונה בדרך מנחם בגין",
+      "street": "דרך מנחם בגין",
+      "timestamp": "2026-05-24T15:24:00"
+    },
+    {
+      "id": "rhist-wsch-003-20260518-1",
+      "executionId": "hist-wsch-003-20260518",
+      "description": "פח אשפה לא פונה בהרצל",
+      "street": "הרצל",
+      "timestamp": "2026-05-18T09:04:00"
+    },
+    {
+      "id": "rhist-wsch-003-20260518-2",
+      "executionId": "hist-wsch-003-20260518",
+      "description": "מכלי אשפה גדושים בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-18T07:34:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260421-1",
+      "executionId": "hist-wsch-005-20260421",
+      "description": "ענפים לא פונו בשדרות כוגמן",
+      "street": "שדרות כוגמן",
+      "timestamp": "2026-04-21T08:59:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260421-2",
+      "executionId": "hist-wsch-005-20260421",
+      "description": "פסולת גינון הושארה בשדרות כוגמן",
+      "street": "שדרות כוגמן",
+      "timestamp": "2026-04-21T08:17:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260421-3",
+      "executionId": "hist-wsch-005-20260421",
+      "description": "צמחייה פרועה חוסמת מדרכה בפארק רמת גן",
+      "street": "פארק רמת גן",
+      "timestamp": "2026-04-21T10:28:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260424-1",
+      "executionId": "hist-wsch-005-20260424",
+      "description": "פסולת גינון הושארה בפארק רמת גן",
+      "street": "פארק רמת גן",
+      "timestamp": "2026-04-24T10:16:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260428-1",
+      "executionId": "hist-wsch-005-20260428",
+      "description": "צמחייה פרועה חוסמת מדרכה בפארק רמת גן",
+      "street": "פארק רמת גן",
+      "timestamp": "2026-04-28T10:41:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260505-1",
+      "executionId": "hist-wsch-005-20260505",
+      "description": "צמחייה פרועה חוסמת מדרכה בפארק רמת גן",
+      "street": "פארק רמת גן",
+      "timestamp": "2026-05-05T08:50:00"
+    },
+    {
+      "id": "rhist-wsch-005-20260526-1",
+      "executionId": "hist-wsch-005-20260526",
+      "description": "ענפים לא פונו בשדרות כוגמן",
+      "street": "שדרות כוגמן",
+      "timestamp": "2026-05-26T09:41:00"
+    },
+    {
+      "id": "rhist-wsch-006-20260428-1",
+      "executionId": "hist-wsch-006-20260428",
+      "description": "שילוט פגום לא טופל בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-28T15:55:00"
+    },
+    {
+      "id": "rhist-wsch-006-20260428-2",
+      "executionId": "hist-wsch-006-20260428",
+      "description": "מכשול לא מסומן בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-04-28T15:28:00"
+    },
+    {
+      "id": "rhist-wsch-006-20260505-1",
+      "executionId": "hist-wsch-006-20260505",
+      "description": "שילוט פגום לא טופל בביאליק",
+      "street": "ביאליק",
+      "timestamp": "2026-05-05T16:37:00"
+    },
     {
       "id": "rc-001",
       "executionId": "exec-001",

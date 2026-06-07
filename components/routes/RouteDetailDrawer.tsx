@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import type { RouteRow, DayKey, CalculatedRouteStatus, RecurrenceType } from "@/lib/types";
 import { ROUTE_STATUS_COLORS, ROUTE_STATUS_LABELS } from "@/lib/routeUtils";
+import { RouteHistorySection } from "./RouteHistorySection";
 
 const RECURRENCE_BADGE: Record<RecurrenceType, { label: string; bg: string; color: string }> = {
   daily: { label: "יומי", bg: "#fff7ed", color: "#c2410c" },
@@ -166,14 +167,14 @@ export function RouteDetailDrawer({ row, onClose, onEdit }: Props) {
                       >
                         {idx + 1}
                       </span>
-                      <span className="text-xs font-semibold text-[#1a1a1a] tabular-nums">
+                      <span className="text-xs font-semibold text-[#1a1a1a] tabular-nums" dir="ltr">
                         {win.startTime}–{win.endTime}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-sm font-semibold text-[#1a1a1a] tabular-nums">
+                <p className="text-sm font-semibold text-[#1a1a1a] tabular-nums" dir="ltr">
                   {schedule.scheduledStartTime}–{schedule.scheduledEndTime}
                 </p>
               )}
@@ -190,6 +191,14 @@ export function RouteDetailDrawer({ row, onClose, onEdit }: Props) {
                 <p className="text-[10px] text-[#999999] mt-0.5">
                   {schedule.assignedTeam}
                 </p>
+              )}
+              {schedule.teamRef && (
+                <Link
+                  href={`/fleet?teamId=${schedule.teamRef}`}
+                  className="mt-1.5 text-[11px] text-[#1f5fa6] hover:underline flex items-center gap-1"
+                >
+                  עבור לניהול צוות ←
+                </Link>
               )}
             </div>
           </div>
@@ -280,6 +289,12 @@ export function RouteDetailDrawer({ row, onClose, onEdit }: Props) {
               {getInsight(status, complaintCount, pct, schedule.requiredCompletionPct)}
             </p>
           </div>
+
+          <RouteHistorySection
+            scheduleId={schedule.id}
+            requiredPct={schedule.requiredCompletionPct}
+            complaintThreshold={schedule.complaintThreshold}
+          />
         </div>
 
         {/* Action buttons */}

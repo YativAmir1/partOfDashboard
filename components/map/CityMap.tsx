@@ -14,11 +14,11 @@ import { districtLabel, priorityLabel, statusLabel } from "@/lib/hebrew";
 import { riskPredictions } from "@/lib/riskPredictions";
 import "leaflet/dist/leaflet.css";
 import { HeatmapLayer } from "@/components/map/HeatmapLayer";
-import { RouteLayer } from "@/components/map/RouteLayer";
+import { RouteLayer, ROUTE_COORDS } from "@/components/map/RouteLayer";
 import { AnimatedTeamLayer } from "@/components/map/AnimatedTeamLayer";
 import { AnimatedVehicleLayer } from "@/components/map/AnimatedVehicleLayer";
 import type { MapViewMode } from "@/components/map/MapViewToggle";
-import type { RouteMapFilter } from "@/lib/types";
+import type { HeatmapSource, RouteMapFilter, RouteTemplate, RouteSchedule } from "@/lib/types";
 
 interface Props {
   activeCategories: Set<IncidentType>;
@@ -31,6 +31,10 @@ interface Props {
   routeFilter?: RouteMapFilter;
   routeStatusFilters?: Set<string>;
   focusedRouteScheduleId?: string | null;
+  additionalTemplates?: RouteTemplate[];
+  additionalSchedules?: RouteSchedule[];
+  additionalCoordsMap?: Record<string, [number, number][]>;
+  heatmapSource?: HeatmapSource;
 }
 
 // ─── Icon factory ─────────────────────────────────────────────────────────────
@@ -312,6 +316,10 @@ export default function CityMap({
   routeFilter = "today",
   routeStatusFilters,
   focusedRouteScheduleId = null,
+  additionalTemplates = [],
+  additionalSchedules = [],
+  additionalCoordsMap = {},
+  heatmapSource = "incidents",
 }: Props) {
   const [selected, setSelected] = useState<string | null>(null);
   const { hazardRevealed } = useHazard();
@@ -381,6 +389,37 @@ export default function CityMap({
     }),
     [],
   );
+
+  const routeHeatPoints = useMemo(() => {
+    const allCoords = { ...ROUTE_COORDS, ...additionalCoordsMap };
+
+    if (heatmapSource === "route_coverage") {
+      return Object.values(allCoords).flat().map(([lat, lng]) => ({ lat, lng, intensity: 1.0 }));
+    }
+
+    if (heatmapSource === "route_problems") {
+      const complaintPts = routeComplaints
+        .filter((c) => c.lat != null && c.lng != null)
+        .map((c) => ({ lat: c.lat!, lng: c.lng!, intensity: 1.0 }));
+      const bgPts = Object.values(allCoords).flat().map(([lat, lng]) => ({ lat, lng, intensity: 0.15 }));
+      return [...bgPts, ...complaintPts];
+    }
+
+    if (heatmapSource === "route_frequency") {
+      const allSchedules = [...routeSchedules, ...additionalSchedules];
+      const freqMap: Record<string, number> = {};
+      for (const s of allSchedules) {
+        if (s.active !== false)
+          freqMap[s.templateId] = (freqMap[s.templateId] ?? 0) + (s.dayOfWeek?.length ?? 0);
+      }
+      const maxFreq = Math.max(1, ...Object.values(freqMap));
+      return Object.entries(allCoords).flatMap(([id, coords]) =>
+        coords.map(([lat, lng]) => ({ lat, lng, intensity: (freqMap[id] ?? 1) / maxFreq }))
+      );
+    }
+
+    return [];
+  }, [heatmapSource, additionalCoordsMap, additionalSchedules]);
 
   return (
     <MapContainer
@@ -481,7 +520,14 @@ export default function CityMap({
 
       {/* ── Heatmap layer ── */}
       {viewMode === "heatmap" && (
-        <HeatmapLayer points={heatPoints} options={heatOptions} />
+        <HeatmapLayer
+          points={heatmapSource === "incidents" ? heatPoints : routeHeatPoints}
+          options={
+            heatmapSource === "route_coverage" || heatmapSource === "route_frequency"
+              ? { ...heatOptions, radius: 30, blur: 20 }
+              : heatOptions
+          }
+        />
       )}
 
       {/* ── Incident markers ── */}
@@ -516,22 +562,22 @@ export default function CityMap({
                   <p className="text-[10px] text-[#585858] uppercase tracking-wider mb-1">פעולה מומלצת</p>
                   <p className="text-xs text-[#1a1a1a] leading-snug">{meta.action}</p>
                 </div>
-                <div className="space-y-1 text-xs text-[#707070]">
-                  <div className="flex justify-between"><span>אזור</span><span className="text-[#1a1a1a]">{districtLabel(m.district)}</span></div>
-                  <div className="flex justify-between"><span>תחום</span><span className="text-[#1a1a1a] capitalize">{CATEGORY_LABELS[m.category]}</span></div>
-                  <div className="flex justify-between">
-                    <span>סטטוס</span>
+                <div dir="rtl" className="space-y-1 text-xs text-[#707070]">
+                  <div className="flex gap-2"><span className="shrink-0 font-medium">אזור</span><span className="text-[#1a1a1a]">{districtLabel(m.district)}</span></div>
+                  <div className="flex gap-2"><span className="shrink-0 font-medium">תחום</span><span className="text-[#1a1a1a] capitalize">{CATEGORY_LABELS[m.category]}</span></div>
+                  <div className="flex gap-2">
+                    <span className="shrink-0 font-medium">סטטוס</span>
                     <span style={{ color: m.status === "resolved" ? "#459524" : m.status === "in_progress" ? "#1f5fa6" : "#d96350" }} className="font-medium capitalize">
                       {statusLabel(m.status)}
                     </span>
                   </div>
-                  <div className="flex justify-between"><span>מקור</span><span className="text-[#1a1a1a]">{meta.source}</span></div>
-                  <div className="flex justify-between">
-                    <span>זמן פתיחה</span>
+                  <div className="flex gap-2"><span className="shrink-0 font-medium">מקור</span><span className="text-[#1a1a1a]">{meta.source}</span></div>
+                  <div className="flex gap-2">
+                    <span className="shrink-0 font-medium">זמן פתיחה</span>
                     <span className="text-[#1a1a1a]">{new Date(m.lastUpdated).toLocaleString("he-IL", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Jerusalem" })}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>סטטוס SLA</span>
+                  <div className="flex gap-2">
+                    <span className="shrink-0 font-medium">סטטוס SLA</span>
                     <span className="font-semibold text-[#1a1a1a]">{meta.slaStatus}</span>
                   </div>
                 </div>
@@ -613,6 +659,9 @@ export default function CityMap({
           filter={routeFilter}
           statusFilters={routeStatusFilters}
           focusedScheduleId={focusedRouteScheduleId}
+          additionalTemplates={additionalTemplates}
+          additionalSchedules={additionalSchedules}
+          additionalCoordsMap={additionalCoordsMap}
         />
       )}
 

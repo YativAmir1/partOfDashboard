@@ -42,7 +42,7 @@ const MOCK_NOW = new Date("2026-05-28T10:30:00");
 const TODAY_DAY_KEY = "thu";
 
 // Mock polyline coordinates per template (OSM-approximate Ramat Gan street paths)
-const ROUTE_COORDS: Record<string, [number, number][]> = {
+export const ROUTE_COORDS: Record<string, [number, number][]> = {
   // מסלול ניקיון מזרחי — שדרות ירושלים → דוד בן גוריון → דרך יצחק רבין
   "tmpl-001": [
     [32.074638, 34.823874],[32.074652, 34.823495],[32.074666, 34.823132],[32.074724, 34.821945],
@@ -225,9 +225,19 @@ interface Props {
   filter: RouteMapFilter;
   statusFilters?: Set<string>;
   focusedScheduleId: string | null;
+  additionalTemplates?: (typeof routeTemplates)[number][];
+  additionalSchedules?: (typeof routeSchedules)[number][];
+  additionalCoordsMap?: Record<string, [number, number][]>;
 }
 
-export function RouteLayer({ filter, statusFilters, focusedScheduleId }: Props) {
+export function RouteLayer({
+  filter,
+  statusFilters,
+  focusedScheduleId,
+  additionalTemplates = [],
+  additionalSchedules = [],
+  additionalCoordsMap = {},
+}: Props) {
   const execBySchedule = useMemo(() => {
     const m = new Map<string, (typeof routeExecutions)[0]>();
     routeExecutions.forEach((e) => m.set(e.scheduleId, e));
@@ -243,23 +253,28 @@ export function RouteLayer({ filter, statusFilters, focusedScheduleId }: Props) 
   }, []);
 
   const allRows = useMemo(() => {
-    return routeSchedules
-      .filter((s) => s.active !== false)
-      .map((schedule) => {
-        const template = routeTemplates.find((t) => t.id === schedule.templateId)!;
-        const execution = execBySchedule.get(schedule.id);
-        const complaintCount = execution
-          ? (complaintsByExecution.get(execution.id) ?? 0)
-          : 0;
-        const isToday = schedule.dayOfWeek.includes(TODAY_DAY_KEY);
-        const status =
-          isToday && execution
-            ? calculateRouteStatus(schedule, execution, complaintCount, MOCK_NOW)
-            : "scheduled";
-        const coords = ROUTE_COORDS[schedule.templateId] ?? [];
-        return { schedule, template, execution, complaintCount, status, coords, isToday };
-      });
-  }, [execBySchedule, complaintsByExecution]);
+    const allTemplates = [...routeTemplates, ...additionalTemplates];
+    const allSchedules = [...routeSchedules, ...additionalSchedules].filter(
+      (s) => s.active !== false,
+    );
+    return allSchedules.map((schedule) => {
+      const template = allTemplates.find((t) => t.id === schedule.templateId)!;
+      const execution = execBySchedule.get(schedule.id);
+      const complaintCount = execution
+        ? (complaintsByExecution.get(execution.id) ?? 0)
+        : 0;
+      const isToday = schedule.dayOfWeek.includes(TODAY_DAY_KEY);
+      const status =
+        isToday && execution
+          ? calculateRouteStatus(schedule, execution, complaintCount, MOCK_NOW)
+          : "scheduled";
+      const coords =
+        additionalCoordsMap[schedule.templateId] ??
+        ROUTE_COORDS[schedule.templateId] ??
+        [];
+      return { schedule, template, execution, complaintCount, status, coords, isToday };
+    });
+  }, [execBySchedule, complaintsByExecution, additionalTemplates, additionalSchedules, additionalCoordsMap]);
 
   const visibleRows = useMemo(() => {
     let rows: typeof allRows;
@@ -315,29 +330,29 @@ export function RouteLayer({ filter, statusFilters, focusedScheduleId }: Props) 
               {template.name}
             </p>
 
-            <div className="space-y-1 text-xs text-[#707070] mb-3">
-              <div className="flex justify-between gap-3">
-                <span>ימים</span>
-                <span className="text-[#1a1a1a] text-left">{dayLabels}</span>
+            <div dir="rtl" className="space-y-1 text-xs text-[#707070] mb-3">
+              <div className="flex gap-2">
+                <span className="shrink-0 font-medium">ימים</span>
+                <span className="text-[#1a1a1a]">{dayLabels}</span>
               </div>
-              <div className="flex justify-between gap-3">
-                <span>שעות</span>
-                <span className="text-[#1a1a1a]">
+              <div className="flex gap-2">
+                <span className="shrink-0 font-medium">שעות</span>
+                <span className="text-[#1a1a1a]" dir="ltr">
                   {schedule.scheduledStartTime}–{schedule.scheduledEndTime}
                 </span>
               </div>
-              <div className="flex justify-between gap-3">
-                <span>צוות/רכב</span>
+              <div className="flex gap-2">
+                <span className="shrink-0 font-medium">צוות/רכב</span>
                 <span className="text-[#1a1a1a]">{resource}</span>
               </div>
-              <div className="flex justify-between gap-3">
-                <span>ביצוע</span>
+              <div className="flex gap-2">
+                <span className="shrink-0 font-medium">ביצוע</span>
                 <span className="font-semibold text-[#1a1a1a]">
                   {execution ? `${execution.completionPct}%` : "—"}
                 </span>
               </div>
-              <div className="flex justify-between gap-3">
-                <span>תלונות</span>
+              <div className="flex gap-2">
+                <span className="shrink-0 font-medium">תלונות</span>
                 <span
                   className="font-semibold"
                   style={{ color: complaintCount > 0 ? "#d96350" : "#459524" }}
@@ -380,13 +395,9 @@ export function RouteLayer({ filter, statusFilters, focusedScheduleId }: Props) 
                 weight: isFocused ? 7 : 4,
                 opacity: isFocused ? 1 : 0.82,
                 dashArray:
-                  status === "scheduled"  ? "8 5"  :
-                  status === "in_progress" ? "16 8" :
-                  undefined,
+                  status === "scheduled" ? "8 5" : undefined,
                 className:
-                  status === "in_progress"       ? "route-flow-path"     :
-                  status === "requires_attention" ? "route-attention-path" :
-                  undefined,
+                  status === "requires_attention" ? "route-attention-path" : undefined,
                 interactive: false,
               }}
             />

@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import {
-  routeTemplates,
   routeExecutions,
   routeComplaints,
 } from "@/lib/data";
@@ -139,10 +138,11 @@ interface WeeklyGridProps {
   now: Date;
   todayDayKey: DayKey;
   schedules: RouteSchedule[];
+  templates: RouteTemplate[];
   onClickRoute?: (scheduleId: string) => void;
 }
 
-export function WeeklyGrid({ now, todayDayKey, schedules, onClickRoute }: WeeklyGridProps) {
+export function WeeklyGrid({ now, todayDayKey, schedules, templates, onClickRoute }: WeeklyGridProps) {
   const execBySchedule = useMemo(() => {
     const map = new Map<string, RouteExecution>();
     routeExecutions.forEach((e) => map.set(e.scheduleId, e));
@@ -243,9 +243,10 @@ export function WeeklyGrid({ now, todayDayKey, schedules, onClickRoute }: Weekly
                         ) : (
                           <div className="space-y-1.5">
                             {cellSchedules.map((schedule) => {
-                              const template = routeTemplates.find(
+                              const template = templates.find(
                                 (t) => t.id === schedule.templateId
-                              )!;
+                              );
+                              if (!template) return null;
                               const execution = isToday
                                 ? execBySchedule.get(schedule.id)
                                 : undefined;

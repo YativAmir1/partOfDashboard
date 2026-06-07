@@ -1,4 +1,5 @@
 export type IncidentType = "waste" | "traffic" | "safety" | "utilities" | "parks";
+export type HeatmapSource = "incidents" | "route_coverage" | "route_problems" | "route_frequency";
 export type Priority = "critical" | "high" | "medium" | "low";
 export type IncidentStatus = "open" | "in_progress" | "resolved";
 export type District =
@@ -286,6 +287,7 @@ export interface RouteTemplate {
   streets: string[];
   category: IncidentType;
   estimatedDurationMin: number;
+  coords?: [number, number][];
 }
 
 export type RecurrenceType = "daily" | "weekly" | "monthly";
@@ -303,6 +305,8 @@ export interface RouteSchedule {
   scheduledEndTime: string;
   assignedTeam: string;
   vehicle?: string;
+  vehicleRef?: string;  // Vehicle.id
+  teamRef?: string;     // MunicipalTeam.id
   requiredCompletionPct: number;
   complaintThreshold?: number;
   active?: boolean;
@@ -342,6 +346,47 @@ export interface RouteRow {
 }
 
 export type RouteMapFilter = "today" | "week" | "focused";
+
+// ─── Vehicle & Fleet Management ───────────────────────────────────────────────
+
+export type VehicleType =
+  | "garbage_truck"       // משאית אשפה
+  | "street_sweeper"      // מכבדת רחובות
+  | "pruning_truck"       // רכב גיזום עצים
+  | "gardening_truck"     // רכב גינון
+  | "irrigation_vehicle"  // רכב השקיה
+  | "pickup_truck"        // טנדר תשתיות
+  | "heavy_equipment"     // ציוד כבד
+  | "patrol_vehicle"      // ניידת ביטחון
+  | "van";                // ואן רב-תכליתי
+
+export type VehicleStatus =
+  | "active"           // פעיל בשטח
+  | "standby"          // בהמתנה
+  | "maintenance"      // בתחזוקה
+  | "out_of_service";  // מושבת
+
+export interface VehicleGPS {
+  lat: number;
+  lng: number;
+  heading?: number;
+  speedKmh?: number;
+  lastUpdated: string;
+  isLive: boolean;
+}
+
+export interface Vehicle {
+  id: string;              // e.g. "RG-301"
+  plateNumber: string;
+  label: string;           // e.g. "משאית פינוי א׳"
+  type: VehicleType;
+  status: VehicleStatus;
+  deptId: string;          // → MunicipalDept.id
+  assignedTeamId?: string; // → MunicipalTeam.id
+  gps?: VehicleGPS;
+  year?: number;
+  notes?: string;
+}
 
 export interface DemoScenarioData {
   phase: ScenarioPhase;
