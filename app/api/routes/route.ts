@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
-import { put, list } from "@vercel/blob";
+import { put, get } from "@vercel/blob";
 import type { RouteTemplate, RouteSchedule, IncidentType, DayKey } from "@/lib/types";
 
 export const maxDuration = 300;
@@ -15,36 +15,45 @@ interface CustomRoutesFile {
   coordsMap: Record<string, [number, number][]>;
 }
 
+const EMPTY: CustomRoutesFile = { templates: [], schedules: [], coordsMap: {} };
+
+async function seedBlob(): Promise<CustomRoutesFile> {
+  let seed: CustomRoutesFile;
+  try {
+    seed = JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
+  } catch {
+    seed = { ...EMPTY };
+  }
+  try {
+    await put(BLOB_KEY, JSON.stringify(seed, null, 2), {
+      access: "private",
+      addRandomSuffix: false,
+      allowOverwrite: true,
+      contentType: "application/json",
+    });
+  } catch {
+    // Seeding failed — will retry on next request
+  }
+  return seed;
+}
+
 async function readData(): Promise<CustomRoutesFile> {
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     try {
       return JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
     } catch {
-      return { templates: [], schedules: [], coordsMap: {} };
+      return { ...EMPTY };
     }
   }
-  let blobs: { url: string }[];
   try {
-    ({ blobs } = await list({ prefix: BLOB_KEY }));
-  } catch {
-    return { templates: [], schedules: [], coordsMap: {} };
-  }
-  if (blobs.length === 0) {
-    let seed: CustomRoutesFile;
-    try {
-      seed = JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
-    } catch {
-      seed = { templates: [], schedules: [], coordsMap: {} };
+    const result = await get(BLOB_KEY, { access: "private" });
+    if (!result || result.statusCode !== 200 || !result.stream) {
+      return await seedBlob();
     }
-    await put(BLOB_KEY, JSON.stringify(seed, null, 2), {
-      access: "public",
-      addRandomSuffix: false,
-      contentType: "application/json",
-    });
-    return seed;
+    return (await new Response(result.stream).json()) as CustomRoutesFile;
+  } catch {
+    return { ...EMPTY };
   }
-  const res = await fetch(blobs[0].url, { cache: "no-store" });
-  return (await res.json()) as CustomRoutesFile;
 }
 
 async function writeData(data: CustomRoutesFile): Promise<void> {
@@ -53,8 +62,9 @@ async function writeData(data: CustomRoutesFile): Promise<void> {
     return;
   }
   await put(BLOB_KEY, JSON.stringify(data, null, 2), {
-    access: "public",
+    access: "private",
     addRandomSuffix: false,
+    allowOverwrite: true,
     contentType: "application/json",
   });
 }
@@ -86,7 +96,12 @@ export async function PATCH(req: NextRequest) {
 
   // Never let a caller overwrite the schedule's own ID
   data.schedules[idx] = { ...data.schedules[idx], ...updates, id: scheduleId };
-  await writeData(data);
+
+  try {
+    await writeData(data);
+  } catch {
+    return NextResponse.json({ error: "שגיאה בשמירת הנתונים. אנא נסה שנית." }, { status: 500 });
+  }
 
   return NextResponse.json({ schedule: data.schedules[idx] });
 }
@@ -108,7 +123,12 @@ export async function DELETE(req: NextRequest) {
   data.schedules = data.schedules.filter((s) => s.id !== scheduleId);
   data.templates = data.templates.filter((t) => t.id !== templateId);
   delete data.coordsMap[templateId];
-  await writeData(data);
+
+  try {
+    await writeData(data);
+  } catch {
+    return NextResponse.json({ error: "שגיאה בשמירת הנתונים. אנא נסה שנית." }, { status: 500 });
+  }
 
   return NextResponse.json({ ok: true });
 }
@@ -189,7 +209,15 @@ export async function POST(req: NextRequest) {
   data.templates.push(template);
   data.schedules.push(schedule);
   data.coordsMap[templateId] = coords;
-  await writeData(data);
+
+  try {
+    await writeData(data);
+  } catch {
+    return NextResponse.json(
+      { error: "שגיאה בשמירת המסלול. אנא נסה שנית." },
+      { status: 500 },
+    );
+  }
 
   return NextResponse.json({ template, schedule, coords }, { status: 201 });
 }

@@ -163,9 +163,26 @@ const DRIVABLE_HIGHWAY =
   "primary|primary_link|secondary|secondary_link|tertiary|tertiary_link" +
   "|residential|unclassified|living_street|pedestrian";
 
-/** Run an Overpass query and return chained + filtered coordinates. */
-async function fetchOverpass(query: string): Promise<[number, number][]> {
-  const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+const OVERPASS_SERVERS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+  "https://overpass.private.coffee/api/interpreter",
+];
+
+type OsmElement =
+  | { type: "node"; id: number; lat: number; lon: number }
+  | { type: "way"; id: number; nodes: number[] };
+
+/**
+ * Fetch an Overpass query from one specific server.
+ * Returns null on network/HTTP error (so the caller can try a mirror),
+ * or a coords array (possibly empty) on a successful response.
+ */
+async function fetchFromServer(
+  server: string,
+  query: string,
+): Promise<[number, number][] | null> {
+  const url = `${server}?data=${encodeURIComponent(query)}`;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 30_000);
   let res: Response;
@@ -175,15 +192,12 @@ async function fetchOverpass(query: string): Promise<[number, number][]> {
       signal: controller.signal,
     });
   } catch {
-    return [];
+    return null;
   } finally {
     clearTimeout(timer);
   }
-  if (!res.ok) return [];
+  if (!res.ok) return null;
 
-  type OsmElement =
-    | { type: "node"; id: number; lat: number; lon: number }
-    | { type: "way"; id: number; nodes: number[] };
   const raw = (await res.json()) as { elements?: OsmElement[] };
   const elements: OsmElement[] = Array.isArray(raw.elements) ? raw.elements : [];
   if (elements.length === 0) return [];
@@ -207,6 +221,15 @@ async function fetchOverpass(query: string): Promise<[number, number][]> {
     if (coord && isInRamatGan(coord)) coords.push(coord);
   }
   return coords;
+}
+
+/** Run an Overpass query, falling back to mirror servers if the primary is unavailable. */
+async function fetchOverpass(query: string): Promise<[number, number][]> {
+  for (const server of OVERPASS_SERVERS) {
+    const result = await fetchFromServer(server, query);
+    if (result !== null) return result;
+  }
+  return [];
 }
 
 async function overpassStreetGeometry(
