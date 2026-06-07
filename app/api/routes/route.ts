@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
+import { put, list } from "@vercel/blob";
 import { resolveAddressToRawCoords, buildSmartPolyline, samplePolyline } from "@/lib/geocoding";
 import type { RouteTemplate, RouteSchedule, IncidentType, DayKey } from "@/lib/types";
 
+export const maxDuration = 300;
+
 const DATA_PATH = join(process.cwd(), "data", "custom-routes.json");
+const BLOB_KEY = "custom-routes.json";
 
 interface CustomRoutesFile {
   templates: RouteTemplate[];
@@ -12,20 +16,47 @@ interface CustomRoutesFile {
   coordsMap: Record<string, [number, number][]>;
 }
 
-function readData(): CustomRoutesFile {
-  try {
-    return JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
-  } catch {
-    return { templates: [], schedules: [], coordsMap: {} };
+async function readData(): Promise<CustomRoutesFile> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      return JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
+    } catch {
+      return { templates: [], schedules: [], coordsMap: {} };
+    }
   }
+  const { blobs } = await list({ prefix: BLOB_KEY });
+  if (blobs.length === 0) {
+    let seed: CustomRoutesFile;
+    try {
+      seed = JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
+    } catch {
+      seed = { templates: [], schedules: [], coordsMap: {} };
+    }
+    await put(BLOB_KEY, JSON.stringify(seed, null, 2), {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: "application/json",
+    });
+    return seed;
+  }
+  const res = await fetch(blobs[0].url, { cache: "no-store" });
+  return (await res.json()) as CustomRoutesFile;
 }
 
-function writeData(data: CustomRoutesFile): void {
-  writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+async function writeData(data: CustomRoutesFile): Promise<void> {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    writeFileSync(DATA_PATH, JSON.stringify(data, null, 2), "utf-8");
+    return;
+  }
+  await put(BLOB_KEY, JSON.stringify(data, null, 2), {
+    access: "public",
+    addRandomSuffix: false,
+    contentType: "application/json",
+  });
 }
 
 export async function GET() {
-  const data = readData();
+  const data = await readData();
   return NextResponse.json(data);
 }
 
@@ -43,7 +74,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const data = readData();
+  const data = await readData();
   const idx = data.schedules.findIndex((s) => s.id === scheduleId);
   if (idx === -1) {
     return NextResponse.json({ error: "Schedule not found" }, { status: 404 });
@@ -51,7 +82,7 @@ export async function PATCH(req: NextRequest) {
 
   // Never let a caller overwrite the schedule's own ID
   data.schedules[idx] = { ...data.schedules[idx], ...updates, id: scheduleId };
-  writeData(data);
+  await writeData(data);
 
   return NextResponse.json({ schedule: data.schedules[idx] });
 }
@@ -63,7 +94,7 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: "Missing scheduleId" }, { status: 400 });
   }
 
-  const data = readData();
+  const data = await readData();
   const schedule = data.schedules.find((s) => s.id === scheduleId);
   if (!schedule) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
@@ -73,7 +104,7 @@ export async function DELETE(req: NextRequest) {
   data.schedules = data.schedules.filter((s) => s.id !== scheduleId);
   data.templates = data.templates.filter((t) => t.id !== templateId);
   delete data.coordsMap[templateId];
-  writeData(data);
+  await writeData(data);
 
   return NextResponse.json({ ok: true });
 }
@@ -168,11 +199,11 @@ export async function POST(req: NextRequest) {
     active: true,
   };
 
-  const data = readData();
+  const data = await readData();
   data.templates.push(template);
   data.schedules.push(schedule);
   data.coordsMap[templateId] = polyline;
-  writeData(data);
+  await writeData(data);
 
   return NextResponse.json({ template, schedule, coords: polyline }, { status: 201 });
 }
