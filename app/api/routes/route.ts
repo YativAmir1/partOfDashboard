@@ -125,7 +125,6 @@ interface CreateRouteBody {
   requiredCompletionPct: number;
 }
 
-const delay = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
 export async function POST(req: NextRequest) {
   let body: CreateRouteBody;
@@ -152,13 +151,11 @@ export async function POST(req: NextRequest) {
   } = body;
 
   const allInputs = [startAddress, ...stops.filter(Boolean), endAddress];
-  const allCoordGroups: [number, number][][] = [];
-
-  for (let i = 0; i < allInputs.length; i++) {
-    if (i > 0) await delay(1100); // Nominatim rate limit: 1 req/sec
-    const coords = await resolveAddressToRawCoords(allInputs[i]);
-    allCoordGroups.push(coords);
-  }
+  // Run all geocoding calls in parallel — Overpass has no rate limit and the
+  // primary path; Nominatim fallback is rare and short enough to accept concurrently.
+  const allCoordGroups = await Promise.all(
+    allInputs.map((input) => resolveAddressToRawCoords(input)),
+  );
 
   // Stitch segments at their natural intersection points, then sample
   const polyline: [number, number][] = samplePolyline(

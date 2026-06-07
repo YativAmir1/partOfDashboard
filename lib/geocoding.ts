@@ -156,9 +156,19 @@ const DRIVABLE_HIGHWAY =
 /** Run an Overpass query and return chained + filtered coordinates. */
 async function fetchOverpass(query: string): Promise<[number, number][]> {
   const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
-  const res = await fetch(url, {
-    headers: { "User-Agent": "RamatGanDashboard/1.0" },
-  });
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 12_000);
+  let res: Response;
+  try {
+    res = await fetch(url, {
+      headers: { "User-Agent": "RamatGanDashboard/1.0" },
+      signal: controller.signal,
+    });
+  } catch {
+    return [];
+  } finally {
+    clearTimeout(timer);
+  }
   if (!res.ok) return [];
 
   type OsmElement =
