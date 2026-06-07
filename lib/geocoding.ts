@@ -63,7 +63,7 @@ async function nominatimGeocode(
     `&format=json&limit=5&accept-language=he` +
     `&countrycodes=il&viewbox=${RG_VIEWBOX}&bounded=1`;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 8_000);
+  const timer = setTimeout(() => controller.abort(), 20_000);
   let res: Response;
   try {
     res = await fetch(url, {
@@ -167,7 +167,7 @@ const DRIVABLE_HIGHWAY =
 async function fetchOverpass(query: string): Promise<[number, number][]> {
   const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 12_000);
+  const timer = setTimeout(() => controller.abort(), 30_000);
   let res: Response;
   try {
     res = await fetch(url, {
@@ -213,14 +213,14 @@ async function overpassStreetGeometry(
   streetName: string,
 ): Promise<[number, number][]> {
   const adminQuery = [
-    `[out:json][bbox:${RG.minLat},${RG.minLon},${RG.maxLat},${RG.maxLon}];`,
+    `[out:json][timeout:30][bbox:${RG.minLat},${RG.minLon},${RG.maxLat},${RG.maxLon}];`,
     `area["name"="רמת גן"]["admin_level"="8"]->.rg;`,
     `way["name"="${streetName}"]["highway"~"^(${DRIVABLE_HIGHWAY})$"](area.rg);`,
     `(._;>;);out body;`,
   ].join("");
 
   const bboxQuery = [
-    `[out:json];`,
+    `[out:json][timeout:30];`,
     `way["name"="${streetName}"]["highway"~"^(${DRIVABLE_HIGHWAY})$"]`,
     `(${RG.minLat},${RG.minLon},${RG.maxLat},${RG.maxLon});`,
     `(._;>;);out body;`,

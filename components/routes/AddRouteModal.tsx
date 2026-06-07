@@ -198,7 +198,7 @@ export function AddRouteModal({ onClose, onCreated }: Props) {
             <Loader2 size={36} className="animate-spin text-[#1f5fa6]" />
             <p className="text-sm font-semibold text-[#1f5fa6]">ממפה כתובות…</p>
             <p className="text-xs text-[#707070] text-center max-w-xs">
-              מאחזר קואורדינטות עבור הכתובות שהוזנו. פעולה זו עשויה לקחת כ-30 שניות.
+              מאחזר נתוני רחובות ממפת OpenStreetMap. פעולה זו עשויה לקחת עד כ-30 שניות.
             </p>
           </div>
         )}
