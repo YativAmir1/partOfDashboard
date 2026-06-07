@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { X, Plus, Trash2, MapPin, Navigation, Flag, Loader2, AlertCircle } from "lucide-react";
 import { EMPLOYEES_DATA } from "@/data/employeesData";
-import { resolveAddressToRawCoords, buildSmartPolyline, samplePolyline } from "@/lib/geocoding";
+import { geocodeAddress, routeViaOsrm } from "@/lib/geocoding";
 import type { DayKey, IncidentType } from "@/lib/types";
 
 const DAY_OPTIONS: { key: DayKey; label: string }[] = [
@@ -134,10 +134,16 @@ export function AddRouteModal({ onClose, onCreated }: Props) {
     ];
     let coords: [number, number][];
     try {
-      const groups = await Promise.all(streets.map(resolveAddressToRawCoords));
-      const polyline = samplePolyline(buildSmartPolyline(groups), 15);
-      if (polyline.length < 2) {
+      const points = await Promise.all(streets.map(geocodeAddress));
+      const validPoints = points.filter((p): p is [number, number] => p !== null);
+      if (validPoints.length < 2) {
         setError("לא ניתן לאתר את הכתובות שהוזנו. אנא בדוק את הכתובות ונסה שנית.");
+        setLoading(false);
+        return;
+      }
+      const polyline = await routeViaOsrm(validPoints);
+      if (polyline.length < 2) {
+        setError("לא ניתן לחשב מסלול בין הכתובות. אנא נסה כתובות אחרות.");
         setLoading(false);
         return;
       }
