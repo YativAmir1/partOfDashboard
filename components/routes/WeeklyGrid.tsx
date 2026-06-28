@@ -37,15 +37,6 @@ const WEEK_DAYS: { key: DayKey; label: string }[] = [
   { key: "fri", label: "שישי"  },
 ];
 
-// Thursday is index 4 in the WEEK_DAYS array; today is 2026-05-28
-const MOCK_TODAY = new Date("2026-05-28T00:00:00");
-
-function getWeekDate(dayIndex: number): string {
-  const d = new Date(MOCK_TODAY);
-  d.setDate(d.getDate() + (dayIndex - 4));
-  return d.toLocaleDateString("he-IL", { day: "numeric", month: "numeric" });
-}
-
 // ─── Sub-components ──────────────────────────────────────────────────────────
 
 function CompletionBar({ pct }: { pct: number }) {
@@ -167,6 +158,15 @@ export function WeeklyGrid({ now, todayDayKey, schedules, templates, onClickRout
       return h >= window.from && h < window.to;
     });
   }
+
+  // Date labels anchored to the real current week (Sunday-based), so the grid
+  // stays in sync with the real-clock "היום" highlight on whatever day it's shown.
+  const getWeekDate = (dayIndex: number): string => {
+    const d = new Date(now);
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - d.getDay() + dayIndex);
+    return d.toLocaleDateString("he-IL", { day: "numeric", month: "numeric" });
+  };
 
   const weekRange = `${getWeekDate(0)} – ${getWeekDate(5)}`;
 
