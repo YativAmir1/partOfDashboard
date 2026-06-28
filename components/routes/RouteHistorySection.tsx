@@ -5,7 +5,7 @@ import { History, ChevronDown, CheckCircle2, XCircle, MessageSquare } from "luci
 import { routeExecutions, routeComplaints } from "@/lib/data";
 import {
   buildRouteHistorySummary,
-  hebrewRelativeDate,
+  hebrewDate,
   type TrendDirection,
 } from "@/lib/routeHistory";
 import { cn } from "@/lib/utils";
@@ -97,7 +97,7 @@ export function RouteHistorySection({ scheduleId, requiredPct, complaintThreshol
                   className="flex items-center gap-2 py-1.5 px-2 rounded-lg hover:bg-[#fafafa] transition-colors"
                 >
                   <span className="text-[10px] text-[#707070] w-20 shrink-0 text-right leading-tight">
-                    {hebrewRelativeDate(exec.date)}
+                    {hebrewDate(exec.date)}
                   </span>
                   <div className="flex-1 h-1.5 bg-[#f0f0f0] rounded-full overflow-hidden">
                     <div

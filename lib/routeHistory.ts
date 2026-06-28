@@ -107,18 +107,7 @@ export function buildRouteHistorySummary(
   };
 }
 
-export function hebrewRelativeDate(isoDate: string): string {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+export function hebrewDate(isoDate: string): string {
   const date = new Date(isoDate + "T00:00:00");
-  const diffMs = today.getTime() - date.getTime();
-  const diffDays = Math.round(diffMs / 86400000);
-
-  if (diffDays === 0) return "היום";
-  if (diffDays === 1) return "אתמול";
-  if (diffDays === 2) return "שלשום";
-  if (diffDays < 7) return `לפני ${diffDays} ימים`;
-  if (diffDays < 14) return "לפני שבוע";
-  if (diffDays < 21) return "לפני שבועיים";
   return new Intl.DateTimeFormat("he-IL", { day: "numeric", month: "short" }).format(date);
 }

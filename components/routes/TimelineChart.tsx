@@ -171,13 +171,27 @@ function CustomTooltip({ active, payload }: { active?: boolean; payload?: any[] 
 
 const TICKS = [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660];
 
-const LEGEND = [
-  { color: "#459524", label: "הושלם" },
-  { color: "#f37d00", label: "בביצוע" },
-  { color: "#d96350", label: "באיחור" },
-  { color: "#4b5563", label: "דורש התערבות" },
-  { color: "#c8c8c8", label: "מתוכנן" },
+// Colors exactly as the timeline bars render them (the <Cell> below paints
+// "scheduled" as a muted gray rather than ROUTE_STATUS_COLORS.scheduled).
+// Deriving the legend from this map keeps it in sync with the bars.
+const TIMELINE_BAR_COLORS: Record<CalculatedRouteStatus, string> = {
+  ...ROUTE_STATUS_COLORS,
+  scheduled: "#c8c8c8",
+};
+
+const LEGEND_ORDER: CalculatedRouteStatus[] = [
+  "completed",
+  "in_progress",
+  "delayed",
+  "requires_attention",
+  "scheduled",
 ];
+
+const LEGEND = LEGEND_ORDER.map((status) => ({
+  color: TIMELINE_BAR_COLORS[status],
+  label: ROUTE_STATUS_LABELS[status],
+  opacity: status === "scheduled" ? 0.6 : 1,
+}));
 
 export function TimelineChart({ rows, now }: { rows: RouteRow[]; now: Date }) {
   const data = buildData(rows, now);
@@ -258,11 +272,11 @@ export function TimelineChart({ rows, now }: { rows: RouteRow[]; now: Date }) {
         </ResponsiveContainer>
       </div>
       <div dir="rtl" className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 justify-end">
-        {LEGEND.map(({ color, label }) => (
+        {LEGEND.map(({ color, label, opacity }) => (
           <div key={label} className="flex items-center gap-1.5">
             <span
               className="w-3 h-2 rounded-sm inline-block"
-              style={{ background: color }}
+              style={{ background: color, opacity }}
             />
             <span className="text-[10px] text-[#707070]">{label}</span>
           </div>
