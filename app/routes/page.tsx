@@ -22,6 +22,7 @@ import {
 } from "@/lib/data";
 import {
   calculateRouteStatus,
+  getCurrentExecution,
   ROUTE_STATUS_LABELS,
   ROUTE_STATUS_COLORS,
 } from "@/lib/routeUtils";
@@ -167,24 +168,34 @@ export default function RoutesPage() {
     if (id) setDetailScheduleId(id);
   }, []);
 
-  // Fetch custom routes from API
+  // Apply the API payload: custom routes + persisted edits (overrides) to base schedules
+  function applyRoutesData(data: {
+    templates?: RouteTemplate[];
+    schedules?: RouteSchedule[];
+    overrides?: Record<string, Partial<RouteSchedule>>;
+  }) {
+    setCustomTemplates(data.templates ?? []);
+    setCustomSchedules(data.schedules ?? []);
+    const overrides = data.overrides ?? {};
+    // Re-apply saved edits on top of the canonical base schedules so they
+    // survive reloads (base schedules can't be written back to routes.json).
+    setSchedules(
+      routeSchedules.map((s) => (overrides[s.id] ? { ...s, ...overrides[s.id] } : s)),
+    );
+  }
+
+  // Fetch custom routes + base-schedule overrides from API
   useEffect(() => {
     fetch("/api/routes")
       .then((r) => r.json())
-      .then((data: { templates: RouteTemplate[]; schedules: RouteSchedule[] }) => {
-        setCustomTemplates(data.templates ?? []);
-        setCustomSchedules(data.schedules ?? []);
-      })
+      .then(applyRoutesData)
       .catch(() => {/* non-critical */});
   }, []);
 
   function refreshCustomRoutes() {
     fetch("/api/routes")
       .then((r) => r.json())
-      .then((data: { templates: RouteTemplate[]; schedules: RouteSchedule[] }) => {
-        setCustomTemplates(data.templates ?? []);
-        setCustomSchedules(data.schedules ?? []);
-      })
+      .then(applyRoutesData)
       .catch(() => {/* non-critical */});
   }
 
@@ -207,7 +218,7 @@ export default function RoutesPage() {
     if (!schedule) return null;
     const template = allTemplates.find((t) => t.id === schedule.templateId);
     if (!template) return null;
-    const execution = routeExecutions.find((e) => e.scheduleId === schedule.id);
+    const execution = getCurrentExecution(schedule.id, routeExecutions);
     const complaintCount = execution
       ? routeComplaints.filter((c) => c.executionId === execution.id).length
       : 0;
@@ -226,7 +237,7 @@ export default function RoutesPage() {
     );
     return todaySchedules.map((schedule) => {
       const template = allTemplates.find((t) => t.id === schedule.templateId)!;
-      const execution = routeExecutions.find((e) => e.scheduleId === schedule.id);
+      const execution = getCurrentExecution(schedule.id, routeExecutions);
       const complaintCount = execution
         ? routeComplaints.filter((c) => c.executionId === execution.id).length
         : 0;
@@ -247,7 +258,7 @@ export default function RoutesPage() {
       const template = allTemplates.find((t) => t.id === schedule.templateId)!;
       const execution =
         selectedDay === todayDayKey
-          ? routeExecutions.find((e) => e.scheduleId === schedule.id)
+          ? getCurrentExecution(schedule.id, routeExecutions)
           : undefined;
       const complaintCount = execution
         ? routeComplaints.filter((c) => c.executionId === execution.id).length
@@ -321,21 +332,23 @@ export default function RoutesPage() {
 
   // ── Save handler ────────────────────────────────────────────────────────────
   function handleSaveSchedule(updated: RouteSchedule) {
+    // Optimistic local update
     if (updated.id.startsWith("sch-custom-")) {
-      // Optimistic local update + fire-and-forget persist to custom-routes.json
       setCustomSchedules((prev) =>
         prev.map((s) => (s.id === updated.id ? updated : s))
       );
-      fetch(`/api/routes?scheduleId=${encodeURIComponent(updated.id)}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updated),
-      }).catch(() => {/* non-critical */});
     } else {
       setSchedules((prev) =>
         prev.map((s) => (s.id === updated.id ? updated : s))
       );
     }
+    // Fire-and-forget persist: custom schedules update in place, base schedules
+    // (from routes.json) are saved as overrides so the edit survives reloads.
+    fetch(`/api/routes?scheduleId=${encodeURIComponent(updated.id)}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updated),
+    }).catch(() => {/* non-critical */});
     setEditingSchedule(null);
     // drawer stays open and auto-updates via detailRow memo
   }

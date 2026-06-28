@@ -11,6 +11,7 @@ import {
 } from "@/lib/data";
 import {
   calculateRouteStatus,
+  getCurrentExecution,
   ROUTE_STATUS_COLORS,
   ROUTE_STATUS_LABELS,
 } from "@/lib/routeUtils";
@@ -197,6 +198,21 @@ export const ROUTE_COORDS: Record<string, [number, number][]> = {
   ],
 };
 
+const ACTIVE_STATUSES = new Set<CalculatedRouteStatus>([
+  "in_progress",
+  "delayed",
+  "requires_attention",
+]);
+
+// Render order: scheduled (bottom) → completed → active (top, captures clicks first)
+const STATUS_RENDER_ORDER: Record<CalculatedRouteStatus, number> = {
+  scheduled: 0,
+  completed: 1,
+  in_progress: 2,
+  delayed: 2,
+  requires_attention: 2,
+};
+
 const DAY_LABELS: Record<string, string> = {
   sun: "ראשון",
   mon: "שני",
@@ -238,12 +254,6 @@ export function RouteLayer({
   additionalSchedules = [],
   additionalCoordsMap = {},
 }: Props) {
-  const execBySchedule = useMemo(() => {
-    const m = new Map<string, (typeof routeExecutions)[0]>();
-    routeExecutions.forEach((e) => m.set(e.scheduleId, e));
-    return m;
-  }, []);
-
   const complaintsByExecution = useMemo(() => {
     const m = new Map<string, number>();
     routeComplaints.forEach((c) => {
@@ -259,7 +269,7 @@ export function RouteLayer({
     );
     return allSchedules.map((schedule) => {
       const template = allTemplates.find((t) => t.id === schedule.templateId)!;
-      const execution = execBySchedule.get(schedule.id);
+      const execution = getCurrentExecution(schedule.id, routeExecutions);
       const complaintCount = execution
         ? (complaintsByExecution.get(execution.id) ?? 0)
         : 0;
@@ -274,7 +284,7 @@ export function RouteLayer({
         [];
       return { schedule, template, execution, complaintCount, status, coords, isToday };
     });
-  }, [execBySchedule, complaintsByExecution, additionalTemplates, additionalSchedules, additionalCoordsMap]);
+  }, [complaintsByExecution, additionalTemplates, additionalSchedules, additionalCoordsMap]);
 
   const visibleRows = useMemo(() => {
     let rows: typeof allRows;
@@ -289,7 +299,21 @@ export function RouteLayer({
     if (statusFilters && statusFilters.size > 0) {
       rows = rows.filter((r) => statusFilters.has(r.status));
     }
-    return rows;
+
+    // Hide "scheduled" duplicates only when the user hasn't explicitly asked to see them
+    if (!statusFilters || !statusFilters.has("scheduled")) {
+      const activeTemplateIds = new Set(
+        allRows.filter((r) => ACTIVE_STATUSES.has(r.status)).map((r) => r.schedule.templateId),
+      );
+      rows = rows.filter(
+        (r) => !(r.status === "scheduled" && activeTemplateIds.has(r.schedule.templateId)),
+      );
+    }
+
+    // Sort so active routes render last (on top) and capture clicks first
+    return [...rows].sort(
+      (a, b) => STATUS_RENDER_ORDER[a.status] - STATUS_RENDER_ORDER[b.status],
+    );
   }, [allRows, filter, statusFilters, focusedScheduleId]);
 
   const focusedCoords = useMemo(() => {

@@ -13,9 +13,12 @@ interface CustomRoutesFile {
   templates: RouteTemplate[];
   schedules: RouteSchedule[];
   coordsMap: Record<string, [number, number][]>;
+  // Edits to base schedules (defined in data/routes.json, not writable at runtime)
+  // are persisted here as per-schedule overrides, keyed by schedule id.
+  overrides: Record<string, Partial<RouteSchedule>>;
 }
 
-const EMPTY: CustomRoutesFile = { templates: [], schedules: [], coordsMap: {} };
+const EMPTY: CustomRoutesFile = { templates: [], schedules: [], coordsMap: {}, overrides: {} };
 
 async function seedBlob(): Promise<CustomRoutesFile> {
   let seed: CustomRoutesFile;
@@ -37,10 +40,21 @@ async function seedBlob(): Promise<CustomRoutesFile> {
   return seed;
 }
 
+// Guarantee every optional collection exists so callers never hit `undefined`,
+// even for files written before `overrides` was introduced.
+function normalize(data: Partial<CustomRoutesFile>): CustomRoutesFile {
+  return {
+    templates: data.templates ?? [],
+    schedules: data.schedules ?? [],
+    coordsMap: data.coordsMap ?? {},
+    overrides: data.overrides ?? {},
+  };
+}
+
 async function readData(): Promise<CustomRoutesFile> {
   if (!process.env.BLOB_READ_WRITE_TOKEN) {
     try {
-      return JSON.parse(readFileSync(DATA_PATH, "utf-8")) as CustomRoutesFile;
+      return normalize(JSON.parse(readFileSync(DATA_PATH, "utf-8")));
     } catch {
       return { ...EMPTY };
     }
@@ -48,9 +62,9 @@ async function readData(): Promise<CustomRoutesFile> {
   try {
     const result = await get(BLOB_KEY, { access: "private" });
     if (!result || result.statusCode !== 200 || !result.stream) {
-      return await seedBlob();
+      return normalize(await seedBlob());
     }
-    return (await new Response(result.stream).json()) as CustomRoutesFile;
+    return normalize(await new Response(result.stream).json());
   } catch {
     return { ...EMPTY };
   }
@@ -90,12 +104,22 @@ export async function PATCH(req: NextRequest) {
 
   const data = await readData();
   const idx = data.schedules.findIndex((s) => s.id === scheduleId);
-  if (idx === -1) {
-    return NextResponse.json({ error: "Schedule not found" }, { status: 404 });
-  }
 
-  // Never let a caller overwrite the schedule's own ID
-  data.schedules[idx] = { ...data.schedules[idx], ...updates, id: scheduleId };
+  let saved: RouteSchedule | Partial<RouteSchedule>;
+  if (idx === -1) {
+    // Not a custom schedule — it's a base schedule from data/routes.json, which we
+    // can't write back to at runtime. Persist the change as an override instead.
+    data.overrides[scheduleId] = {
+      ...data.overrides[scheduleId],
+      ...updates,
+      id: scheduleId,
+    };
+    saved = data.overrides[scheduleId];
+  } else {
+    // Never let a caller overwrite the schedule's own ID
+    data.schedules[idx] = { ...data.schedules[idx], ...updates, id: scheduleId };
+    saved = data.schedules[idx];
+  }
 
   try {
     await writeData(data);
@@ -103,7 +127,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: "שגיאה בשמירת הנתונים. אנא נסה שנית." }, { status: 500 });
   }
 
-  return NextResponse.json({ schedule: data.schedules[idx] });
+  return NextResponse.json({ schedule: saved });
 }
 
 export async function DELETE(req: NextRequest) {

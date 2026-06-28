@@ -6,6 +6,26 @@ import type {
 
 const COMPLAINT_THRESHOLD = 3;
 
+/**
+ * Selects the *current* execution for a schedule — the most recent one by date.
+ *
+ * A schedule accumulates many historical executions plus the current-day one;
+ * picking the wrong one yields a different calculated status. This is the single
+ * source of truth so the city map and the route-management screen stay in sync.
+ * (`date` is "YYYY-MM-DD", so lexical comparison is chronological.)
+ */
+export function getCurrentExecution(
+  scheduleId: string,
+  executions: readonly RouteExecution[]
+): RouteExecution | undefined {
+  let current: RouteExecution | undefined;
+  for (const e of executions) {
+    if (e.scheduleId !== scheduleId) continue;
+    if (!current || e.date > current.date) current = e;
+  }
+  return current;
+}
+
 export function calculateRouteStatus(
   schedule: RouteSchedule,
   execution: RouteExecution,

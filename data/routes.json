@@ -110,6 +110,8 @@
       "scheduledStartTime": "09:00",
       "scheduledEndTime": "12:00",
       "assignedTeam": "צוות ניקיון ב׳",
+      "teamRef": "waste-b",
+      "vehicleRef": "RG-302",
       "requiredCompletionPct": 80
     },
     {
@@ -122,8 +124,10 @@
         "thu"
       ],
       "scheduledStartTime": "07:00",
-      "scheduledEndTime": "10:00",
+      "scheduledEndTime": "09:00",
       "assignedTeam": "צוות ניקיון ג׳",
+      "teamRef": "waste-c",
+      "vehicleRef": "RG-303",
       "requiredCompletionPct": 80
     },
     {
@@ -193,9 +197,11 @@
         "wed"
       ],
       "scheduledStartTime": "07:00",
-      "scheduledEndTime": "10:00",
+      "scheduledEndTime": "09:00",
       "assignedTeam": "צוות ניקיון ג׳",
       "vehicle": "רכב 11",
+      "teamRef": "waste-c",
+      "vehicleRef": "RG-303",
       "requiredCompletionPct": 80
     },
     {
@@ -1552,7 +1558,7 @@
       "scheduleId": "sch-003",
       "date": "2026-05-28",
       "actualStartTime": "07:20",
-      "completionPct": 45
+      "completionPct": 75
     },
     {
       "id": "exec-004",
