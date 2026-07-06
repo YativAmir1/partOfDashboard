@@ -8,9 +8,11 @@ import {
   Map,
   Route,
   Truck,
+  Radio,
 } from "lucide-react";
 
 const NAV = [
+  { href: "/command",  label: "מרכז שליטה",          icon: Radio },
   { href: "/overview", label: "תמונת מצב עירונית", icon: LayoutDashboard },
   { href: "/map",      label: "מפת העיר",           icon: Map },
   { href: "/routes",   label: "ניהול מסלולים",       icon: Route },
