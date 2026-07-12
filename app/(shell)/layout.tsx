@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { DemoProvider } from "@/context/DemoContext";
 import { HazardProvider } from "@/context/HazardContext";
 import { MapStateProvider } from "@/context/MapStateContext";

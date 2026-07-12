@@ -153,6 +153,55 @@ body {
   background: #475569;
 }
 
+/* ── CityMind AI — scoped light theme ────────────────────────────────────────
+   The cockpit (app/(cockpit)/) is dark-first with a hardcoded navy palette.
+   `.citymind-light` on its <html> (toggled by CityMindThemeToggle) remaps only
+   those hardcoded utilities to a light palette — the default (no class) stays
+   dark and untouched. Semantic/accent colors (teal #0ea5b7, greens, reds,
+   ambers) mostly work on both; only "bright" text used on tinted chips is
+   darkened for contrast, and solid colored buttons keep white text. */
+
+/* Surfaces */
+.citymind-light [class*="bg-[#0b1220]"] { background-color: #f1f5f9 !important; }
+.citymind-light [class*="bg-[#0f1729]"] { background-color: #ffffff !important; }
+.citymind-light [class*="bg-[#16223c]"],
+.citymind-light [class*="bg-[#1e293b]"],
+.citymind-light [class*="bg-[#334155]"] { background-color: #e2e8f0 !important; }
+.citymind-light [class*="bg-[#3f1d1d]"] { background-color: #fee2e2 !important; }
+.citymind-light [class*="bg-[#052e1a]"] { background-color: #dcfce7 !important; }
+.citymind-light [class*="hover:bg-[#16223c]"]:hover { background-color: #e2e8f0 !important; }
+
+/* Borders */
+.citymind-light [class*="border-[#1e293b]"] { border-color: #e2e8f0 !important; }
+.citymind-light [class*="border-[#334155]"] { border-color: #cbd5e1 !important; }
+
+/* Neutral text (named Tailwind utilities → plain selectors, so the `hover:`
+   variants below are not caught by these always-on rules) */
+.citymind-light .text-white       { color: #0f172a !important; }
+.citymind-light .text-slate-200   { color: #1e293b !important; }
+.citymind-light .text-slate-300   { color: #334155 !important; }
+.citymind-light .text-slate-400   { color: #475569 !important; }
+.citymind-light .hover\:text-white:hover     { color: #0f172a !important; }
+.citymind-light .hover\:text-slate-200:hover { color: #1e293b !important; }
+
+/* Bright accent text on tinted chips → darkened for readable contrast on white */
+.citymind-light [class*="text-[#4ade80]"] { color: #15803d !important; }
+.citymind-light [class*="text-[#22c55e]"] { color: #16a34a !important; }
+.citymind-light [class*="text-[#f87171]"] { color: #dc2626 !important; }
+.citymind-light [class*="text-[#fbbf24]"] { color: #b45309 !important; }
+.citymind-light [class*="text-[#a78bfa]"] { color: #7c3aed !important; }
+
+/* Solid colored buttons must keep white text (higher specificity wins) */
+.citymind-light [class*="bg-[#0ea5b7]"].text-white,
+.citymind-light [class*="bg-[#16a34a]"].text-white { color: #ffffff !important; }
+
+/* Inline SVG presentation attributes (charts/map) — CSS props override attrs */
+.citymind-light [fill="#0f1729"]   { fill: #e2e8f0 !important; }   /* map landmass */
+.citymind-light [stroke="#1e293b"] { stroke: #e2e8f0 !important; } /* radar grid */
+
+.citymind-light ::-webkit-scrollbar-track { background: #f1f5f9; }
+.citymind-light ::-webkit-scrollbar-thumb { background: #cbd5e1; }
+
 /* Leaflet light map overrides */
 .leaflet-container {
   background: #e8edf2;
@@ -194,6 +243,22 @@ body {
 }
 .count-up {
   animation: countUp 0.4s ease-out;
+}
+
+/* CityMind — LLM streaming caret (blinking typewriter cursor) */
+@keyframes llm-caret-blink {
+  0%, 45%  { opacity: 1; }
+  50%, 95% { opacity: 0; }
+  100%     { opacity: 1; }
+}
+.llm-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-inline-start: 2px;
+  vertical-align: text-bottom;
+  background: #0ea5b7;
+  animation: llm-caret-blink 1s steps(1) infinite;
 }
 
 /* Alert banner slide-in */

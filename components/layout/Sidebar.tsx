@@ -9,9 +9,11 @@ import {
   Route,
   Truck,
   Radio,
+  Sparkles,
 } from "lucide-react";
 
 const NAV = [
+  { href: "/citymind", label: "CityMind AI",         icon: Sparkles },
   { href: "/command",  label: "מרכז שליטה",          icon: Radio },
   { href: "/overview", label: "תמונת מצב עירונית", icon: LayoutDashboard },
   { href: "/map",      label: "מפת העיר",           icon: Map },

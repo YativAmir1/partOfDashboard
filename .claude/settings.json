@@ -2,7 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(ls -la \"what is it.txt\")",
-      "Bash(ls -la *.txt *.csv)"
+      "Bash(ls -la *.txt *.csv)",
+      "Bash(echo \"=== tsc exit: $? ===\")",
+      "Bash(rm -rf .next)",
+      "Bash(npm run *)",
+      "Bash(echo \"build exit=$?\")",
+      "Bash(grep -rlE \"api\\\\.groq\\\\.com|generativelanguage\\\\.googleapis|api\\\\.anthropic\\\\.com|GROQ_API_KEY|ANTHROPIC_API_KEY|GEMINI_API_KEY\" .next/static)",
+      "Bash(echo \"install exit=$?\")",
+      "Bash(taskkill //F //PID 19296)",
+      "Bash(netstat -ano)",
+      "Bash(git check-ignore *)",
+      "Skill(artifact-design)",
+      "Skill(artifact-design:*)",
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(curl -s -N -X POST http://localhost:3000/api/ai/generate -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(taskkill //F //IM node.exe //FI \"WINDOWTITLE eq *\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")"
     ]
   }
 }
